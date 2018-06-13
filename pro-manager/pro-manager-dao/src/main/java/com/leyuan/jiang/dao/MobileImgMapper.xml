@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.MobileImgMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.MobileImg" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="IMG_NAME" property="imgName" jdbcType="VARCHAR" />
+    <result column="IMG_URL" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="JUMP_URL" property="jumpUrl" jdbcType="VARCHAR" />
+    <result column="MESSAGE_URL" property="messageUrl" jdbcType="VARCHAR" />
+    <result column="PAGE" property="page" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CODE, IMG_NAME, IMG_URL, JUMP_URL, MESSAGE_URL, PAGE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.MobileImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mobile_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_img
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mobile_img
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.MobileImgExample" >
+    delete from mobile_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.MobileImg" >
+    insert into mobile_img (ID, NAME, CODE, 
+      IMG_NAME, IMG_URL, JUMP_URL, 
+      MESSAGE_URL, PAGE)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{imgName,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{jumpUrl,jdbcType=VARCHAR}, 
+      #{messageUrl,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.MobileImg" >
+    insert into mobile_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="imgName != null" >
+        IMG_NAME,
+      </if>
+      <if test="imgUrl != null" >
+        IMG_URL,
+      </if>
+      <if test="jumpUrl != null" >
+        JUMP_URL,
+      </if>
+      <if test="messageUrl != null" >
+        MESSAGE_URL,
+      </if>
+      <if test="page != null" >
+        PAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null" >
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageUrl != null" >
+        #{messageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        #{page,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.MobileImgExample" resultType="java.lang.Integer" >
+    select count(*) from mobile_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mobile_img
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgName != null" >
+        IMG_NAME = #{record.imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrl != null" >
+        IMG_URL = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jumpUrl != null" >
+        JUMP_URL = #{record.jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageUrl != null" >
+        MESSAGE_URL = #{record.messageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.page != null" >
+        PAGE = #{record.page,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mobile_img
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      IMG_NAME = #{record.imgName,jdbcType=VARCHAR},
+      IMG_URL = #{record.imgUrl,jdbcType=VARCHAR},
+      JUMP_URL = #{record.jumpUrl,jdbcType=VARCHAR},
+      MESSAGE_URL = #{record.messageUrl,jdbcType=VARCHAR},
+      PAGE = #{record.page,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.MobileImg" >
+    update mobile_img
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null" >
+        JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageUrl != null" >
+        MESSAGE_URL = #{messageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        PAGE = #{page,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.MobileImg" >
+    update mobile_img
+    set NAME = #{name,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      IMG_NAME = #{imgName,jdbcType=VARCHAR},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      MESSAGE_URL = #{messageUrl,jdbcType=VARCHAR},
+      PAGE = #{page,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

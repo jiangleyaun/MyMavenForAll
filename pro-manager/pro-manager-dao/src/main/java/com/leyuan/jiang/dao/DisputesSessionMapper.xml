@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.DisputesSessionMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.DisputesSession" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CLAIM_TIME" property="claimTime" jdbcType="TIMESTAMP" />
+    <result column="ISSWITCH" property="isswitch" jdbcType="VARCHAR" />
+    <result column="LATEST_TIME" property="latestTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="VALID_TIME" property="validTime" jdbcType="TIMESTAMP" />
+    <result column="CLIENT_ID" property="clientId" jdbcType="BIGINT" />
+    <result column="COUNSELOR_ID" property="counselorId" jdbcType="BIGINT" />
+    <result column="DISPUTES_ID" property="disputesId" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.DisputesSessionWithBLOBs" extends="BaseResultMap" >
+    <result column="OPIN" property="opin" jdbcType="LONGVARCHAR" />
+    <result column="REPORT" property="report" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CLAIM_TIME, ISSWITCH, LATEST_TIME, STATUS, VALID_TIME, CLIENT_ID, COUNSELOR_ID, 
+    DISPUTES_ID, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    OPIN, REPORT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from disputes_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disputes_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from disputes_session
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from disputes_session
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionExample" >
+    delete from disputes_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionWithBLOBs" >
+    insert into disputes_session (ID, NAME, CLAIM_TIME, 
+      ISSWITCH, LATEST_TIME, STATUS, 
+      VALID_TIME, CLIENT_ID, COUNSELOR_ID, 
+      DISPUTES_ID, CREATE_TIME, UPDATE_TIME, 
+      OPIN, REPORT)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{claimTime,jdbcType=TIMESTAMP}, 
+      #{isswitch,jdbcType=VARCHAR}, #{latestTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{validTime,jdbcType=TIMESTAMP}, #{clientId,jdbcType=BIGINT}, #{counselorId,jdbcType=BIGINT}, 
+      #{disputesId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{opin,jdbcType=LONGVARCHAR}, #{report,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionWithBLOBs" >
+    insert into disputes_session
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="claimTime != null" >
+        CLAIM_TIME,
+      </if>
+      <if test="isswitch != null" >
+        ISSWITCH,
+      </if>
+      <if test="latestTime != null" >
+        LATEST_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME,
+      </if>
+      <if test="clientId != null" >
+        CLIENT_ID,
+      </if>
+      <if test="counselorId != null" >
+        COUNSELOR_ID,
+      </if>
+      <if test="disputesId != null" >
+        DISPUTES_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="opin != null" >
+        OPIN,
+      </if>
+      <if test="report != null" >
+        REPORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="claimTime != null" >
+        #{claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isswitch != null" >
+        #{isswitch,jdbcType=VARCHAR},
+      </if>
+      <if test="latestTime != null" >
+        #{latestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null" >
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=BIGINT},
+      </if>
+      <if test="counselorId != null" >
+        #{counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="disputesId != null" >
+        #{disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opin != null" >
+        #{opin,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="report != null" >
+        #{report,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionExample" resultType="java.lang.Integer" >
+    select count(*) from disputes_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disputes_session
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.claimTime != null" >
+        CLAIM_TIME = #{record.claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isswitch != null" >
+        ISSWITCH = #{record.isswitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latestTime != null" >
+        LATEST_TIME = #{record.latestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validTime != null" >
+        VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clientId != null" >
+        CLIENT_ID = #{record.clientId,jdbcType=BIGINT},
+      </if>
+      <if test="record.counselorId != null" >
+        COUNSELOR_ID = #{record.counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.disputesId != null" >
+        DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.opin != null" >
+        OPIN = #{record.opin,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.report != null" >
+        REPORT = #{record.report,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update disputes_session
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CLAIM_TIME = #{record.claimTime,jdbcType=TIMESTAMP},
+      ISSWITCH = #{record.isswitch,jdbcType=VARCHAR},
+      LATEST_TIME = #{record.latestTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      CLIENT_ID = #{record.clientId,jdbcType=BIGINT},
+      COUNSELOR_ID = #{record.counselorId,jdbcType=BIGINT},
+      DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      OPIN = #{record.opin,jdbcType=LONGVARCHAR},
+      REPORT = #{record.report,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disputes_session
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CLAIM_TIME = #{record.claimTime,jdbcType=TIMESTAMP},
+      ISSWITCH = #{record.isswitch,jdbcType=VARCHAR},
+      LATEST_TIME = #{record.latestTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      VALID_TIME = #{record.validTime,jdbcType=TIMESTAMP},
+      CLIENT_ID = #{record.clientId,jdbcType=BIGINT},
+      COUNSELOR_ID = #{record.counselorId,jdbcType=BIGINT},
+      DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionWithBLOBs" >
+    update disputes_session
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="claimTime != null" >
+        CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isswitch != null" >
+        ISSWITCH = #{isswitch,jdbcType=VARCHAR},
+      </if>
+      <if test="latestTime != null" >
+        LATEST_TIME = #{latestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null" >
+        VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientId != null" >
+        CLIENT_ID = #{clientId,jdbcType=BIGINT},
+      </if>
+      <if test="counselorId != null" >
+        COUNSELOR_ID = #{counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="disputesId != null" >
+        DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opin != null" >
+        OPIN = #{opin,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="report != null" >
+        REPORT = #{report,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.DisputesSessionWithBLOBs" >
+    update disputes_session
+    set NAME = #{name,jdbcType=VARCHAR},
+      CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+      ISSWITCH = #{isswitch,jdbcType=VARCHAR},
+      LATEST_TIME = #{latestTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      CLIENT_ID = #{clientId,jdbcType=BIGINT},
+      COUNSELOR_ID = #{counselorId,jdbcType=BIGINT},
+      DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      OPIN = #{opin,jdbcType=LONGVARCHAR},
+      REPORT = #{report,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.DisputesSession" >
+    update disputes_session
+    set NAME = #{name,jdbcType=VARCHAR},
+      CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+      ISSWITCH = #{isswitch,jdbcType=VARCHAR},
+      LATEST_TIME = #{latestTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      VALID_TIME = #{validTime,jdbcType=TIMESTAMP},
+      CLIENT_ID = #{clientId,jdbcType=BIGINT},
+      COUNSELOR_ID = #{counselorId,jdbcType=BIGINT},
+      DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

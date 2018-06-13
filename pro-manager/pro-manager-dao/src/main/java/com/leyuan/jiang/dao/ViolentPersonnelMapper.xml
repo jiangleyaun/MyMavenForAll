@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ViolentPersonnelMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ViolentPersonnel" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ACTUAL_NAME" property="actualName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="AGE" property="age" jdbcType="INTEGER" />
+    <result column="AREAS_CODE" property="areasCode" jdbcType="VARCHAR" />
+    <result column="BIRTH" property="birth" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="EMERGENCY_PHONE" property="emergencyPhone" jdbcType="VARCHAR" />
+    <result column="ENTERPRISE_PHONE" property="enterprisePhone" jdbcType="VARCHAR" />
+    <result column="EXTEND" property="extend" jdbcType="VARCHAR" />
+    <result column="HAS_CHILDREN" property="hasChildren" jdbcType="BIT" />
+    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="INCOME" property="income" jdbcType="VARCHAR" />
+    <result column="IS_COOPERATE" property="isCooperate" jdbcType="BIT" />
+    <result column="MARITAL_STATUS" property="maritalStatus" jdbcType="VARCHAR" />
+    <result column="MARRIAGE_AGE" property="marriageAge" jdbcType="INTEGER" />
+    <result column="NATION" property="nation" jdbcType="VARCHAR" />
+    <result column="OCCUPATION" property="occupation" jdbcType="VARCHAR" />
+    <result column="ORDERS" property="orders" jdbcType="INTEGER" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_NATURE" property="orgNature" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="PROCREDIT_CODE" property="procreditCode" jdbcType="VARCHAR" />
+    <result column="PROLICENSE_CODE" property="prolicenseCode" jdbcType="VARCHAR" />
+    <result column="PROORGANIZATION" property="proorganization" jdbcType="VARCHAR" />
+    <result column="PROTAX" property="protax" jdbcType="VARCHAR" />
+    <result column="REGISTRATION" property="registration" jdbcType="VARCHAR" />
+    <result column="REGISTRATION_DETAIL" property="registrationDetail" jdbcType="VARCHAR" />
+    <result column="RELATION_TO_APPLY" property="relationToApply" jdbcType="VARCHAR" />
+    <result column="RELATION_TO_RESPONDENT" property="relationToRespondent" jdbcType="VARCHAR" />
+    <result column="RESIDENCE_AREA_CODE" property="residenceAreaCode" jdbcType="VARCHAR" />
+    <result column="RESIDENCE_DETAIL" property="residenceDetail" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="INTEGER" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="USER_DETAIL_ID" property="userDetailId" jdbcType="BIGINT" />
+    <result column="VIOLENCE_YEARS" property="violenceYears" jdbcType="INTEGER" />
+    <result column="VIOLENT_CASE_ID" property="violentCaseId" jdbcType="BIGINT" />
+    <result column="SIG_TIME" property="sigTime" jdbcType="DATE" />
+    <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" />
+    <result column="PSYCHOLOGICAL_COUNSELING_ID" property="psychologicalCounselingId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.ViolentPersonnelWithBLOBs" extends="BaseResultMap" >
+    <result column="ILLNESS_DETAIL" property="illnessDetail" jdbcType="LONGVARCHAR" />
+    <result column="VUSERSIG" property="vusersig" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ACTUAL_NAME, ADDRESS, AGE, AREAS_CODE, BIRTH, COMPANY_NAME, CREATE_TIME, 
+    EDUCATION, EMAIL, EMERGENCY_PHONE, ENTERPRISE_PHONE, EXTEND, HAS_CHILDREN, HOBBY, 
+    ID_CARD, INCOME, IS_COOPERATE, MARITAL_STATUS, MARRIAGE_AGE, NATION, OCCUPATION, 
+    ORDERS, ORG_NAME, ORG_NATURE, PHONE, POST_CODE, PROCREDIT_CODE, PROLICENSE_CODE, 
+    PROORGANIZATION, PROTAX, REGISTRATION, REGISTRATION_DETAIL, RELATION_TO_APPLY, RELATION_TO_RESPONDENT, 
+    RESIDENCE_AREA_CODE, RESIDENCE_DETAIL, ROLE, SEX, TITLE, TYPE, UPDATE_TIME, USER_DETAIL_ID, 
+    VIOLENCE_YEARS, VIOLENT_CASE_ID, SIG_TIME, OPEN_ID, PSYCHOLOGICAL_COUNSELING_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    ILLNESS_DETAIL, VUSERSIG
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from violent_personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_personnel
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from violent_personnel
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelExample" >
+    delete from violent_personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelWithBLOBs" >
+    insert into violent_personnel (ID, NAME, ACTUAL_NAME, 
+      ADDRESS, AGE, AREAS_CODE, 
+      BIRTH, COMPANY_NAME, CREATE_TIME, 
+      EDUCATION, EMAIL, EMERGENCY_PHONE, 
+      ENTERPRISE_PHONE, EXTEND, HAS_CHILDREN, 
+      HOBBY, ID_CARD, INCOME, 
+      IS_COOPERATE, MARITAL_STATUS, MARRIAGE_AGE, 
+      NATION, OCCUPATION, ORDERS, 
+      ORG_NAME, ORG_NATURE, PHONE, 
+      POST_CODE, PROCREDIT_CODE, PROLICENSE_CODE, 
+      PROORGANIZATION, PROTAX, REGISTRATION, 
+      REGISTRATION_DETAIL, RELATION_TO_APPLY, RELATION_TO_RESPONDENT, 
+      RESIDENCE_AREA_CODE, RESIDENCE_DETAIL, ROLE, 
+      SEX, TITLE, TYPE, UPDATE_TIME, 
+      USER_DETAIL_ID, VIOLENCE_YEARS, VIOLENT_CASE_ID, 
+      SIG_TIME, OPEN_ID, PSYCHOLOGICAL_COUNSELING_ID, 
+      ILLNESS_DETAIL, VUSERSIG)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{actualName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{areasCode,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{education,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emergencyPhone,jdbcType=VARCHAR}, 
+      #{enterprisePhone,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR}, #{hasChildren,jdbcType=BIT}, 
+      #{hobby,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{income,jdbcType=VARCHAR}, 
+      #{isCooperate,jdbcType=BIT}, #{maritalStatus,jdbcType=VARCHAR}, #{marriageAge,jdbcType=INTEGER}, 
+      #{nation,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgNature,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{postCode,jdbcType=VARCHAR}, #{procreditCode,jdbcType=VARCHAR}, #{prolicenseCode,jdbcType=VARCHAR}, 
+      #{proorganization,jdbcType=VARCHAR}, #{protax,jdbcType=VARCHAR}, #{registration,jdbcType=VARCHAR}, 
+      #{registrationDetail,jdbcType=VARCHAR}, #{relationToApply,jdbcType=VARCHAR}, #{relationToRespondent,jdbcType=VARCHAR}, 
+      #{residenceAreaCode,jdbcType=VARCHAR}, #{residenceDetail,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
+      #{sex,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{userDetailId,jdbcType=BIGINT}, #{violenceYears,jdbcType=INTEGER}, #{violentCaseId,jdbcType=BIGINT}, 
+      #{sigTime,jdbcType=DATE}, #{openId,jdbcType=VARCHAR}, #{psychologicalCounselingId,jdbcType=BIGINT}, 
+      #{illnessDetail,jdbcType=LONGVARCHAR}, #{vusersig,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelWithBLOBs" >
+    insert into violent_personnel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="emergencyPhone != null" >
+        EMERGENCY_PHONE,
+      </if>
+      <if test="enterprisePhone != null" >
+        ENTERPRISE_PHONE,
+      </if>
+      <if test="extend != null" >
+        EXTEND,
+      </if>
+      <if test="hasChildren != null" >
+        HAS_CHILDREN,
+      </if>
+      <if test="hobby != null" >
+        HOBBY,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="income != null" >
+        INCOME,
+      </if>
+      <if test="isCooperate != null" >
+        IS_COOPERATE,
+      </if>
+      <if test="maritalStatus != null" >
+        MARITAL_STATUS,
+      </if>
+      <if test="marriageAge != null" >
+        MARRIAGE_AGE,
+      </if>
+      <if test="nation != null" >
+        NATION,
+      </if>
+      <if test="occupation != null" >
+        OCCUPATION,
+      </if>
+      <if test="orders != null" >
+        ORDERS,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="procreditCode != null" >
+        PROCREDIT_CODE,
+      </if>
+      <if test="prolicenseCode != null" >
+        PROLICENSE_CODE,
+      </if>
+      <if test="proorganization != null" >
+        PROORGANIZATION,
+      </if>
+      <if test="protax != null" >
+        PROTAX,
+      </if>
+      <if test="registration != null" >
+        REGISTRATION,
+      </if>
+      <if test="registrationDetail != null" >
+        REGISTRATION_DETAIL,
+      </if>
+      <if test="relationToApply != null" >
+        RELATION_TO_APPLY,
+      </if>
+      <if test="relationToRespondent != null" >
+        RELATION_TO_RESPONDENT,
+      </if>
+      <if test="residenceAreaCode != null" >
+        RESIDENCE_AREA_CODE,
+      </if>
+      <if test="residenceDetail != null" >
+        RESIDENCE_DETAIL,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID,
+      </if>
+      <if test="violenceYears != null" >
+        VIOLENCE_YEARS,
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID,
+      </if>
+      <if test="sigTime != null" >
+        SIG_TIME,
+      </if>
+      <if test="openId != null" >
+        OPEN_ID,
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID,
+      </if>
+      <if test="illnessDetail != null" >
+        ILLNESS_DETAIL,
+      </if>
+      <if test="vusersig != null" >
+        VUSERSIG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="areasCode != null" >
+        #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null" >
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePhone != null" >
+        #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null" >
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="hasChildren != null" >
+        #{hasChildren,jdbcType=BIT},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=VARCHAR},
+      </if>
+      <if test="isCooperate != null" >
+        #{isCooperate,jdbcType=BIT},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageAge != null" >
+        #{marriageAge,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="procreditCode != null" >
+        #{procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prolicenseCode != null" >
+        #{prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proorganization != null" >
+        #{proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="protax != null" >
+        #{protax,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationDetail != null" >
+        #{registrationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="relationToApply != null" >
+        #{relationToApply,jdbcType=VARCHAR},
+      </if>
+      <if test="relationToRespondent != null" >
+        #{relationToRespondent,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceAreaCode != null" >
+        #{residenceAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceDetail != null" >
+        #{residenceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDetailId != null" >
+        #{userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="violenceYears != null" >
+        #{violenceYears,jdbcType=INTEGER},
+      </if>
+      <if test="violentCaseId != null" >
+        #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="sigTime != null" >
+        #{sigTime,jdbcType=DATE},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        #{psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="illnessDetail != null" >
+        #{illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vusersig != null" >
+        #{vusersig,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelExample" resultType="java.lang.Integer" >
+    select count(*) from violent_personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update violent_personnel
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualName != null" >
+        ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        AGE = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.areasCode != null" >
+        AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.education != null" >
+        EDUCATION = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyPhone != null" >
+        EMERGENCY_PHONE = #{record.emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterprisePhone != null" >
+        ENTERPRISE_PHONE = #{record.enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend != null" >
+        EXTEND = #{record.extend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasChildren != null" >
+        HAS_CHILDREN = #{record.hasChildren,jdbcType=BIT},
+      </if>
+      <if test="record.hobby != null" >
+        HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.income != null" >
+        INCOME = #{record.income,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCooperate != null" >
+        IS_COOPERATE = #{record.isCooperate,jdbcType=BIT},
+      </if>
+      <if test="record.maritalStatus != null" >
+        MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriageAge != null" >
+        MARRIAGE_AGE = #{record.marriageAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.nation != null" >
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupation != null" >
+        OCCUPATION = #{record.occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orders != null" >
+        ORDERS = #{record.orders,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNature != null" >
+        ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null" >
+        POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procreditCode != null" >
+        PROCREDIT_CODE = #{record.procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prolicenseCode != null" >
+        PROLICENSE_CODE = #{record.prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proorganization != null" >
+        PROORGANIZATION = #{record.proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protax != null" >
+        PROTAX = #{record.protax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registration != null" >
+        REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationDetail != null" >
+        REGISTRATION_DETAIL = #{record.registrationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationToApply != null" >
+        RELATION_TO_APPLY = #{record.relationToApply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationToRespondent != null" >
+        RELATION_TO_RESPONDENT = #{record.relationToRespondent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.residenceAreaCode != null" >
+        RESIDENCE_AREA_CODE = #{record.residenceAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.residenceDetail != null" >
+        RESIDENCE_DETAIL = #{record.residenceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        ROLE = #{record.role,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userDetailId != null" >
+        USER_DETAIL_ID = #{record.userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.violenceYears != null" >
+        VIOLENCE_YEARS = #{record.violenceYears,jdbcType=INTEGER},
+      </if>
+      <if test="record.violentCaseId != null" >
+        VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sigTime != null" >
+        SIG_TIME = #{record.sigTime,jdbcType=DATE},
+      </if>
+      <if test="record.openId != null" >
+        OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID = #{record.psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="record.illnessDetail != null" >
+        ILLNESS_DETAIL = #{record.illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.vusersig != null" >
+        VUSERSIG = #{record.vusersig,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update violent_personnel
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=INTEGER},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      EDUCATION = #{record.education,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{record.emergencyPhone,jdbcType=VARCHAR},
+      ENTERPRISE_PHONE = #{record.enterprisePhone,jdbcType=VARCHAR},
+      EXTEND = #{record.extend,jdbcType=VARCHAR},
+      HAS_CHILDREN = #{record.hasChildren,jdbcType=BIT},
+      HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      INCOME = #{record.income,jdbcType=VARCHAR},
+      IS_COOPERATE = #{record.isCooperate,jdbcType=BIT},
+      MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      MARRIAGE_AGE = #{record.marriageAge,jdbcType=INTEGER},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      OCCUPATION = #{record.occupation,jdbcType=VARCHAR},
+      ORDERS = #{record.orders,jdbcType=INTEGER},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{record.procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{record.prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{record.proorganization,jdbcType=VARCHAR},
+      PROTAX = #{record.protax,jdbcType=VARCHAR},
+      REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      REGISTRATION_DETAIL = #{record.registrationDetail,jdbcType=VARCHAR},
+      RELATION_TO_APPLY = #{record.relationToApply,jdbcType=VARCHAR},
+      RELATION_TO_RESPONDENT = #{record.relationToRespondent,jdbcType=VARCHAR},
+      RESIDENCE_AREA_CODE = #{record.residenceAreaCode,jdbcType=VARCHAR},
+      RESIDENCE_DETAIL = #{record.residenceDetail,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=INTEGER},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{record.userDetailId,jdbcType=BIGINT},
+      VIOLENCE_YEARS = #{record.violenceYears,jdbcType=INTEGER},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      SIG_TIME = #{record.sigTime,jdbcType=DATE},
+      OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{record.psychologicalCounselingId,jdbcType=BIGINT},
+      ILLNESS_DETAIL = #{record.illnessDetail,jdbcType=LONGVARCHAR},
+      VUSERSIG = #{record.vusersig,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update violent_personnel
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=INTEGER},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      EDUCATION = #{record.education,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{record.emergencyPhone,jdbcType=VARCHAR},
+      ENTERPRISE_PHONE = #{record.enterprisePhone,jdbcType=VARCHAR},
+      EXTEND = #{record.extend,jdbcType=VARCHAR},
+      HAS_CHILDREN = #{record.hasChildren,jdbcType=BIT},
+      HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      INCOME = #{record.income,jdbcType=VARCHAR},
+      IS_COOPERATE = #{record.isCooperate,jdbcType=BIT},
+      MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      MARRIAGE_AGE = #{record.marriageAge,jdbcType=INTEGER},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      OCCUPATION = #{record.occupation,jdbcType=VARCHAR},
+      ORDERS = #{record.orders,jdbcType=INTEGER},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{record.procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{record.prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{record.proorganization,jdbcType=VARCHAR},
+      PROTAX = #{record.protax,jdbcType=VARCHAR},
+      REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      REGISTRATION_DETAIL = #{record.registrationDetail,jdbcType=VARCHAR},
+      RELATION_TO_APPLY = #{record.relationToApply,jdbcType=VARCHAR},
+      RELATION_TO_RESPONDENT = #{record.relationToRespondent,jdbcType=VARCHAR},
+      RESIDENCE_AREA_CODE = #{record.residenceAreaCode,jdbcType=VARCHAR},
+      RESIDENCE_DETAIL = #{record.residenceDetail,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=INTEGER},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{record.userDetailId,jdbcType=BIGINT},
+      VIOLENCE_YEARS = #{record.violenceYears,jdbcType=INTEGER},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      SIG_TIME = #{record.sigTime,jdbcType=DATE},
+      OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{record.psychologicalCounselingId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelWithBLOBs" >
+    update violent_personnel
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyPhone != null" >
+        EMERGENCY_PHONE = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePhone != null" >
+        ENTERPRISE_PHONE = #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null" >
+        EXTEND = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="hasChildren != null" >
+        HAS_CHILDREN = #{hasChildren,jdbcType=BIT},
+      </if>
+      <if test="hobby != null" >
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null" >
+        INCOME = #{income,jdbcType=VARCHAR},
+      </if>
+      <if test="isCooperate != null" >
+        IS_COOPERATE = #{isCooperate,jdbcType=BIT},
+      </if>
+      <if test="maritalStatus != null" >
+        MARITAL_STATUS = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageAge != null" >
+        MARRIAGE_AGE = #{marriageAge,jdbcType=INTEGER},
+      </if>
+      <if test="nation != null" >
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        ORDERS = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="procreditCode != null" >
+        PROCREDIT_CODE = #{procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prolicenseCode != null" >
+        PROLICENSE_CODE = #{prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proorganization != null" >
+        PROORGANIZATION = #{proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="protax != null" >
+        PROTAX = #{protax,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        REGISTRATION = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationDetail != null" >
+        REGISTRATION_DETAIL = #{registrationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="relationToApply != null" >
+        RELATION_TO_APPLY = #{relationToApply,jdbcType=VARCHAR},
+      </if>
+      <if test="relationToRespondent != null" >
+        RELATION_TO_RESPONDENT = #{relationToRespondent,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceAreaCode != null" >
+        RESIDENCE_AREA_CODE = #{residenceAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceDetail != null" >
+        RESIDENCE_DETAIL = #{residenceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID = #{userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="violenceYears != null" >
+        VIOLENCE_YEARS = #{violenceYears,jdbcType=INTEGER},
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="sigTime != null" >
+        SIG_TIME = #{sigTime,jdbcType=DATE},
+      </if>
+      <if test="openId != null" >
+        OPEN_ID = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID = #{psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="illnessDetail != null" >
+        ILLNESS_DETAIL = #{illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vusersig != null" >
+        VUSERSIG = #{vusersig,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnelWithBLOBs" >
+    update violent_personnel
+    set NAME = #{name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{emergencyPhone,jdbcType=VARCHAR},
+      ENTERPRISE_PHONE = #{enterprisePhone,jdbcType=VARCHAR},
+      EXTEND = #{extend,jdbcType=VARCHAR},
+      HAS_CHILDREN = #{hasChildren,jdbcType=BIT},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      INCOME = #{income,jdbcType=VARCHAR},
+      IS_COOPERATE = #{isCooperate,jdbcType=BIT},
+      MARITAL_STATUS = #{maritalStatus,jdbcType=VARCHAR},
+      MARRIAGE_AGE = #{marriageAge,jdbcType=INTEGER},
+      NATION = #{nation,jdbcType=VARCHAR},
+      OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      ORDERS = #{orders,jdbcType=INTEGER},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{proorganization,jdbcType=VARCHAR},
+      PROTAX = #{protax,jdbcType=VARCHAR},
+      REGISTRATION = #{registration,jdbcType=VARCHAR},
+      REGISTRATION_DETAIL = #{registrationDetail,jdbcType=VARCHAR},
+      RELATION_TO_APPLY = #{relationToApply,jdbcType=VARCHAR},
+      RELATION_TO_RESPONDENT = #{relationToRespondent,jdbcType=VARCHAR},
+      RESIDENCE_AREA_CODE = #{residenceAreaCode,jdbcType=VARCHAR},
+      RESIDENCE_DETAIL = #{residenceDetail,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=INTEGER},
+      SEX = #{sex,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{userDetailId,jdbcType=BIGINT},
+      VIOLENCE_YEARS = #{violenceYears,jdbcType=INTEGER},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      SIG_TIME = #{sigTime,jdbcType=DATE},
+      OPEN_ID = #{openId,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{psychologicalCounselingId,jdbcType=BIGINT},
+      ILLNESS_DETAIL = #{illnessDetail,jdbcType=LONGVARCHAR},
+      VUSERSIG = #{vusersig,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ViolentPersonnel" >
+    update violent_personnel
+    set NAME = #{name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EMERGENCY_PHONE = #{emergencyPhone,jdbcType=VARCHAR},
+      ENTERPRISE_PHONE = #{enterprisePhone,jdbcType=VARCHAR},
+      EXTEND = #{extend,jdbcType=VARCHAR},
+      HAS_CHILDREN = #{hasChildren,jdbcType=BIT},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      INCOME = #{income,jdbcType=VARCHAR},
+      IS_COOPERATE = #{isCooperate,jdbcType=BIT},
+      MARITAL_STATUS = #{maritalStatus,jdbcType=VARCHAR},
+      MARRIAGE_AGE = #{marriageAge,jdbcType=INTEGER},
+      NATION = #{nation,jdbcType=VARCHAR},
+      OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      ORDERS = #{orders,jdbcType=INTEGER},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{proorganization,jdbcType=VARCHAR},
+      PROTAX = #{protax,jdbcType=VARCHAR},
+      REGISTRATION = #{registration,jdbcType=VARCHAR},
+      REGISTRATION_DETAIL = #{registrationDetail,jdbcType=VARCHAR},
+      RELATION_TO_APPLY = #{relationToApply,jdbcType=VARCHAR},
+      RELATION_TO_RESPONDENT = #{relationToRespondent,jdbcType=VARCHAR},
+      RESIDENCE_AREA_CODE = #{residenceAreaCode,jdbcType=VARCHAR},
+      RESIDENCE_DETAIL = #{residenceDetail,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=INTEGER},
+      SEX = #{sex,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{userDetailId,jdbcType=BIGINT},
+      VIOLENCE_YEARS = #{violenceYears,jdbcType=INTEGER},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      SIG_TIME = #{sigTime,jdbcType=DATE},
+      OPEN_ID = #{openId,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{psychologicalCounselingId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

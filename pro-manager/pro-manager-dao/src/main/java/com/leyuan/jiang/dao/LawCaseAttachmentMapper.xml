@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.LawCaseAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CATEGORYB" property="categoryb" jdbcType="VARCHAR" />
+    <result column="CATEGORYM" property="categorym" jdbcType="VARCHAR" />
+    <result column="CATEGORYS" property="categorys" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="OWNER" property="owner" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="COUNSELOR_AND_MEDIATORS_ID" property="counselorAndMediatorsId" jdbcType="BIGINT" />
+    <result column="ROLE" property="role" jdbcType="VARCHAR" />
+    <result column="PERSONNEL_IDS" property="personnelIds" jdbcType="VARCHAR" />
+    <result column="SIGN" property="sign" jdbcType="INTEGER" />
+    <result column="MEETTING_ID" property="meettingId" jdbcType="VARCHAR" />
+    <result column="PERSONNEL_ID" property="personnelId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.LawCaseAttachment" extends="BaseResultMap" >
+    <result column="HASHCODE" property="hashcode" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CATEGORYB, CATEGORYM, CATEGORYS, CONTENT, DEL_FLAG, TYPE, URL, CASE_ID, 
+    USER_ID, OWNER, CREATE_TIME, UPDATE_TIME, COUNSELOR_AND_MEDIATORS_ID, ROLE, PERSONNEL_IDS, 
+    SIGN, MEETTING_ID, PERSONNEL_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    HASHCODE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from law_case_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from law_case_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from law_case_attachment
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_case_attachment
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachmentExample" >
+    delete from law_case_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    insert into law_case_attachment (ID, NAME, CATEGORYB, 
+      CATEGORYM, CATEGORYS, CONTENT, 
+      DEL_FLAG, TYPE, URL, 
+      CASE_ID, USER_ID, OWNER, 
+      CREATE_TIME, UPDATE_TIME, COUNSELOR_AND_MEDIATORS_ID, 
+      ROLE, PERSONNEL_IDS, SIGN, 
+      MEETTING_ID, PERSONNEL_ID, HASHCODE
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{categoryb,jdbcType=VARCHAR}, 
+      #{categorym,jdbcType=VARCHAR}, #{categorys,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{owner,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{counselorAndMediatorsId,jdbcType=BIGINT}, 
+      #{role,jdbcType=VARCHAR}, #{personnelIds,jdbcType=VARCHAR}, #{sign,jdbcType=INTEGER}, 
+      #{meettingId,jdbcType=VARCHAR}, #{personnelId,jdbcType=BIGINT}, #{hashcode,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    insert into law_case_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="categoryb != null" >
+        CATEGORYB,
+      </if>
+      <if test="categorym != null" >
+        CATEGORYM,
+      </if>
+      <if test="categorys != null" >
+        CATEGORYS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="caseId != null" >
+        CASE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="owner != null" >
+        OWNER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="personnelIds != null" >
+        PERSONNEL_IDS,
+      </if>
+      <if test="sign != null" >
+        SIGN,
+      </if>
+      <if test="meettingId != null" >
+        MEETTING_ID,
+      </if>
+      <if test="personnelId != null" >
+        PERSONNEL_ID,
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryb != null" >
+        #{categoryb,jdbcType=VARCHAR},
+      </if>
+      <if test="categorym != null" >
+        #{categorym,jdbcType=VARCHAR},
+      </if>
+      <if test="categorys != null" >
+        #{categorys,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        #{counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelIds != null" >
+        #{personnelIds,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="meettingId != null" >
+        #{meettingId,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelId != null" >
+        #{personnelId,jdbcType=BIGINT},
+      </if>
+      <if test="hashcode != null" >
+        #{hashcode,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachmentExample" resultType="java.lang.Integer" >
+    select count(*) from law_case_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update law_case_attachment
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryb != null" >
+        CATEGORYB = #{record.categoryb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categorym != null" >
+        CATEGORYM = #{record.categorym,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categorys != null" >
+        CATEGORYS = #{record.categorys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseId != null" >
+        CASE_ID = #{record.caseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.owner != null" >
+        OWNER = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.role != null" >
+        ROLE = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnelIds != null" >
+        PERSONNEL_IDS = #{record.personnelIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sign != null" >
+        SIGN = #{record.sign,jdbcType=INTEGER},
+      </if>
+      <if test="record.meettingId != null" >
+        MEETTING_ID = #{record.meettingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnelId != null" >
+        PERSONNEL_ID = #{record.personnelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hashcode != null" >
+        HASHCODE = #{record.hashcode,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update law_case_attachment
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CATEGORYB = #{record.categoryb,jdbcType=VARCHAR},
+      CATEGORYM = #{record.categorym,jdbcType=VARCHAR},
+      CATEGORYS = #{record.categorys,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      CASE_ID = #{record.caseId,jdbcType=BIGINT},
+      USER_ID = #{record.userId,jdbcType=BIGINT},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      ROLE = #{record.role,jdbcType=VARCHAR},
+      PERSONNEL_IDS = #{record.personnelIds,jdbcType=VARCHAR},
+      SIGN = #{record.sign,jdbcType=INTEGER},
+      MEETTING_ID = #{record.meettingId,jdbcType=VARCHAR},
+      PERSONNEL_ID = #{record.personnelId,jdbcType=BIGINT},
+      HASHCODE = #{record.hashcode,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update law_case_attachment
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CATEGORYB = #{record.categoryb,jdbcType=VARCHAR},
+      CATEGORYM = #{record.categorym,jdbcType=VARCHAR},
+      CATEGORYS = #{record.categorys,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      CASE_ID = #{record.caseId,jdbcType=BIGINT},
+      USER_ID = #{record.userId,jdbcType=BIGINT},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      ROLE = #{record.role,jdbcType=VARCHAR},
+      PERSONNEL_IDS = #{record.personnelIds,jdbcType=VARCHAR},
+      SIGN = #{record.sign,jdbcType=INTEGER},
+      MEETTING_ID = #{record.meettingId,jdbcType=VARCHAR},
+      PERSONNEL_ID = #{record.personnelId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    update law_case_attachment
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryb != null" >
+        CATEGORYB = #{categoryb,jdbcType=VARCHAR},
+      </if>
+      <if test="categorym != null" >
+        CATEGORYM = #{categorym,jdbcType=VARCHAR},
+      </if>
+      <if test="categorys != null" >
+        CATEGORYS = #{categorys,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        CASE_ID = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="owner != null" >
+        OWNER = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelIds != null" >
+        PERSONNEL_IDS = #{personnelIds,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        SIGN = #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="meettingId != null" >
+        MEETTING_ID = #{meettingId,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelId != null" >
+        PERSONNEL_ID = #{personnelId,jdbcType=BIGINT},
+      </if>
+      <if test="hashcode != null" >
+        HASHCODE = #{hashcode,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    update law_case_attachment
+    set NAME = #{name,jdbcType=VARCHAR},
+      CATEGORYB = #{categoryb,jdbcType=VARCHAR},
+      CATEGORYM = #{categorym,jdbcType=VARCHAR},
+      CATEGORYS = #{categorys,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      CASE_ID = #{caseId,jdbcType=BIGINT},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      ROLE = #{role,jdbcType=VARCHAR},
+      PERSONNEL_IDS = #{personnelIds,jdbcType=VARCHAR},
+      SIGN = #{sign,jdbcType=INTEGER},
+      MEETTING_ID = #{meettingId,jdbcType=VARCHAR},
+      PERSONNEL_ID = #{personnelId,jdbcType=BIGINT},
+      HASHCODE = #{hashcode,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.LawCaseAttachment" >
+    update law_case_attachment
+    set NAME = #{name,jdbcType=VARCHAR},
+      CATEGORYB = #{categoryb,jdbcType=VARCHAR},
+      CATEGORYM = #{categorym,jdbcType=VARCHAR},
+      CATEGORYS = #{categorys,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      CASE_ID = #{caseId,jdbcType=BIGINT},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      ROLE = #{role,jdbcType=VARCHAR},
+      PERSONNEL_IDS = #{personnelIds,jdbcType=VARCHAR},
+      SIGN = #{sign,jdbcType=INTEGER},
+      MEETTING_ID = #{meettingId,jdbcType=VARCHAR},
+      PERSONNEL_ID = #{personnelId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

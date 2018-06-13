@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.AreasMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Areas" >
+    <id column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="SNAME" property="sname" jdbcType="VARCHAR" />
+    <result column="LNAME" property="lname" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+    <result column="CANTON_FLAG" property="cantonFlag" jdbcType="INTEGER" />
+    <result column="SHOW_FLAG" property="showFlag" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CODE, SNAME, LNAME, LEVEL, PARENT_CODE, CANTON_FLAG, SHOW_FLAG, NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.AreasExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from areas
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from areas
+    where CODE = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from areas
+    where CODE = #{code,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.AreasExample" >
+    delete from areas
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Areas" >
+    insert into areas (CODE, SNAME, LNAME, 
+      LEVEL, PARENT_CODE, CANTON_FLAG, 
+      SHOW_FLAG, NAME)
+    values (#{code,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{lname,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{parentCode,jdbcType=VARCHAR}, #{cantonFlag,jdbcType=INTEGER}, 
+      #{showFlag,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Areas" >
+    insert into areas
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="sname != null" >
+        SNAME,
+      </if>
+      <if test="lname != null" >
+        LNAME,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="parentCode != null" >
+        PARENT_CODE,
+      </if>
+      <if test="cantonFlag != null" >
+        CANTON_FLAG,
+      </if>
+      <if test="showFlag != null" >
+        SHOW_FLAG,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null" >
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cantonFlag != null" >
+        #{cantonFlag,jdbcType=INTEGER},
+      </if>
+      <if test="showFlag != null" >
+        #{showFlag,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.AreasExample" resultType="java.lang.Integer" >
+    select count(*) from areas
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update areas
+    <set >
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        SNAME = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lname != null" >
+        LNAME = #{record.lname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentCode != null" >
+        PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cantonFlag != null" >
+        CANTON_FLAG = #{record.cantonFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.showFlag != null" >
+        SHOW_FLAG = #{record.showFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update areas
+    set CODE = #{record.code,jdbcType=VARCHAR},
+      SNAME = #{record.sname,jdbcType=VARCHAR},
+      LNAME = #{record.lname,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=INTEGER},
+      PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR},
+      CANTON_FLAG = #{record.cantonFlag,jdbcType=INTEGER},
+      SHOW_FLAG = #{record.showFlag,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Areas" >
+    update areas
+    <set >
+      <if test="sname != null" >
+        SNAME = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null" >
+        LNAME = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null" >
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cantonFlag != null" >
+        CANTON_FLAG = #{cantonFlag,jdbcType=INTEGER},
+      </if>
+      <if test="showFlag != null" >
+        SHOW_FLAG = #{showFlag,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CODE = #{code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Areas" >
+    update areas
+    set SNAME = #{sname,jdbcType=VARCHAR},
+      LNAME = #{lname,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      CANTON_FLAG = #{cantonFlag,jdbcType=INTEGER},
+      SHOW_FLAG = #{showFlag,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR}
+    where CODE = #{code,jdbcType=VARCHAR}
+  </update>
+</mapper>

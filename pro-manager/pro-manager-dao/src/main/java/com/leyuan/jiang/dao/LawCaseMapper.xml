@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.LawCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.LawCase" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="RESPONDENT_ID" property="respondentId" jdbcType="BIGINT" />
+    <result column="APPLY_ID" property="applyId" jdbcType="BIGINT" />
+    <result column="COUNSELOR_AND_MEDIATORS_ID" property="counselorAndMediatorsId" jdbcType="BIGINT" />
+    <result column="SUIT_PERSON_ID" property="suitPersonId" jdbcType="VARCHAR" />
+    <result column="CASE_NO" property="caseNo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="ORGANIZATION_ID" property="organizationId" jdbcType="BIGINT" />
+    <result column="AGREEMENT_BOOK_ID" property="agreementBookId" jdbcType="BIGINT" />
+    <result column="VIDEO_ID" property="videoId" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CASE_COMPLETE_TIME" property="caseCompleteTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="RESERVE_DATE" property="reserveDate" jdbcType="TIMESTAMP" />
+    <result column="AREAS_CODE" property="areasCode" jdbcType="VARCHAR" />
+    <result column="DISPUTE_DICT_ID" property="disputeDictId" jdbcType="BIGINT" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="IS_SEND" property="isSend" jdbcType="VARCHAR" />
+    <result column="ISCONFIRMMB" property="isconfirmmb" jdbcType="BIT" />
+    <result column="ISCONFIRMPRO" property="isconfirmpro" jdbcType="BIT" />
+    <result column="ISCONFIRMREP" property="isconfirmrep" jdbcType="BIT" />
+    <result column="TAB" property="tab" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+    <result column="AREAS_NAME" property="areasName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ORIGIN" property="origin" jdbcType="VARCHAR" />
+    <result column="ORG_COFIRM" property="orgCofirm" jdbcType="INTEGER" />
+    <result column="DISPUTES_ID" property="disputesId" jdbcType="BIGINT" />
+    <result column="ADJUST_BOOK_ID" property="adjustBookId" jdbcType="BIGINT" />
+    <result column="LAW_NO_DISPUTE_FACT_ID" property="lawNoDisputeFactId" jdbcType="BIGINT" />
+    <result column="IS_SEND_NO_DF" property="isSendNoDf" jdbcType="VARCHAR" />
+    <result column="IS_SEND_JUDGLE" property="isSendJudgle" jdbcType="VARCHAR" />
+    <result column="LAW_JUDGLE_BOOK_ID" property="lawJudgleBookId" jdbcType="BIGINT" />
+    <result column="IS_SEND_LAW_PROMISE" property="isSendLawPromise" jdbcType="VARCHAR" />
+    <result column="IS_SEND_LAW_MSCH" property="isSendLawMsch" jdbcType="VARCHAR" />
+    <result column="LAW_PROMISE_ID" property="lawPromiseId" jdbcType="BIGINT" />
+    <result column="LAW_MSCHEME_ID" property="lawMschemeId" jdbcType="BIGINT" />
+    <result column="LAW_ADJUST_BOOK_ID" property="lawAdjustBookId" jdbcType="BIGINT" />
+    <result column="SUIT_COUNT" property="suitCount" jdbcType="INTEGER" />
+    <result column="MEDIATE_TYPES" property="mediateTypes" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.LawCaseWithBLOBs" extends="BaseResultMap" >
+    <result column="APPEAL" property="appeal" jdbcType="LONGVARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="LONGVARCHAR" />
+    <result column="RECORD" property="record" jdbcType="LONGVARCHAR" />
+    <result column="TAB_DETAIL" property="tabDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TYPE, RESPONDENT_ID, APPLY_ID, COUNSELOR_AND_MEDIATORS_ID, SUIT_PERSON_ID, CASE_NO, 
+    CREATE_DATE, ORGANIZATION_ID, AGREEMENT_BOOK_ID, VIDEO_ID, NAME, CASE_COMPLETE_TIME, 
+    STATUS, RESERVE_DATE, AREAS_CODE, DISPUTE_DICT_ID, DICT_CODE, CREATE_TIME, UPDATE_TIME, 
+    IS_SEND, ISCONFIRMMB, ISCONFIRMPRO, ISCONFIRMREP, TAB, USER_TYPE, AREAS_NAME, ADDRESS, 
+    ORIGIN, ORG_COFIRM, DISPUTES_ID, ADJUST_BOOK_ID, LAW_NO_DISPUTE_FACT_ID, IS_SEND_NO_DF, 
+    IS_SEND_JUDGLE, LAW_JUDGLE_BOOK_ID, IS_SEND_LAW_PROMISE, IS_SEND_LAW_MSCH, LAW_PROMISE_ID, 
+    LAW_MSCHEME_ID, LAW_ADJUST_BOOK_ID, SUIT_COUNT, MEDIATE_TYPES
+  </sql>
+  <sql id="Blob_Column_List" >
+    APPEAL, REMARKS, RECORD, TAB_DETAIL
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.LawCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from law_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.LawCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from law_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from law_case
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_case
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseExample" >
+    delete from law_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.LawCaseWithBLOBs" >
+    insert into law_case (ID, TYPE, RESPONDENT_ID, 
+      APPLY_ID, COUNSELOR_AND_MEDIATORS_ID, SUIT_PERSON_ID, 
+      CASE_NO, CREATE_DATE, ORGANIZATION_ID, 
+      AGREEMENT_BOOK_ID, VIDEO_ID, NAME, 
+      CASE_COMPLETE_TIME, STATUS, RESERVE_DATE, 
+      AREAS_CODE, DISPUTE_DICT_ID, DICT_CODE, 
+      CREATE_TIME, UPDATE_TIME, IS_SEND, 
+      ISCONFIRMMB, ISCONFIRMPRO, ISCONFIRMREP, 
+      TAB, USER_TYPE, AREAS_NAME, 
+      ADDRESS, ORIGIN, ORG_COFIRM, 
+      DISPUTES_ID, ADJUST_BOOK_ID, LAW_NO_DISPUTE_FACT_ID, 
+      IS_SEND_NO_DF, IS_SEND_JUDGLE, LAW_JUDGLE_BOOK_ID, 
+      IS_SEND_LAW_PROMISE, IS_SEND_LAW_MSCH, LAW_PROMISE_ID, 
+      LAW_MSCHEME_ID, LAW_ADJUST_BOOK_ID, SUIT_COUNT, 
+      MEDIATE_TYPES, APPEAL, REMARKS, 
+      RECORD, TAB_DETAIL)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{respondentId,jdbcType=BIGINT}, 
+      #{applyId,jdbcType=BIGINT}, #{counselorAndMediatorsId,jdbcType=BIGINT}, #{suitPersonId,jdbcType=VARCHAR}, 
+      #{caseNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{organizationId,jdbcType=BIGINT}, 
+      #{agreementBookId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{caseCompleteTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{reserveDate,jdbcType=TIMESTAMP}, 
+      #{areasCode,jdbcType=VARCHAR}, #{disputeDictId,jdbcType=BIGINT}, #{dictCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isSend,jdbcType=VARCHAR}, 
+      #{isconfirmmb,jdbcType=BIT}, #{isconfirmpro,jdbcType=BIT}, #{isconfirmrep,jdbcType=BIT}, 
+      #{tab,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{areasName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{orgCofirm,jdbcType=INTEGER}, 
+      #{disputesId,jdbcType=BIGINT}, #{adjustBookId,jdbcType=BIGINT}, #{lawNoDisputeFactId,jdbcType=BIGINT}, 
+      #{isSendNoDf,jdbcType=VARCHAR}, #{isSendJudgle,jdbcType=VARCHAR}, #{lawJudgleBookId,jdbcType=BIGINT}, 
+      #{isSendLawPromise,jdbcType=VARCHAR}, #{isSendLawMsch,jdbcType=VARCHAR}, #{lawPromiseId,jdbcType=BIGINT}, 
+      #{lawMschemeId,jdbcType=BIGINT}, #{lawAdjustBookId,jdbcType=BIGINT}, #{suitCount,jdbcType=INTEGER}, 
+      #{mediateTypes,jdbcType=VARCHAR}, #{appeal,jdbcType=LONGVARCHAR}, #{remarks,jdbcType=LONGVARCHAR}, 
+      #{record,jdbcType=LONGVARCHAR}, #{tabDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseWithBLOBs" >
+    insert into law_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="respondentId != null" >
+        RESPONDENT_ID,
+      </if>
+      <if test="applyId != null" >
+        APPLY_ID,
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID,
+      </if>
+      <if test="suitPersonId != null" >
+        SUIT_PERSON_ID,
+      </if>
+      <if test="caseNo != null" >
+        CASE_NO,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID,
+      </if>
+      <if test="agreementBookId != null" >
+        AGREEMENT_BOOK_ID,
+      </if>
+      <if test="videoId != null" >
+        VIDEO_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="caseCompleteTime != null" >
+        CASE_COMPLETE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="reserveDate != null" >
+        RESERVE_DATE,
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE,
+      </if>
+      <if test="disputeDictId != null" >
+        DISPUTE_DICT_ID,
+      </if>
+      <if test="dictCode != null" >
+        DICT_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="isSend != null" >
+        IS_SEND,
+      </if>
+      <if test="isconfirmmb != null" >
+        ISCONFIRMMB,
+      </if>
+      <if test="isconfirmpro != null" >
+        ISCONFIRMPRO,
+      </if>
+      <if test="isconfirmrep != null" >
+        ISCONFIRMREP,
+      </if>
+      <if test="tab != null" >
+        TAB,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="areasName != null" >
+        AREAS_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="origin != null" >
+        ORIGIN,
+      </if>
+      <if test="orgCofirm != null" >
+        ORG_COFIRM,
+      </if>
+      <if test="disputesId != null" >
+        DISPUTES_ID,
+      </if>
+      <if test="adjustBookId != null" >
+        ADJUST_BOOK_ID,
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID,
+      </if>
+      <if test="isSendNoDf != null" >
+        IS_SEND_NO_DF,
+      </if>
+      <if test="isSendJudgle != null" >
+        IS_SEND_JUDGLE,
+      </if>
+      <if test="lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID,
+      </if>
+      <if test="isSendLawPromise != null" >
+        IS_SEND_LAW_PROMISE,
+      </if>
+      <if test="isSendLawMsch != null" >
+        IS_SEND_LAW_MSCH,
+      </if>
+      <if test="lawPromiseId != null" >
+        LAW_PROMISE_ID,
+      </if>
+      <if test="lawMschemeId != null" >
+        LAW_MSCHEME_ID,
+      </if>
+      <if test="lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID,
+      </if>
+      <if test="suitCount != null" >
+        SUIT_COUNT,
+      </if>
+      <if test="mediateTypes != null" >
+        MEDIATE_TYPES,
+      </if>
+      <if test="appeal != null" >
+        APPEAL,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="record != null" >
+        RECORD,
+      </if>
+      <if test="tabDetail != null" >
+        TAB_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="respondentId != null" >
+        #{respondentId,jdbcType=BIGINT},
+      </if>
+      <if test="applyId != null" >
+        #{applyId,jdbcType=BIGINT},
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        #{counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="suitPersonId != null" >
+        #{suitPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="agreementBookId != null" >
+        #{agreementBookId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCompleteTime != null" >
+        #{caseCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDate != null" >
+        #{reserveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areasCode != null" >
+        #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeDictId != null" >
+        #{disputeDictId,jdbcType=BIGINT},
+      </if>
+      <if test="dictCode != null" >
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSend != null" >
+        #{isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="isconfirmmb != null" >
+        #{isconfirmmb,jdbcType=BIT},
+      </if>
+      <if test="isconfirmpro != null" >
+        #{isconfirmpro,jdbcType=BIT},
+      </if>
+      <if test="isconfirmrep != null" >
+        #{isconfirmrep,jdbcType=BIT},
+      </if>
+      <if test="tab != null" >
+        #{tab,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="areasName != null" >
+        #{areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCofirm != null" >
+        #{orgCofirm,jdbcType=INTEGER},
+      </if>
+      <if test="disputesId != null" >
+        #{disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="adjustBookId != null" >
+        #{adjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        #{lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="isSendNoDf != null" >
+        #{isSendNoDf,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendJudgle != null" >
+        #{isSendJudgle,jdbcType=VARCHAR},
+      </if>
+      <if test="lawJudgleBookId != null" >
+        #{lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="isSendLawPromise != null" >
+        #{isSendLawPromise,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendLawMsch != null" >
+        #{isSendLawMsch,jdbcType=VARCHAR},
+      </if>
+      <if test="lawPromiseId != null" >
+        #{lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="lawMschemeId != null" >
+        #{lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="lawAdjustBookId != null" >
+        #{lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="suitCount != null" >
+        #{suitCount,jdbcType=INTEGER},
+      </if>
+      <if test="mediateTypes != null" >
+        #{mediateTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        #{appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tabDetail != null" >
+        #{tabDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseExample" resultType="java.lang.Integer" >
+    select count(*) from law_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update law_case
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respondentId != null" >
+        RESPONDENT_ID = #{record.respondentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyId != null" >
+        APPLY_ID = #{record.applyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.suitPersonId != null" >
+        SUIT_PERSON_ID = #{record.suitPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseNo != null" >
+        CASE_NO = #{record.caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organizationId != null" >
+        ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.agreementBookId != null" >
+        AGREEMENT_BOOK_ID = #{record.agreementBookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoId != null" >
+        VIDEO_ID = #{record.videoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseCompleteTime != null" >
+        CASE_COMPLETE_TIME = #{record.caseCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserveDate != null" >
+        RESERVE_DATE = #{record.reserveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.areasCode != null" >
+        AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disputeDictId != null" >
+        DISPUTE_DICT_ID = #{record.disputeDictId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dictCode != null" >
+        DICT_CODE = #{record.dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isSend != null" >
+        IS_SEND = #{record.isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isconfirmmb != null" >
+        ISCONFIRMMB = #{record.isconfirmmb,jdbcType=BIT},
+      </if>
+      <if test="record.isconfirmpro != null" >
+        ISCONFIRMPRO = #{record.isconfirmpro,jdbcType=BIT},
+      </if>
+      <if test="record.isconfirmrep != null" >
+        ISCONFIRMREP = #{record.isconfirmrep,jdbcType=BIT},
+      </if>
+      <if test="record.tab != null" >
+        TAB = #{record.tab,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areasName != null" >
+        AREAS_NAME = #{record.areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null" >
+        ORIGIN = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCofirm != null" >
+        ORG_COFIRM = #{record.orgCofirm,jdbcType=INTEGER},
+      </if>
+      <if test="record.disputesId != null" >
+        DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="record.adjustBookId != null" >
+        ADJUST_BOOK_ID = #{record.adjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID = #{record.lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isSendNoDf != null" >
+        IS_SEND_NO_DF = #{record.isSendNoDf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSendJudgle != null" >
+        IS_SEND_JUDGLE = #{record.isSendJudgle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID = #{record.lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isSendLawPromise != null" >
+        IS_SEND_LAW_PROMISE = #{record.isSendLawPromise,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSendLawMsch != null" >
+        IS_SEND_LAW_MSCH = #{record.isSendLawMsch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawPromiseId != null" >
+        LAW_PROMISE_ID = #{record.lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawMschemeId != null" >
+        LAW_MSCHEME_ID = #{record.lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID = #{record.lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.suitCount != null" >
+        SUIT_COUNT = #{record.suitCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.mediateTypes != null" >
+        MEDIATE_TYPES = #{record.mediateTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appeal != null" >
+        APPEAL = #{record.appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.record != null" >
+        RECORD = #{record.record,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tabDetail != null" >
+        TAB_DETAIL = #{record.tabDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update law_case
+    set ID = #{record.id,jdbcType=BIGINT},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      RESPONDENT_ID = #{record.respondentId,jdbcType=BIGINT},
+      APPLY_ID = #{record.applyId,jdbcType=BIGINT},
+      COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      SUIT_PERSON_ID = #{record.suitPersonId,jdbcType=VARCHAR},
+      CASE_NO = #{record.caseNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      AGREEMENT_BOOK_ID = #{record.agreementBookId,jdbcType=BIGINT},
+      VIDEO_ID = #{record.videoId,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CASE_COMPLETE_TIME = #{record.caseCompleteTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      RESERVE_DATE = #{record.reserveDate,jdbcType=TIMESTAMP},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      DISPUTE_DICT_ID = #{record.disputeDictId,jdbcType=BIGINT},
+      DICT_CODE = #{record.dictCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      IS_SEND = #{record.isSend,jdbcType=VARCHAR},
+      ISCONFIRMMB = #{record.isconfirmmb,jdbcType=BIT},
+      ISCONFIRMPRO = #{record.isconfirmpro,jdbcType=BIT},
+      ISCONFIRMREP = #{record.isconfirmrep,jdbcType=BIT},
+      TAB = #{record.tab,jdbcType=VARCHAR},
+      USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      AREAS_NAME = #{record.areasName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ORIGIN = #{record.origin,jdbcType=VARCHAR},
+      ORG_COFIRM = #{record.orgCofirm,jdbcType=INTEGER},
+      DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      ADJUST_BOOK_ID = #{record.adjustBookId,jdbcType=BIGINT},
+      LAW_NO_DISPUTE_FACT_ID = #{record.lawNoDisputeFactId,jdbcType=BIGINT},
+      IS_SEND_NO_DF = #{record.isSendNoDf,jdbcType=VARCHAR},
+      IS_SEND_JUDGLE = #{record.isSendJudgle,jdbcType=VARCHAR},
+      LAW_JUDGLE_BOOK_ID = #{record.lawJudgleBookId,jdbcType=BIGINT},
+      IS_SEND_LAW_PROMISE = #{record.isSendLawPromise,jdbcType=VARCHAR},
+      IS_SEND_LAW_MSCH = #{record.isSendLawMsch,jdbcType=VARCHAR},
+      LAW_PROMISE_ID = #{record.lawPromiseId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{record.lawMschemeId,jdbcType=BIGINT},
+      LAW_ADJUST_BOOK_ID = #{record.lawAdjustBookId,jdbcType=BIGINT},
+      SUIT_COUNT = #{record.suitCount,jdbcType=INTEGER},
+      MEDIATE_TYPES = #{record.mediateTypes,jdbcType=VARCHAR},
+      APPEAL = #{record.appeal,jdbcType=LONGVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=LONGVARCHAR},
+      RECORD = #{record.record,jdbcType=LONGVARCHAR},
+      TAB_DETAIL = #{record.tabDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update law_case
+    set ID = #{record.id,jdbcType=BIGINT},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      RESPONDENT_ID = #{record.respondentId,jdbcType=BIGINT},
+      APPLY_ID = #{record.applyId,jdbcType=BIGINT},
+      COUNSELOR_AND_MEDIATORS_ID = #{record.counselorAndMediatorsId,jdbcType=BIGINT},
+      SUIT_PERSON_ID = #{record.suitPersonId,jdbcType=VARCHAR},
+      CASE_NO = #{record.caseNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      AGREEMENT_BOOK_ID = #{record.agreementBookId,jdbcType=BIGINT},
+      VIDEO_ID = #{record.videoId,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CASE_COMPLETE_TIME = #{record.caseCompleteTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      RESERVE_DATE = #{record.reserveDate,jdbcType=TIMESTAMP},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      DISPUTE_DICT_ID = #{record.disputeDictId,jdbcType=BIGINT},
+      DICT_CODE = #{record.dictCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      IS_SEND = #{record.isSend,jdbcType=VARCHAR},
+      ISCONFIRMMB = #{record.isconfirmmb,jdbcType=BIT},
+      ISCONFIRMPRO = #{record.isconfirmpro,jdbcType=BIT},
+      ISCONFIRMREP = #{record.isconfirmrep,jdbcType=BIT},
+      TAB = #{record.tab,jdbcType=VARCHAR},
+      USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      AREAS_NAME = #{record.areasName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ORIGIN = #{record.origin,jdbcType=VARCHAR},
+      ORG_COFIRM = #{record.orgCofirm,jdbcType=INTEGER},
+      DISPUTES_ID = #{record.disputesId,jdbcType=BIGINT},
+      ADJUST_BOOK_ID = #{record.adjustBookId,jdbcType=BIGINT},
+      LAW_NO_DISPUTE_FACT_ID = #{record.lawNoDisputeFactId,jdbcType=BIGINT},
+      IS_SEND_NO_DF = #{record.isSendNoDf,jdbcType=VARCHAR},
+      IS_SEND_JUDGLE = #{record.isSendJudgle,jdbcType=VARCHAR},
+      LAW_JUDGLE_BOOK_ID = #{record.lawJudgleBookId,jdbcType=BIGINT},
+      IS_SEND_LAW_PROMISE = #{record.isSendLawPromise,jdbcType=VARCHAR},
+      IS_SEND_LAW_MSCH = #{record.isSendLawMsch,jdbcType=VARCHAR},
+      LAW_PROMISE_ID = #{record.lawPromiseId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{record.lawMschemeId,jdbcType=BIGINT},
+      LAW_ADJUST_BOOK_ID = #{record.lawAdjustBookId,jdbcType=BIGINT},
+      SUIT_COUNT = #{record.suitCount,jdbcType=INTEGER},
+      MEDIATE_TYPES = #{record.mediateTypes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseWithBLOBs" >
+    update law_case
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="respondentId != null" >
+        RESPONDENT_ID = #{respondentId,jdbcType=BIGINT},
+      </if>
+      <if test="applyId != null" >
+        APPLY_ID = #{applyId,jdbcType=BIGINT},
+      </if>
+      <if test="counselorAndMediatorsId != null" >
+        COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      </if>
+      <if test="suitPersonId != null" >
+        SUIT_PERSON_ID = #{suitPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        CASE_NO = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="agreementBookId != null" >
+        AGREEMENT_BOOK_ID = #{agreementBookId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        VIDEO_ID = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCompleteTime != null" >
+        CASE_COMPLETE_TIME = #{caseCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDate != null" >
+        RESERVE_DATE = #{reserveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeDictId != null" >
+        DISPUTE_DICT_ID = #{disputeDictId,jdbcType=BIGINT},
+      </if>
+      <if test="dictCode != null" >
+        DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSend != null" >
+        IS_SEND = #{isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="isconfirmmb != null" >
+        ISCONFIRMMB = #{isconfirmmb,jdbcType=BIT},
+      </if>
+      <if test="isconfirmpro != null" >
+        ISCONFIRMPRO = #{isconfirmpro,jdbcType=BIT},
+      </if>
+      <if test="isconfirmrep != null" >
+        ISCONFIRMREP = #{isconfirmrep,jdbcType=BIT},
+      </if>
+      <if test="tab != null" >
+        TAB = #{tab,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="areasName != null" >
+        AREAS_NAME = #{areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCofirm != null" >
+        ORG_COFIRM = #{orgCofirm,jdbcType=INTEGER},
+      </if>
+      <if test="disputesId != null" >
+        DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      </if>
+      <if test="adjustBookId != null" >
+        ADJUST_BOOK_ID = #{adjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID = #{lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="isSendNoDf != null" >
+        IS_SEND_NO_DF = #{isSendNoDf,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendJudgle != null" >
+        IS_SEND_JUDGLE = #{isSendJudgle,jdbcType=VARCHAR},
+      </if>
+      <if test="lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID = #{lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="isSendLawPromise != null" >
+        IS_SEND_LAW_PROMISE = #{isSendLawPromise,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendLawMsch != null" >
+        IS_SEND_LAW_MSCH = #{isSendLawMsch,jdbcType=VARCHAR},
+      </if>
+      <if test="lawPromiseId != null" >
+        LAW_PROMISE_ID = #{lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="lawMschemeId != null" >
+        LAW_MSCHEME_ID = #{lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID = #{lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+      <if test="suitCount != null" >
+        SUIT_COUNT = #{suitCount,jdbcType=INTEGER},
+      </if>
+      <if test="mediateTypes != null" >
+        MEDIATE_TYPES = #{mediateTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        APPEAL = #{appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record != null" >
+        RECORD = #{record,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tabDetail != null" >
+        TAB_DETAIL = #{tabDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.LawCaseWithBLOBs" >
+    update law_case
+    set TYPE = #{type,jdbcType=VARCHAR},
+      RESPONDENT_ID = #{respondentId,jdbcType=BIGINT},
+      APPLY_ID = #{applyId,jdbcType=BIGINT},
+      COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      SUIT_PERSON_ID = #{suitPersonId,jdbcType=VARCHAR},
+      CASE_NO = #{caseNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      AGREEMENT_BOOK_ID = #{agreementBookId,jdbcType=BIGINT},
+      VIDEO_ID = #{videoId,jdbcType=BIGINT},
+      NAME = #{name,jdbcType=VARCHAR},
+      CASE_COMPLETE_TIME = #{caseCompleteTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      RESERVE_DATE = #{reserveDate,jdbcType=TIMESTAMP},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      DISPUTE_DICT_ID = #{disputeDictId,jdbcType=BIGINT},
+      DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IS_SEND = #{isSend,jdbcType=VARCHAR},
+      ISCONFIRMMB = #{isconfirmmb,jdbcType=BIT},
+      ISCONFIRMPRO = #{isconfirmpro,jdbcType=BIT},
+      ISCONFIRMREP = #{isconfirmrep,jdbcType=BIT},
+      TAB = #{tab,jdbcType=VARCHAR},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      AREAS_NAME = #{areasName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      ORG_COFIRM = #{orgCofirm,jdbcType=INTEGER},
+      DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      ADJUST_BOOK_ID = #{adjustBookId,jdbcType=BIGINT},
+      LAW_NO_DISPUTE_FACT_ID = #{lawNoDisputeFactId,jdbcType=BIGINT},
+      IS_SEND_NO_DF = #{isSendNoDf,jdbcType=VARCHAR},
+      IS_SEND_JUDGLE = #{isSendJudgle,jdbcType=VARCHAR},
+      LAW_JUDGLE_BOOK_ID = #{lawJudgleBookId,jdbcType=BIGINT},
+      IS_SEND_LAW_PROMISE = #{isSendLawPromise,jdbcType=VARCHAR},
+      IS_SEND_LAW_MSCH = #{isSendLawMsch,jdbcType=VARCHAR},
+      LAW_PROMISE_ID = #{lawPromiseId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{lawMschemeId,jdbcType=BIGINT},
+      LAW_ADJUST_BOOK_ID = #{lawAdjustBookId,jdbcType=BIGINT},
+      SUIT_COUNT = #{suitCount,jdbcType=INTEGER},
+      MEDIATE_TYPES = #{mediateTypes,jdbcType=VARCHAR},
+      APPEAL = #{appeal,jdbcType=LONGVARCHAR},
+      REMARKS = #{remarks,jdbcType=LONGVARCHAR},
+      RECORD = #{record,jdbcType=LONGVARCHAR},
+      TAB_DETAIL = #{tabDetail,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.LawCase" >
+    update law_case
+    set TYPE = #{type,jdbcType=VARCHAR},
+      RESPONDENT_ID = #{respondentId,jdbcType=BIGINT},
+      APPLY_ID = #{applyId,jdbcType=BIGINT},
+      COUNSELOR_AND_MEDIATORS_ID = #{counselorAndMediatorsId,jdbcType=BIGINT},
+      SUIT_PERSON_ID = #{suitPersonId,jdbcType=VARCHAR},
+      CASE_NO = #{caseNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      AGREEMENT_BOOK_ID = #{agreementBookId,jdbcType=BIGINT},
+      VIDEO_ID = #{videoId,jdbcType=BIGINT},
+      NAME = #{name,jdbcType=VARCHAR},
+      CASE_COMPLETE_TIME = #{caseCompleteTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      RESERVE_DATE = #{reserveDate,jdbcType=TIMESTAMP},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      DISPUTE_DICT_ID = #{disputeDictId,jdbcType=BIGINT},
+      DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IS_SEND = #{isSend,jdbcType=VARCHAR},
+      ISCONFIRMMB = #{isconfirmmb,jdbcType=BIT},
+      ISCONFIRMPRO = #{isconfirmpro,jdbcType=BIT},
+      ISCONFIRMREP = #{isconfirmrep,jdbcType=BIT},
+      TAB = #{tab,jdbcType=VARCHAR},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      AREAS_NAME = #{areasName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      ORG_COFIRM = #{orgCofirm,jdbcType=INTEGER},
+      DISPUTES_ID = #{disputesId,jdbcType=BIGINT},
+      ADJUST_BOOK_ID = #{adjustBookId,jdbcType=BIGINT},
+      LAW_NO_DISPUTE_FACT_ID = #{lawNoDisputeFactId,jdbcType=BIGINT},
+      IS_SEND_NO_DF = #{isSendNoDf,jdbcType=VARCHAR},
+      IS_SEND_JUDGLE = #{isSendJudgle,jdbcType=VARCHAR},
+      LAW_JUDGLE_BOOK_ID = #{lawJudgleBookId,jdbcType=BIGINT},
+      IS_SEND_LAW_PROMISE = #{isSendLawPromise,jdbcType=VARCHAR},
+      IS_SEND_LAW_MSCH = #{isSendLawMsch,jdbcType=VARCHAR},
+      LAW_PROMISE_ID = #{lawPromiseId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{lawMschemeId,jdbcType=BIGINT},
+      LAW_ADJUST_BOOK_ID = #{lawAdjustBookId,jdbcType=BIGINT},
+      SUIT_COUNT = #{suitCount,jdbcType=INTEGER},
+      MEDIATE_TYPES = #{mediateTypes,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ViolentCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ViolentCase" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ALARM_NUMBER" property="alarmNumber" jdbcType="INTEGER" />
+    <result column="ALARM_TIME" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="APPLY_EXPECT" property="applyExpect" jdbcType="VARCHAR" />
+    <result column="APPLY_TYPE" property="applyType" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="DESIRED_PURPOSE" property="desiredPurpose" jdbcType="VARCHAR" />
+    <result column="FIRST_VIOLENT_TIME" property="firstViolentTime" jdbcType="TIMESTAMP" />
+    <result column="INJURY_IDENTIFY_PLACE" property="injuryIdentifyPlace" jdbcType="VARCHAR" />
+    <result column="IS_ALARMED" property="isAlarmed" jdbcType="BIT" />
+    <result column="IS_DISABLED" property="isDisabled" jdbcType="BIT" />
+    <result column="IS_HURT" property="isHurt" jdbcType="BIT" />
+    <result column="IS_PREGNANCY" property="isPregnancy" jdbcType="BIT" />
+    <result column="IS_TEST_HURT" property="isTestHurt" jdbcType="BIT" />
+    <result column="IS_URGENT" property="isUrgent" jdbcType="BIT" />
+    <result column="SERVICE_NO" property="serviceNo" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="VICTIM_MENTAL_STATUS" property="victimMentalStatus" jdbcType="VARCHAR" />
+    <result column="VIOLENT_ATTITUDE" property="violentAttitude" jdbcType="VARCHAR" />
+    <result column="VIOLENT_MENTAL_STATUS" property="violentMentalStatus" jdbcType="VARCHAR" />
+    <result column="VIOLENT_NUMBER" property="violentNumber" jdbcType="INTEGER" />
+    <result column="VIOLENT_TIME" property="violentTime" jdbcType="VARCHAR" />
+    <result column="VIOLENT_TYPE" property="violentType" jdbcType="VARCHAR" />
+    <result column="AREAS" property="areas" jdbcType="VARCHAR" />
+    <result column="VIOLENT_DATE" property="violentDate" jdbcType="VARCHAR" />
+    <result column="VOILENT_MEANS" property="voilentMeans" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.ViolentCaseWithBLOBs" extends="BaseResultMap" >
+    <result column="APPEAL" property="appeal" jdbcType="LONGVARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ADDRESS, ALARM_NUMBER, ALARM_TIME, APPLY_EXPECT, APPLY_TYPE, CREATE_TIME, 
+    DESIRED_PURPOSE, FIRST_VIOLENT_TIME, INJURY_IDENTIFY_PLACE, IS_ALARMED, IS_DISABLED, 
+    IS_HURT, IS_PREGNANCY, IS_TEST_HURT, IS_URGENT, SERVICE_NO, SOURCE, UPDATE_TIME, 
+    VICTIM_MENTAL_STATUS, VIOLENT_ATTITUDE, VIOLENT_MENTAL_STATUS, VIOLENT_NUMBER, VIOLENT_TIME, 
+    VIOLENT_TYPE, AREAS, VIOLENT_DATE, VOILENT_MEANS
+  </sql>
+  <sql id="Blob_Column_List" >
+    APPEAL, REMARKS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from violent_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_case
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from violent_case
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseExample" >
+    delete from violent_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseWithBLOBs" >
+    insert into violent_case (ID, NAME, ADDRESS, 
+      ALARM_NUMBER, ALARM_TIME, APPLY_EXPECT, 
+      APPLY_TYPE, CREATE_TIME, DESIRED_PURPOSE, 
+      FIRST_VIOLENT_TIME, INJURY_IDENTIFY_PLACE, 
+      IS_ALARMED, IS_DISABLED, IS_HURT, 
+      IS_PREGNANCY, IS_TEST_HURT, IS_URGENT, 
+      SERVICE_NO, SOURCE, UPDATE_TIME, 
+      VICTIM_MENTAL_STATUS, VIOLENT_ATTITUDE, VIOLENT_MENTAL_STATUS, 
+      VIOLENT_NUMBER, VIOLENT_TIME, VIOLENT_TYPE, 
+      AREAS, VIOLENT_DATE, VOILENT_MEANS, 
+      APPEAL, REMARKS)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{alarmNumber,jdbcType=INTEGER}, #{alarmTime,jdbcType=TIMESTAMP}, #{applyExpect,jdbcType=VARCHAR}, 
+      #{applyType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{desiredPurpose,jdbcType=VARCHAR}, 
+      #{firstViolentTime,jdbcType=TIMESTAMP}, #{injuryIdentifyPlace,jdbcType=VARCHAR}, 
+      #{isAlarmed,jdbcType=BIT}, #{isDisabled,jdbcType=BIT}, #{isHurt,jdbcType=BIT}, 
+      #{isPregnancy,jdbcType=BIT}, #{isTestHurt,jdbcType=BIT}, #{isUrgent,jdbcType=BIT}, 
+      #{serviceNo,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{victimMentalStatus,jdbcType=VARCHAR}, #{violentAttitude,jdbcType=VARCHAR}, #{violentMentalStatus,jdbcType=VARCHAR}, 
+      #{violentNumber,jdbcType=INTEGER}, #{violentTime,jdbcType=VARCHAR}, #{violentType,jdbcType=VARCHAR}, 
+      #{areas,jdbcType=VARCHAR}, #{violentDate,jdbcType=VARCHAR}, #{voilentMeans,jdbcType=VARCHAR}, 
+      #{appeal,jdbcType=LONGVARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseWithBLOBs" >
+    insert into violent_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="alarmNumber != null" >
+        ALARM_NUMBER,
+      </if>
+      <if test="alarmTime != null" >
+        ALARM_TIME,
+      </if>
+      <if test="applyExpect != null" >
+        APPLY_EXPECT,
+      </if>
+      <if test="applyType != null" >
+        APPLY_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="desiredPurpose != null" >
+        DESIRED_PURPOSE,
+      </if>
+      <if test="firstViolentTime != null" >
+        FIRST_VIOLENT_TIME,
+      </if>
+      <if test="injuryIdentifyPlace != null" >
+        INJURY_IDENTIFY_PLACE,
+      </if>
+      <if test="isAlarmed != null" >
+        IS_ALARMED,
+      </if>
+      <if test="isDisabled != null" >
+        IS_DISABLED,
+      </if>
+      <if test="isHurt != null" >
+        IS_HURT,
+      </if>
+      <if test="isPregnancy != null" >
+        IS_PREGNANCY,
+      </if>
+      <if test="isTestHurt != null" >
+        IS_TEST_HURT,
+      </if>
+      <if test="isUrgent != null" >
+        IS_URGENT,
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="victimMentalStatus != null" >
+        VICTIM_MENTAL_STATUS,
+      </if>
+      <if test="violentAttitude != null" >
+        VIOLENT_ATTITUDE,
+      </if>
+      <if test="violentMentalStatus != null" >
+        VIOLENT_MENTAL_STATUS,
+      </if>
+      <if test="violentNumber != null" >
+        VIOLENT_NUMBER,
+      </if>
+      <if test="violentTime != null" >
+        VIOLENT_TIME,
+      </if>
+      <if test="violentType != null" >
+        VIOLENT_TYPE,
+      </if>
+      <if test="areas != null" >
+        AREAS,
+      </if>
+      <if test="violentDate != null" >
+        VIOLENT_DATE,
+      </if>
+      <if test="voilentMeans != null" >
+        VOILENT_MEANS,
+      </if>
+      <if test="appeal != null" >
+        APPEAL,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmNumber != null" >
+        #{alarmNumber,jdbcType=INTEGER},
+      </if>
+      <if test="alarmTime != null" >
+        #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyExpect != null" >
+        #{applyExpect,jdbcType=VARCHAR},
+      </if>
+      <if test="applyType != null" >
+        #{applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="desiredPurpose != null" >
+        #{desiredPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="firstViolentTime != null" >
+        #{firstViolentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="injuryIdentifyPlace != null" >
+        #{injuryIdentifyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="isAlarmed != null" >
+        #{isAlarmed,jdbcType=BIT},
+      </if>
+      <if test="isDisabled != null" >
+        #{isDisabled,jdbcType=BIT},
+      </if>
+      <if test="isHurt != null" >
+        #{isHurt,jdbcType=BIT},
+      </if>
+      <if test="isPregnancy != null" >
+        #{isPregnancy,jdbcType=BIT},
+      </if>
+      <if test="isTestHurt != null" >
+        #{isTestHurt,jdbcType=BIT},
+      </if>
+      <if test="isUrgent != null" >
+        #{isUrgent,jdbcType=BIT},
+      </if>
+      <if test="serviceNo != null" >
+        #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="victimMentalStatus != null" >
+        #{victimMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="violentAttitude != null" >
+        #{violentAttitude,jdbcType=VARCHAR},
+      </if>
+      <if test="violentMentalStatus != null" >
+        #{violentMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="violentNumber != null" >
+        #{violentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="violentTime != null" >
+        #{violentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="violentType != null" >
+        #{violentType,jdbcType=VARCHAR},
+      </if>
+      <if test="areas != null" >
+        #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="violentDate != null" >
+        #{violentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="voilentMeans != null" >
+        #{voilentMeans,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        #{appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseExample" resultType="java.lang.Integer" >
+    select count(*) from violent_case
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update violent_case
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmNumber != null" >
+        ALARM_NUMBER = #{record.alarmNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmTime != null" >
+        ALARM_TIME = #{record.alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyExpect != null" >
+        APPLY_EXPECT = #{record.applyExpect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyType != null" >
+        APPLY_TYPE = #{record.applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.desiredPurpose != null" >
+        DESIRED_PURPOSE = #{record.desiredPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstViolentTime != null" >
+        FIRST_VIOLENT_TIME = #{record.firstViolentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.injuryIdentifyPlace != null" >
+        INJURY_IDENTIFY_PLACE = #{record.injuryIdentifyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAlarmed != null" >
+        IS_ALARMED = #{record.isAlarmed,jdbcType=BIT},
+      </if>
+      <if test="record.isDisabled != null" >
+        IS_DISABLED = #{record.isDisabled,jdbcType=BIT},
+      </if>
+      <if test="record.isHurt != null" >
+        IS_HURT = #{record.isHurt,jdbcType=BIT},
+      </if>
+      <if test="record.isPregnancy != null" >
+        IS_PREGNANCY = #{record.isPregnancy,jdbcType=BIT},
+      </if>
+      <if test="record.isTestHurt != null" >
+        IS_TEST_HURT = #{record.isTestHurt,jdbcType=BIT},
+      </if>
+      <if test="record.isUrgent != null" >
+        IS_URGENT = #{record.isUrgent,jdbcType=BIT},
+      </if>
+      <if test="record.serviceNo != null" >
+        SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        SOURCE = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.victimMentalStatus != null" >
+        VICTIM_MENTAL_STATUS = #{record.victimMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentAttitude != null" >
+        VIOLENT_ATTITUDE = #{record.violentAttitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentMentalStatus != null" >
+        VIOLENT_MENTAL_STATUS = #{record.violentMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentNumber != null" >
+        VIOLENT_NUMBER = #{record.violentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.violentTime != null" >
+        VIOLENT_TIME = #{record.violentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentType != null" >
+        VIOLENT_TYPE = #{record.violentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areas != null" >
+        AREAS = #{record.areas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentDate != null" >
+        VIOLENT_DATE = #{record.violentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voilentMeans != null" >
+        VOILENT_MEANS = #{record.voilentMeans,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appeal != null" >
+        APPEAL = #{record.appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update violent_case
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ALARM_NUMBER = #{record.alarmNumber,jdbcType=INTEGER},
+      ALARM_TIME = #{record.alarmTime,jdbcType=TIMESTAMP},
+      APPLY_EXPECT = #{record.applyExpect,jdbcType=VARCHAR},
+      APPLY_TYPE = #{record.applyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      DESIRED_PURPOSE = #{record.desiredPurpose,jdbcType=VARCHAR},
+      FIRST_VIOLENT_TIME = #{record.firstViolentTime,jdbcType=TIMESTAMP},
+      INJURY_IDENTIFY_PLACE = #{record.injuryIdentifyPlace,jdbcType=VARCHAR},
+      IS_ALARMED = #{record.isAlarmed,jdbcType=BIT},
+      IS_DISABLED = #{record.isDisabled,jdbcType=BIT},
+      IS_HURT = #{record.isHurt,jdbcType=BIT},
+      IS_PREGNANCY = #{record.isPregnancy,jdbcType=BIT},
+      IS_TEST_HURT = #{record.isTestHurt,jdbcType=BIT},
+      IS_URGENT = #{record.isUrgent,jdbcType=BIT},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      SOURCE = #{record.source,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VICTIM_MENTAL_STATUS = #{record.victimMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_ATTITUDE = #{record.violentAttitude,jdbcType=VARCHAR},
+      VIOLENT_MENTAL_STATUS = #{record.violentMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_NUMBER = #{record.violentNumber,jdbcType=INTEGER},
+      VIOLENT_TIME = #{record.violentTime,jdbcType=VARCHAR},
+      VIOLENT_TYPE = #{record.violentType,jdbcType=VARCHAR},
+      AREAS = #{record.areas,jdbcType=VARCHAR},
+      VIOLENT_DATE = #{record.violentDate,jdbcType=VARCHAR},
+      VOILENT_MEANS = #{record.voilentMeans,jdbcType=VARCHAR},
+      APPEAL = #{record.appeal,jdbcType=LONGVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update violent_case
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ALARM_NUMBER = #{record.alarmNumber,jdbcType=INTEGER},
+      ALARM_TIME = #{record.alarmTime,jdbcType=TIMESTAMP},
+      APPLY_EXPECT = #{record.applyExpect,jdbcType=VARCHAR},
+      APPLY_TYPE = #{record.applyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      DESIRED_PURPOSE = #{record.desiredPurpose,jdbcType=VARCHAR},
+      FIRST_VIOLENT_TIME = #{record.firstViolentTime,jdbcType=TIMESTAMP},
+      INJURY_IDENTIFY_PLACE = #{record.injuryIdentifyPlace,jdbcType=VARCHAR},
+      IS_ALARMED = #{record.isAlarmed,jdbcType=BIT},
+      IS_DISABLED = #{record.isDisabled,jdbcType=BIT},
+      IS_HURT = #{record.isHurt,jdbcType=BIT},
+      IS_PREGNANCY = #{record.isPregnancy,jdbcType=BIT},
+      IS_TEST_HURT = #{record.isTestHurt,jdbcType=BIT},
+      IS_URGENT = #{record.isUrgent,jdbcType=BIT},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      SOURCE = #{record.source,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VICTIM_MENTAL_STATUS = #{record.victimMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_ATTITUDE = #{record.violentAttitude,jdbcType=VARCHAR},
+      VIOLENT_MENTAL_STATUS = #{record.violentMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_NUMBER = #{record.violentNumber,jdbcType=INTEGER},
+      VIOLENT_TIME = #{record.violentTime,jdbcType=VARCHAR},
+      VIOLENT_TYPE = #{record.violentType,jdbcType=VARCHAR},
+      AREAS = #{record.areas,jdbcType=VARCHAR},
+      VIOLENT_DATE = #{record.violentDate,jdbcType=VARCHAR},
+      VOILENT_MEANS = #{record.voilentMeans,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseWithBLOBs" >
+    update violent_case
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmNumber != null" >
+        ALARM_NUMBER = #{alarmNumber,jdbcType=INTEGER},
+      </if>
+      <if test="alarmTime != null" >
+        ALARM_TIME = #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyExpect != null" >
+        APPLY_EXPECT = #{applyExpect,jdbcType=VARCHAR},
+      </if>
+      <if test="applyType != null" >
+        APPLY_TYPE = #{applyType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="desiredPurpose != null" >
+        DESIRED_PURPOSE = #{desiredPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="firstViolentTime != null" >
+        FIRST_VIOLENT_TIME = #{firstViolentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="injuryIdentifyPlace != null" >
+        INJURY_IDENTIFY_PLACE = #{injuryIdentifyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="isAlarmed != null" >
+        IS_ALARMED = #{isAlarmed,jdbcType=BIT},
+      </if>
+      <if test="isDisabled != null" >
+        IS_DISABLED = #{isDisabled,jdbcType=BIT},
+      </if>
+      <if test="isHurt != null" >
+        IS_HURT = #{isHurt,jdbcType=BIT},
+      </if>
+      <if test="isPregnancy != null" >
+        IS_PREGNANCY = #{isPregnancy,jdbcType=BIT},
+      </if>
+      <if test="isTestHurt != null" >
+        IS_TEST_HURT = #{isTestHurt,jdbcType=BIT},
+      </if>
+      <if test="isUrgent != null" >
+        IS_URGENT = #{isUrgent,jdbcType=BIT},
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="victimMentalStatus != null" >
+        VICTIM_MENTAL_STATUS = #{victimMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="violentAttitude != null" >
+        VIOLENT_ATTITUDE = #{violentAttitude,jdbcType=VARCHAR},
+      </if>
+      <if test="violentMentalStatus != null" >
+        VIOLENT_MENTAL_STATUS = #{violentMentalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="violentNumber != null" >
+        VIOLENT_NUMBER = #{violentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="violentTime != null" >
+        VIOLENT_TIME = #{violentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="violentType != null" >
+        VIOLENT_TYPE = #{violentType,jdbcType=VARCHAR},
+      </if>
+      <if test="areas != null" >
+        AREAS = #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="violentDate != null" >
+        VIOLENT_DATE = #{violentDate,jdbcType=VARCHAR},
+      </if>
+      <if test="voilentMeans != null" >
+        VOILENT_MEANS = #{voilentMeans,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        APPEAL = #{appeal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentCaseWithBLOBs" >
+    update violent_case
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ALARM_NUMBER = #{alarmNumber,jdbcType=INTEGER},
+      ALARM_TIME = #{alarmTime,jdbcType=TIMESTAMP},
+      APPLY_EXPECT = #{applyExpect,jdbcType=VARCHAR},
+      APPLY_TYPE = #{applyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      DESIRED_PURPOSE = #{desiredPurpose,jdbcType=VARCHAR},
+      FIRST_VIOLENT_TIME = #{firstViolentTime,jdbcType=TIMESTAMP},
+      INJURY_IDENTIFY_PLACE = #{injuryIdentifyPlace,jdbcType=VARCHAR},
+      IS_ALARMED = #{isAlarmed,jdbcType=BIT},
+      IS_DISABLED = #{isDisabled,jdbcType=BIT},
+      IS_HURT = #{isHurt,jdbcType=BIT},
+      IS_PREGNANCY = #{isPregnancy,jdbcType=BIT},
+      IS_TEST_HURT = #{isTestHurt,jdbcType=BIT},
+      IS_URGENT = #{isUrgent,jdbcType=BIT},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VICTIM_MENTAL_STATUS = #{victimMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_ATTITUDE = #{violentAttitude,jdbcType=VARCHAR},
+      VIOLENT_MENTAL_STATUS = #{violentMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_NUMBER = #{violentNumber,jdbcType=INTEGER},
+      VIOLENT_TIME = #{violentTime,jdbcType=VARCHAR},
+      VIOLENT_TYPE = #{violentType,jdbcType=VARCHAR},
+      AREAS = #{areas,jdbcType=VARCHAR},
+      VIOLENT_DATE = #{violentDate,jdbcType=VARCHAR},
+      VOILENT_MEANS = #{voilentMeans,jdbcType=VARCHAR},
+      APPEAL = #{appeal,jdbcType=LONGVARCHAR},
+      REMARKS = #{remarks,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ViolentCase" >
+    update violent_case
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ALARM_NUMBER = #{alarmNumber,jdbcType=INTEGER},
+      ALARM_TIME = #{alarmTime,jdbcType=TIMESTAMP},
+      APPLY_EXPECT = #{applyExpect,jdbcType=VARCHAR},
+      APPLY_TYPE = #{applyType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      DESIRED_PURPOSE = #{desiredPurpose,jdbcType=VARCHAR},
+      FIRST_VIOLENT_TIME = #{firstViolentTime,jdbcType=TIMESTAMP},
+      INJURY_IDENTIFY_PLACE = #{injuryIdentifyPlace,jdbcType=VARCHAR},
+      IS_ALARMED = #{isAlarmed,jdbcType=BIT},
+      IS_DISABLED = #{isDisabled,jdbcType=BIT},
+      IS_HURT = #{isHurt,jdbcType=BIT},
+      IS_PREGNANCY = #{isPregnancy,jdbcType=BIT},
+      IS_TEST_HURT = #{isTestHurt,jdbcType=BIT},
+      IS_URGENT = #{isUrgent,jdbcType=BIT},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VICTIM_MENTAL_STATUS = #{victimMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_ATTITUDE = #{violentAttitude,jdbcType=VARCHAR},
+      VIOLENT_MENTAL_STATUS = #{violentMentalStatus,jdbcType=VARCHAR},
+      VIOLENT_NUMBER = #{violentNumber,jdbcType=INTEGER},
+      VIOLENT_TIME = #{violentTime,jdbcType=VARCHAR},
+      VIOLENT_TYPE = #{violentType,jdbcType=VARCHAR},
+      AREAS = #{areas,jdbcType=VARCHAR},
+      VIOLENT_DATE = #{violentDate,jdbcType=VARCHAR},
+      VOILENT_MEANS = #{voilentMeans,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

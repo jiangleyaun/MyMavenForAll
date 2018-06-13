@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pro-web-tset:war">
+    <output-path>$PROJECT_DIR$/pro-web-tset/target</output-path>
+    <root id="archive" name="pro-web-tset.war">
+      <element id="artifact" artifact-name="pro-web-tset:war exploded" />
+    </root>
+  </artifact>
+</component>

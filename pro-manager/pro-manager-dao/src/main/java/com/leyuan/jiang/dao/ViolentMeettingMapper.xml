@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ViolentMeettingMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ViolentMeetting" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="MEETING_CONTENT" property="meetingContent" jdbcType="VARCHAR" />
+    <result column="MEETING_HOUR" property="meetingHour" jdbcType="INTEGER" />
+    <result column="MEETING_MIN" property="meetingMin" jdbcType="INTEGER" />
+    <result column="ORDER_ADDRESS" property="orderAddress" jdbcType="VARCHAR" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="INTEGER" />
+    <result column="SEE_MEETING_ID" property="seeMeetingId" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="VIEW_CODE" property="viewCode" jdbcType="VARCHAR" />
+    <result column="PSYCHOLOGICAL_COUNSELING_ID" property="psychologicalCounselingId" jdbcType="BIGINT" />
+    <result column="ANALYSIS_REPORT" property="analysisReport" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_TIME, END_TIME, MEETING_CONTENT, MEETING_HOUR, MEETING_MIN, ORDER_ADDRESS, 
+    ORDER_TIME, ORDER_TYPE, SEE_MEETING_ID, START_TIME, STATUS, TYPE, VIEW_CODE, PSYCHOLOGICAL_COUNSELING_ID, 
+    ANALYSIS_REPORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ViolentMeettingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from violent_meetting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from violent_meetting
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from violent_meetting
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentMeettingExample" >
+    delete from violent_meetting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ViolentMeetting" >
+    insert into violent_meetting (ID, NAME, CREATE_TIME, 
+      END_TIME, MEETING_CONTENT, MEETING_HOUR, 
+      MEETING_MIN, ORDER_ADDRESS, ORDER_TIME, 
+      ORDER_TYPE, SEE_MEETING_ID, START_TIME, 
+      STATUS, TYPE, VIEW_CODE, 
+      PSYCHOLOGICAL_COUNSELING_ID, ANALYSIS_REPORT
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{meetingContent,jdbcType=VARCHAR}, #{meetingHour,jdbcType=INTEGER}, 
+      #{meetingMin,jdbcType=INTEGER}, #{orderAddress,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{orderType,jdbcType=INTEGER}, #{seeMeetingId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{viewCode,jdbcType=VARCHAR}, 
+      #{psychologicalCounselingId,jdbcType=BIGINT}, #{analysisReport,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ViolentMeetting" >
+    insert into violent_meetting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="meetingContent != null" >
+        MEETING_CONTENT,
+      </if>
+      <if test="meetingHour != null" >
+        MEETING_HOUR,
+      </if>
+      <if test="meetingMin != null" >
+        MEETING_MIN,
+      </if>
+      <if test="orderAddress != null" >
+        ORDER_ADDRESS,
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME,
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE,
+      </if>
+      <if test="seeMeetingId != null" >
+        SEE_MEETING_ID,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="viewCode != null" >
+        VIEW_CODE,
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID,
+      </if>
+      <if test="analysisReport != null" >
+        ANALYSIS_REPORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingContent != null" >
+        #{meetingContent,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingHour != null" >
+        #{meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="meetingMin != null" >
+        #{meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="orderAddress != null" >
+        #{orderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="seeMeetingId != null" >
+        #{seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="viewCode != null" >
+        #{viewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        #{psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="analysisReport != null" >
+        #{analysisReport,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentMeettingExample" resultType="java.lang.Integer" >
+    select count(*) from violent_meetting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update violent_meetting
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.meetingContent != null" >
+        MEETING_CONTENT = #{record.meetingContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingHour != null" >
+        MEETING_HOUR = #{record.meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingMin != null" >
+        MEETING_MIN = #{record.meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderAddress != null" >
+        ORDER_ADDRESS = #{record.orderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTime != null" >
+        ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderType != null" >
+        ORDER_TYPE = #{record.orderType,jdbcType=INTEGER},
+      </if>
+      <if test="record.seeMeetingId != null" >
+        SEE_MEETING_ID = #{record.seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.viewCode != null" >
+        VIEW_CODE = #{record.viewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID = #{record.psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="record.analysisReport != null" >
+        ANALYSIS_REPORT = #{record.analysisReport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update violent_meetting
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      MEETING_CONTENT = #{record.meetingContent,jdbcType=VARCHAR},
+      MEETING_HOUR = #{record.meetingHour,jdbcType=INTEGER},
+      MEETING_MIN = #{record.meetingMin,jdbcType=INTEGER},
+      ORDER_ADDRESS = #{record.orderAddress,jdbcType=VARCHAR},
+      ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      ORDER_TYPE = #{record.orderType,jdbcType=INTEGER},
+      SEE_MEETING_ID = #{record.seeMeetingId,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      VIEW_CODE = #{record.viewCode,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{record.psychologicalCounselingId,jdbcType=BIGINT},
+      ANALYSIS_REPORT = #{record.analysisReport,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ViolentMeetting" >
+    update violent_meetting
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingContent != null" >
+        MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingHour != null" >
+        MEETING_HOUR = #{meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="meetingMin != null" >
+        MEETING_MIN = #{meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="orderAddress != null" >
+        ORDER_ADDRESS = #{orderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="seeMeetingId != null" >
+        SEE_MEETING_ID = #{seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="viewCode != null" >
+        VIEW_CODE = #{viewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="psychologicalCounselingId != null" >
+        PSYCHOLOGICAL_COUNSELING_ID = #{psychologicalCounselingId,jdbcType=BIGINT},
+      </if>
+      <if test="analysisReport != null" >
+        ANALYSIS_REPORT = #{analysisReport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ViolentMeetting" >
+    update violent_meetting
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR},
+      MEETING_HOUR = #{meetingHour,jdbcType=INTEGER},
+      MEETING_MIN = #{meetingMin,jdbcType=INTEGER},
+      ORDER_ADDRESS = #{orderAddress,jdbcType=VARCHAR},
+      ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+      SEE_MEETING_ID = #{seeMeetingId,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=INTEGER},
+      VIEW_CODE = #{viewCode,jdbcType=VARCHAR},
+      PSYCHOLOGICAL_COUNSELING_ID = #{psychologicalCounselingId,jdbcType=BIGINT},
+      ANALYSIS_REPORT = #{analysisReport,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

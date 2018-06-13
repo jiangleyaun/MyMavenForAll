@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.PsyReportMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.PsyReport" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="COUNSELOR" property="counselor" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MEETING_HOUR" property="meetingHour" jdbcType="INTEGER" />
+    <result column="MEETING_MIN" property="meetingMin" jdbcType="INTEGER" />
+    <result column="SEE_MEETING_ID" property="seeMeetingId" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="VIOLENT_MEETTING_ID" property="violentMeettingId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ADDRESS, CONTENT, COUNSELOR, CREATE_TIME, MEETING_HOUR, MEETING_MIN, SEE_MEETING_ID, 
+    TIME, UPDATE_TIME, VIOLENT_MEETTING_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.PsyReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from psy_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from psy_report
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from psy_report
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.PsyReportExample" >
+    delete from psy_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.PsyReport" >
+    insert into psy_report (ID, NAME, ADDRESS, 
+      CONTENT, COUNSELOR, CREATE_TIME, 
+      MEETING_HOUR, MEETING_MIN, SEE_MEETING_ID, 
+      TIME, UPDATE_TIME, VIOLENT_MEETTING_ID
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{counselor,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{meetingHour,jdbcType=INTEGER}, #{meetingMin,jdbcType=INTEGER}, #{seeMeetingId,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{violentMeettingId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.PsyReport" >
+    insert into psy_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="counselor != null" >
+        COUNSELOR,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="meetingHour != null" >
+        MEETING_HOUR,
+      </if>
+      <if test="meetingMin != null" >
+        MEETING_MIN,
+      </if>
+      <if test="seeMeetingId != null" >
+        SEE_MEETING_ID,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="violentMeettingId != null" >
+        VIOLENT_MEETTING_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="counselor != null" >
+        #{counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingHour != null" >
+        #{meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="meetingMin != null" >
+        #{meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="seeMeetingId != null" >
+        #{seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="violentMeettingId != null" >
+        #{violentMeettingId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.PsyReportExample" resultType="java.lang.Integer" >
+    select count(*) from psy_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update psy_report
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counselor != null" >
+        COUNSELOR = #{record.counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.meetingHour != null" >
+        MEETING_HOUR = #{record.meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingMin != null" >
+        MEETING_MIN = #{record.meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.seeMeetingId != null" >
+        SEE_MEETING_ID = #{record.seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        TIME = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.violentMeettingId != null" >
+        VIOLENT_MEETTING_ID = #{record.violentMeettingId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update psy_report
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      COUNSELOR = #{record.counselor,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      MEETING_HOUR = #{record.meetingHour,jdbcType=INTEGER},
+      MEETING_MIN = #{record.meetingMin,jdbcType=INTEGER},
+      SEE_MEETING_ID = #{record.seeMeetingId,jdbcType=VARCHAR},
+      TIME = #{record.time,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_MEETTING_ID = #{record.violentMeettingId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.PsyReport" >
+    update psy_report
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="counselor != null" >
+        COUNSELOR = #{counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingHour != null" >
+        MEETING_HOUR = #{meetingHour,jdbcType=INTEGER},
+      </if>
+      <if test="meetingMin != null" >
+        MEETING_MIN = #{meetingMin,jdbcType=INTEGER},
+      </if>
+      <if test="seeMeetingId != null" >
+        SEE_MEETING_ID = #{seeMeetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="violentMeettingId != null" >
+        VIOLENT_MEETTING_ID = #{violentMeettingId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.PsyReport" >
+    update psy_report
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      COUNSELOR = #{counselor,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MEETING_HOUR = #{meetingHour,jdbcType=INTEGER},
+      MEETING_MIN = #{meetingMin,jdbcType=INTEGER},
+      SEE_MEETING_ID = #{seeMeetingId,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_MEETTING_ID = #{violentMeettingId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

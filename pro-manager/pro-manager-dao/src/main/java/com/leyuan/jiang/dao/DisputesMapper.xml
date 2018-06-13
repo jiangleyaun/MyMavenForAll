@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.DisputesMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Disputes" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CASE_NO" property="caseNo" jdbcType="VARCHAR" />
+    <result column="CASE_NUMBER" property="caseNumber" jdbcType="VARCHAR" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
+    <result column="EVALUATE_NO" property="evaluateNo" jdbcType="VARCHAR" />
+    <result column="MEDIATOR_CODE" property="mediatorCode" jdbcType="VARCHAR" />
+    <result column="MEDIATOR_ID" property="mediatorId" jdbcType="BIGINT" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="VISIBLE" property="visible" jdbcType="VARCHAR" />
+    <result column="EVALUATE_ID" property="evaluateId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="APPEAL" property="appeal" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CASE_NO, CASE_NUMBER, DEL_FLAG, EVALUATE_NO, MEDIATOR_CODE, MEDIATOR_ID, 
+    STATUS, TYPE, VISIBLE, EVALUATE_ID, USER_ID, CREATE_TIME, UPDATE_TIME, AREA_CODE, 
+    APPEAL, REMARKS, ADDRESS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.DisputesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disputes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from disputes
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from disputes
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.DisputesExample" >
+    delete from disputes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Disputes" >
+    insert into disputes (ID, NAME, CASE_NO, 
+      CASE_NUMBER, DEL_FLAG, EVALUATE_NO, 
+      MEDIATOR_CODE, MEDIATOR_ID, STATUS, 
+      TYPE, VISIBLE, EVALUATE_ID, 
+      USER_ID, CREATE_TIME, UPDATE_TIME, 
+      AREA_CODE, APPEAL, REMARKS, 
+      ADDRESS)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{caseNo,jdbcType=VARCHAR}, 
+      #{caseNumber,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{evaluateNo,jdbcType=VARCHAR}, 
+      #{mediatorCode,jdbcType=VARCHAR}, #{mediatorId,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{visible,jdbcType=VARCHAR}, #{evaluateId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{areaCode,jdbcType=VARCHAR}, #{appeal,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Disputes" >
+    insert into disputes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="caseNo != null" >
+        CASE_NO,
+      </if>
+      <if test="caseNumber != null" >
+        CASE_NUMBER,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+      <if test="evaluateNo != null" >
+        EVALUATE_NO,
+      </if>
+      <if test="mediatorCode != null" >
+        MEDIATOR_CODE,
+      </if>
+      <if test="mediatorId != null" >
+        MEDIATOR_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="visible != null" >
+        VISIBLE,
+      </if>
+      <if test="evaluateId != null" >
+        EVALUATE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="appeal != null" >
+        APPEAL,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNumber != null" >
+        #{caseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateNo != null" >
+        #{evaluateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mediatorCode != null" >
+        #{mediatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mediatorId != null" >
+        #{mediatorId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateId != null" >
+        #{evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        #{appeal,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.DisputesExample" resultType="java.lang.Integer" >
+    select count(*) from disputes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disputes
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseNo != null" >
+        CASE_NO = #{record.caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caseNumber != null" >
+        CASE_NUMBER = #{record.caseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateNo != null" >
+        EVALUATE_NO = #{record.evaluateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediatorCode != null" >
+        MEDIATOR_CODE = #{record.mediatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediatorId != null" >
+        MEDIATOR_ID = #{record.mediatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visible != null" >
+        VISIBLE = #{record.visible,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateId != null" >
+        EVALUATE_ID = #{record.evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.areaCode != null" >
+        AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appeal != null" >
+        APPEAL = #{record.appeal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disputes
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CASE_NO = #{record.caseNo,jdbcType=VARCHAR},
+      CASE_NUMBER = #{record.caseNumber,jdbcType=VARCHAR},
+      DEL_FLAG = #{record.delFlag,jdbcType=VARCHAR},
+      EVALUATE_NO = #{record.evaluateNo,jdbcType=VARCHAR},
+      MEDIATOR_CODE = #{record.mediatorCode,jdbcType=VARCHAR},
+      MEDIATOR_ID = #{record.mediatorId,jdbcType=BIGINT},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      VISIBLE = #{record.visible,jdbcType=VARCHAR},
+      EVALUATE_ID = #{record.evaluateId,jdbcType=BIGINT},
+      USER_ID = #{record.userId,jdbcType=BIGINT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      APPEAL = #{record.appeal,jdbcType=VARCHAR},
+      REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Disputes" >
+    update disputes
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNo != null" >
+        CASE_NO = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNumber != null" >
+        CASE_NUMBER = #{caseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateNo != null" >
+        EVALUATE_NO = #{evaluateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mediatorCode != null" >
+        MEDIATOR_CODE = #{mediatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mediatorId != null" >
+        MEDIATOR_ID = #{mediatorId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        VISIBLE = #{visible,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateId != null" >
+        EVALUATE_ID = #{evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal != null" >
+        APPEAL = #{appeal,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Disputes" >
+    update disputes
+    set NAME = #{name,jdbcType=VARCHAR},
+      CASE_NO = #{caseNo,jdbcType=VARCHAR},
+      CASE_NUMBER = #{caseNumber,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      EVALUATE_NO = #{evaluateNo,jdbcType=VARCHAR},
+      MEDIATOR_CODE = #{mediatorCode,jdbcType=VARCHAR},
+      MEDIATOR_ID = #{mediatorId,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      VISIBLE = #{visible,jdbcType=VARCHAR},
+      EVALUATE_ID = #{evaluateId,jdbcType=BIGINT},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      APPEAL = #{appeal,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

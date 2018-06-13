@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.CauseMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Cause" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="SYCS" property="sycs" jdbcType="VARCHAR" />
+    <result column="SFJY" property="sfjy" jdbcType="VARCHAR" />
+    <result column="CCBM" property="ccbm" jdbcType="VARCHAR" />
+    <result column="DISPUTE_TYPE_CODE" property="disputeTypeCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, PARENT_ID, SYCS, SFJY, CCBM, DISPUTE_TYPE_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.CauseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cause
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cause
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cause
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.CauseExample" >
+    delete from cause
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Cause" >
+    insert into cause (ID, NAME, PARENT_ID, 
+      SYCS, SFJY, CCBM, DISPUTE_TYPE_CODE
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{sycs,jdbcType=VARCHAR}, #{sfjy,jdbcType=VARCHAR}, #{ccbm,jdbcType=VARCHAR}, #{disputeTypeCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Cause" >
+    insert into cause
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="sycs != null" >
+        SYCS,
+      </if>
+      <if test="sfjy != null" >
+        SFJY,
+      </if>
+      <if test="ccbm != null" >
+        CCBM,
+      </if>
+      <if test="disputeTypeCode != null" >
+        DISPUTE_TYPE_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sycs != null" >
+        #{sycs,jdbcType=VARCHAR},
+      </if>
+      <if test="sfjy != null" >
+        #{sfjy,jdbcType=VARCHAR},
+      </if>
+      <if test="ccbm != null" >
+        #{ccbm,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeTypeCode != null" >
+        #{disputeTypeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.CauseExample" resultType="java.lang.Integer" >
+    select count(*) from cause
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cause
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sycs != null" >
+        SYCS = #{record.sycs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfjy != null" >
+        SFJY = #{record.sfjy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ccbm != null" >
+        CCBM = #{record.ccbm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disputeTypeCode != null" >
+        DISPUTE_TYPE_CODE = #{record.disputeTypeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cause
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      SYCS = #{record.sycs,jdbcType=VARCHAR},
+      SFJY = #{record.sfjy,jdbcType=VARCHAR},
+      CCBM = #{record.ccbm,jdbcType=VARCHAR},
+      DISPUTE_TYPE_CODE = #{record.disputeTypeCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Cause" >
+    update cause
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sycs != null" >
+        SYCS = #{sycs,jdbcType=VARCHAR},
+      </if>
+      <if test="sfjy != null" >
+        SFJY = #{sfjy,jdbcType=VARCHAR},
+      </if>
+      <if test="ccbm != null" >
+        CCBM = #{ccbm,jdbcType=VARCHAR},
+      </if>
+      <if test="disputeTypeCode != null" >
+        DISPUTE_TYPE_CODE = #{disputeTypeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Cause" >
+    update cause
+    set NAME = #{name,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      SYCS = #{sycs,jdbcType=VARCHAR},
+      SFJY = #{sfjy,jdbcType=VARCHAR},
+      CCBM = #{ccbm,jdbcType=VARCHAR},
+      DISPUTE_TYPE_CODE = #{disputeTypeCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

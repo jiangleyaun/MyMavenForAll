@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.XjqTriggerLogMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.XjqTriggerLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="job_group" property="jobGroup" jdbcType="INTEGER" />
+    <result column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="glue_type" property="glueType" jdbcType="VARCHAR" />
+    <result column="executor_address" property="executorAddress" jdbcType="VARCHAR" />
+    <result column="executor_handler" property="executorHandler" jdbcType="VARCHAR" />
+    <result column="executor_param" property="executorParam" jdbcType="VARCHAR" />
+    <result column="trigger_time" property="triggerTime" jdbcType="TIMESTAMP" />
+    <result column="trigger_code" property="triggerCode" jdbcType="VARCHAR" />
+    <result column="trigger_msg" property="triggerMsg" jdbcType="VARCHAR" />
+    <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
+    <result column="handle_code" property="handleCode" jdbcType="VARCHAR" />
+    <result column="handle_msg" property="handleMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, job_group, job_id, glue_type, executor_address, executor_handler, executor_param, 
+    trigger_time, trigger_code, trigger_msg, handle_time, handle_code, handle_msg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xjq_trigger_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xjq_trigger_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xjq_trigger_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLogExample" >
+    delete from xjq_trigger_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLog" >
+    insert into xjq_trigger_log (id, job_group, job_id, 
+      glue_type, executor_address, executor_handler, 
+      executor_param, trigger_time, trigger_code, 
+      trigger_msg, handle_time, handle_code, 
+      handle_msg)
+    values (#{id,jdbcType=INTEGER}, #{jobGroup,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, 
+      #{glueType,jdbcType=VARCHAR}, #{executorAddress,jdbcType=VARCHAR}, #{executorHandler,jdbcType=VARCHAR}, 
+      #{executorParam,jdbcType=VARCHAR}, #{triggerTime,jdbcType=TIMESTAMP}, #{triggerCode,jdbcType=VARCHAR}, 
+      #{triggerMsg,jdbcType=VARCHAR}, #{handleTime,jdbcType=TIMESTAMP}, #{handleCode,jdbcType=VARCHAR}, 
+      #{handleMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLog" >
+    insert into xjq_trigger_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jobGroup != null" >
+        job_group,
+      </if>
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="glueType != null" >
+        glue_type,
+      </if>
+      <if test="executorAddress != null" >
+        executor_address,
+      </if>
+      <if test="executorHandler != null" >
+        executor_handler,
+      </if>
+      <if test="executorParam != null" >
+        executor_param,
+      </if>
+      <if test="triggerTime != null" >
+        trigger_time,
+      </if>
+      <if test="triggerCode != null" >
+        trigger_code,
+      </if>
+      <if test="triggerMsg != null" >
+        trigger_msg,
+      </if>
+      <if test="handleTime != null" >
+        handle_time,
+      </if>
+      <if test="handleCode != null" >
+        handle_code,
+      </if>
+      <if test="handleMsg != null" >
+        handle_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobGroup != null" >
+        #{jobGroup,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="glueType != null" >
+        #{glueType,jdbcType=VARCHAR},
+      </if>
+      <if test="executorAddress != null" >
+        #{executorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="executorHandler != null" >
+        #{executorHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="executorParam != null" >
+        #{executorParam,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerTime != null" >
+        #{triggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="triggerCode != null" >
+        #{triggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerMsg != null" >
+        #{triggerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleCode != null" >
+        #{handleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="handleMsg != null" >
+        #{handleMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLogExample" resultType="java.lang.Integer" >
+    select count(*) from xjq_trigger_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xjq_trigger_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobGroup != null" >
+        job_group = #{record.jobGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobId != null" >
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.glueType != null" >
+        glue_type = #{record.glueType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.executorAddress != null" >
+        executor_address = #{record.executorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.executorHandler != null" >
+        executor_handler = #{record.executorHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.executorParam != null" >
+        executor_param = #{record.executorParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.triggerTime != null" >
+        trigger_time = #{record.triggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.triggerCode != null" >
+        trigger_code = #{record.triggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.triggerMsg != null" >
+        trigger_msg = #{record.triggerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleTime != null" >
+        handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.handleCode != null" >
+        handle_code = #{record.handleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleMsg != null" >
+        handle_msg = #{record.handleMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xjq_trigger_log
+    set id = #{record.id,jdbcType=INTEGER},
+      job_group = #{record.jobGroup,jdbcType=INTEGER},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      glue_type = #{record.glueType,jdbcType=VARCHAR},
+      executor_address = #{record.executorAddress,jdbcType=VARCHAR},
+      executor_handler = #{record.executorHandler,jdbcType=VARCHAR},
+      executor_param = #{record.executorParam,jdbcType=VARCHAR},
+      trigger_time = #{record.triggerTime,jdbcType=TIMESTAMP},
+      trigger_code = #{record.triggerCode,jdbcType=VARCHAR},
+      trigger_msg = #{record.triggerMsg,jdbcType=VARCHAR},
+      handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
+      handle_code = #{record.handleCode,jdbcType=VARCHAR},
+      handle_msg = #{record.handleMsg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLog" >
+    update xjq_trigger_log
+    <set >
+      <if test="jobGroup != null" >
+        job_group = #{jobGroup,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="glueType != null" >
+        glue_type = #{glueType,jdbcType=VARCHAR},
+      </if>
+      <if test="executorAddress != null" >
+        executor_address = #{executorAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="executorHandler != null" >
+        executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="executorParam != null" >
+        executor_param = #{executorParam,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerTime != null" >
+        trigger_time = #{triggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="triggerCode != null" >
+        trigger_code = #{triggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerMsg != null" >
+        trigger_msg = #{triggerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleCode != null" >
+        handle_code = #{handleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="handleMsg != null" >
+        handle_msg = #{handleMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.XjqTriggerLog" >
+    update xjq_trigger_log
+    set job_group = #{jobGroup,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      glue_type = #{glueType,jdbcType=VARCHAR},
+      executor_address = #{executorAddress,jdbcType=VARCHAR},
+      executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      executor_param = #{executorParam,jdbcType=VARCHAR},
+      trigger_time = #{triggerTime,jdbcType=TIMESTAMP},
+      trigger_code = #{triggerCode,jdbcType=VARCHAR},
+      trigger_msg = #{triggerMsg,jdbcType=VARCHAR},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      handle_code = #{handleCode,jdbcType=VARCHAR},
+      handle_msg = #{handleMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

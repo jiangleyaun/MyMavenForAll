@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ViolentMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="IS_FILE" property="isFile" jdbcType="BIT" />
+    <result column="IS_READ" property="isRead" jdbcType="BIT" />
+    <result column="SENDER" property="sender" jdbcType="VARCHAR" />
+    <result column="VIOLENT_MEETTING_ID" property="violentMeettingId" jdbcType="BIGINT" />
+    <result column="VIOLENT_PERSONNEL_ID" property="violentPersonnelId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.ViolentMsg" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_TIME, IS_FILE, IS_READ, SENDER, VIOLENT_MEETTING_ID, VIOLENT_PERSONNEL_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ViolentMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from violent_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_msg
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from violent_msg
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentMsgExample" >
+    delete from violent_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    insert into violent_msg (ID, NAME, CREATE_TIME, 
+      IS_FILE, IS_READ, SENDER, VIOLENT_MEETTING_ID, 
+      VIOLENT_PERSONNEL_ID, CONTENT)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isFile,jdbcType=BIT}, #{isRead,jdbcType=BIT}, #{sender,jdbcType=VARCHAR}, #{violentMeettingId,jdbcType=BIGINT}, 
+      #{violentPersonnelId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    insert into violent_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="isFile != null" >
+        IS_FILE,
+      </if>
+      <if test="isRead != null" >
+        IS_READ,
+      </if>
+      <if test="sender != null" >
+        SENDER,
+      </if>
+      <if test="violentMeettingId != null" >
+        VIOLENT_MEETTING_ID,
+      </if>
+      <if test="violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFile != null" >
+        #{isFile,jdbcType=BIT},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=BIT},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="violentMeettingId != null" >
+        #{violentMeettingId,jdbcType=BIGINT},
+      </if>
+      <if test="violentPersonnelId != null" >
+        #{violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentMsgExample" resultType="java.lang.Integer" >
+    select count(*) from violent_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update violent_msg
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE = #{record.isFile,jdbcType=BIT},
+      </if>
+      <if test="record.isRead != null" >
+        IS_READ = #{record.isRead,jdbcType=BIT},
+      </if>
+      <if test="record.sender != null" >
+        SENDER = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violentMeettingId != null" >
+        VIOLENT_MEETTING_ID = #{record.violentMeettingId,jdbcType=BIGINT},
+      </if>
+      <if test="record.violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update violent_msg
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      IS_FILE = #{record.isFile,jdbcType=BIT},
+      IS_READ = #{record.isRead,jdbcType=BIT},
+      SENDER = #{record.sender,jdbcType=VARCHAR},
+      VIOLENT_MEETTING_ID = #{record.violentMeettingId,jdbcType=BIGINT},
+      VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update violent_msg
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      IS_FILE = #{record.isFile,jdbcType=BIT},
+      IS_READ = #{record.isRead,jdbcType=BIT},
+      SENDER = #{record.sender,jdbcType=VARCHAR},
+      VIOLENT_MEETTING_ID = #{record.violentMeettingId,jdbcType=BIGINT},
+      VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    update violent_msg
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFile != null" >
+        IS_FILE = #{isFile,jdbcType=BIT},
+      </if>
+      <if test="isRead != null" >
+        IS_READ = #{isRead,jdbcType=BIT},
+      </if>
+      <if test="sender != null" >
+        SENDER = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="violentMeettingId != null" >
+        VIOLENT_MEETTING_ID = #{violentMeettingId,jdbcType=BIGINT},
+      </if>
+      <if test="violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    update violent_msg
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_FILE = #{isFile,jdbcType=BIT},
+      IS_READ = #{isRead,jdbcType=BIT},
+      SENDER = #{sender,jdbcType=VARCHAR},
+      VIOLENT_MEETTING_ID = #{violentMeettingId,jdbcType=BIGINT},
+      VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ViolentMsg" >
+    update violent_msg
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_FILE = #{isFile,jdbcType=BIT},
+      IS_READ = #{isRead,jdbcType=BIT},
+      SENDER = #{sender,jdbcType=VARCHAR},
+      VIOLENT_MEETTING_ID = #{violentMeettingId,jdbcType=BIGINT},
+      VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

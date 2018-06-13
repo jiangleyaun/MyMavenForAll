@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.OrganizationServicePersonMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.OrganizationServicePerson" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ORG_ID" property="orgId" jdbcType="BIGINT" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="CAM_ID" property="camId" jdbcType="BIGINT" />
+    <result column="CAM_NAME" property="camName" jdbcType="VARCHAR" />
+    <result column="SERVICE_CODE" property="serviceCode" jdbcType="VARCHAR" />
+    <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR" />
+    <result column="SERVICE_TYPE" property="serviceType" jdbcType="CHAR" />
+    <result column="AREAS_CODE" property="areasCode" jdbcType="VARCHAR" />
+    <result column="AREAS_NAME" property="areasName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ORG_ID, ORG_NAME, CAM_ID, CAM_NAME, SERVICE_CODE, SERVICE_NAME, SERVICE_TYPE, 
+    AREAS_CODE, AREAS_NAME, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_service_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_service_person
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_service_person
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePersonExample" >
+    delete from organization_service_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePerson" >
+    insert into organization_service_person (ID, ORG_ID, ORG_NAME, 
+      CAM_ID, CAM_NAME, SERVICE_CODE, 
+      SERVICE_NAME, SERVICE_TYPE, AREAS_CODE, 
+      AREAS_NAME, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, 
+      #{camId,jdbcType=BIGINT}, #{camName,jdbcType=VARCHAR}, #{serviceCode,jdbcType=VARCHAR}, 
+      #{serviceName,jdbcType=VARCHAR}, #{serviceType,jdbcType=CHAR}, #{areasCode,jdbcType=VARCHAR}, 
+      #{areasName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePerson" >
+    insert into organization_service_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="camId != null" >
+        CAM_ID,
+      </if>
+      <if test="camName != null" >
+        CAM_NAME,
+      </if>
+      <if test="serviceCode != null" >
+        SERVICE_CODE,
+      </if>
+      <if test="serviceName != null" >
+        SERVICE_NAME,
+      </if>
+      <if test="serviceType != null" >
+        SERVICE_TYPE,
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE,
+      </if>
+      <if test="areasName != null" >
+        AREAS_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="camId != null" >
+        #{camId,jdbcType=BIGINT},
+      </if>
+      <if test="camName != null" >
+        #{camName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null" >
+        #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=CHAR},
+      </if>
+      <if test="areasCode != null" >
+        #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areasName != null" >
+        #{areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePersonExample" resultType="java.lang.Integer" >
+    select count(*) from organization_service_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_service_person
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.camId != null" >
+        CAM_ID = #{record.camId,jdbcType=BIGINT},
+      </if>
+      <if test="record.camName != null" >
+        CAM_NAME = #{record.camName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCode != null" >
+        SERVICE_CODE = #{record.serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceName != null" >
+        SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceType != null" >
+        SERVICE_TYPE = #{record.serviceType,jdbcType=CHAR},
+      </if>
+      <if test="record.areasCode != null" >
+        AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areasName != null" >
+        AREAS_NAME = #{record.areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_service_person
+    set ID = #{record.id,jdbcType=BIGINT},
+      ORG_ID = #{record.orgId,jdbcType=BIGINT},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      CAM_ID = #{record.camId,jdbcType=BIGINT},
+      CAM_NAME = #{record.camName,jdbcType=VARCHAR},
+      SERVICE_CODE = #{record.serviceCode,jdbcType=VARCHAR},
+      SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      SERVICE_TYPE = #{record.serviceType,jdbcType=CHAR},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      AREAS_NAME = #{record.areasName,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePerson" >
+    update organization_service_person
+    <set >
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="camId != null" >
+        CAM_ID = #{camId,jdbcType=BIGINT},
+      </if>
+      <if test="camName != null" >
+        CAM_NAME = #{camName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null" >
+        SERVICE_CODE = #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        SERVICE_TYPE = #{serviceType,jdbcType=CHAR},
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areasName != null" >
+        AREAS_NAME = #{areasName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.OrganizationServicePerson" >
+    update organization_service_person
+    set ORG_ID = #{orgId,jdbcType=BIGINT},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      CAM_ID = #{camId,jdbcType=BIGINT},
+      CAM_NAME = #{camName,jdbcType=VARCHAR},
+      SERVICE_CODE = #{serviceCode,jdbcType=VARCHAR},
+      SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      SERVICE_TYPE = #{serviceType,jdbcType=CHAR},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      AREAS_NAME = #{areasName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/pro-common/pro-common.iml" filepath="$PROJECT_DIR$/pro-common/pro-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-manager/pro-manager.iml" filepath="$PROJECT_DIR$/pro-manager/pro-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-manager/pro-manager-dao/pro-manager-dao.iml" filepath="$PROJECT_DIR$/pro-manager/pro-manager-dao/pro-manager-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-manager/pro-manager-interface/pro-manager-interface.iml" filepath="$PROJECT_DIR$/pro-manager/pro-manager-interface/pro-manager-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-manager/pro-manager-pojo/pro-manager-pojo.iml" filepath="$PROJECT_DIR$/pro-manager/pro-manager-pojo/pro-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-manager/pro-manager-service/pro-manager-service.iml" filepath="$PROJECT_DIR$/pro-manager/pro-manager-service/pro-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-parent/pro-parent.iml" filepath="$PROJECT_DIR$/pro-parent/pro-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro-web-tset/pro-web-tset.iml" filepath="$PROJECT_DIR$/pro-web-tset/pro-web-tset.iml" />
+    </modules>
+  </component>
+</project>

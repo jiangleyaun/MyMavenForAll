@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.LawCaseProgressMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.LawCaseProgress" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS_CODE" property="statusCode" jdbcType="VARCHAR" />
+    <result column="STATUS_NAME" property="statusName" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+    <result column="LAW_CASE_ID" property="lawCaseId" jdbcType="BIGINT" />
+    <result column="DESCRIBES" property="describes" jdbcType="VARCHAR" />
+    <result column="SHOW_TYPE" property="showType" jdbcType="INTEGER" />
+    <result column="MEETING_ID" property="meetingId" jdbcType="VARCHAR" />
+    <result column="PERSONNELS" property="personnels" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_DATE, STATUS_CODE, STATUS_NAME, USER_ID, USER_TYPE, LAW_CASE_ID, 
+    DESCRIBES, SHOW_TYPE, MEETING_ID, PERSONNELS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from law_case_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from law_case_progress
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_case_progress
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgressExample" >
+    delete from law_case_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgress" >
+    insert into law_case_progress (ID, NAME, CREATE_DATE, 
+      STATUS_CODE, STATUS_NAME, USER_ID, 
+      USER_TYPE, LAW_CASE_ID, DESCRIBES, 
+      SHOW_TYPE, MEETING_ID, PERSONNELS
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{statusCode,jdbcType=VARCHAR}, #{statusName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{lawCaseId,jdbcType=BIGINT}, #{describes,jdbcType=VARCHAR}, 
+      #{showType,jdbcType=INTEGER}, #{meetingId,jdbcType=VARCHAR}, #{personnels,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgress" >
+    insert into law_case_progress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="statusCode != null" >
+        STATUS_CODE,
+      </if>
+      <if test="statusName != null" >
+        STATUS_NAME,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID,
+      </if>
+      <if test="describes != null" >
+        DESCRIBES,
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE,
+      </if>
+      <if test="meetingId != null" >
+        MEETING_ID,
+      </if>
+      <if test="personnels != null" >
+        PERSONNELS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusCode != null" >
+        #{statusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="statusName != null" >
+        #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="lawCaseId != null" >
+        #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null" >
+        #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="meetingId != null" >
+        #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="personnels != null" >
+        #{personnels,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgressExample" resultType="java.lang.Integer" >
+    select count(*) from law_case_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update law_case_progress
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusCode != null" >
+        STATUS_CODE = #{record.statusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statusName != null" >
+        STATUS_NAME = #{record.statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawCaseId != null" >
+        LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.describes != null" >
+        DESCRIBES = #{record.describes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showType != null" >
+        SHOW_TYPE = #{record.showType,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingId != null" >
+        MEETING_ID = #{record.meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnels != null" >
+        PERSONNELS = #{record.personnels,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update law_case_progress
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      STATUS_CODE = #{record.statusCode,jdbcType=VARCHAR},
+      STATUS_NAME = #{record.statusName,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      DESCRIBES = #{record.describes,jdbcType=VARCHAR},
+      SHOW_TYPE = #{record.showType,jdbcType=INTEGER},
+      MEETING_ID = #{record.meetingId,jdbcType=VARCHAR},
+      PERSONNELS = #{record.personnels,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgress" >
+    update law_case_progress
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusCode != null" >
+        STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="statusName != null" >
+        STATUS_NAME = #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="describes != null" >
+        DESCRIBES = #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE = #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="meetingId != null" >
+        MEETING_ID = #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="personnels != null" >
+        PERSONNELS = #{personnels,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.LawCaseProgress" >
+    update law_case_progress
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+      STATUS_NAME = #{statusName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      DESCRIBES = #{describes,jdbcType=VARCHAR},
+      SHOW_TYPE = #{showType,jdbcType=INTEGER},
+      MEETING_ID = #{meetingId,jdbcType=VARCHAR},
+      PERSONNELS = #{personnels,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.CounselorAndMediatorsMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.CounselorAndMediators" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ABILITY" property="ability" jdbcType="VARCHAR" />
+    <result column="ACTUAL_NAME" property="actualName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="BIRTH" property="birth" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="CUR_ADDRESS" property="curAddress" jdbcType="VARCHAR" />
+    <result column="CUR_ADDRESS_DETAIL" property="curAddressDetail" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="EXPERIENCE" property="experience" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="IMG_OTHER" property="imgOther" jdbcType="VARCHAR" />
+    <result column="IMG_PHOTO" property="imgPhoto" jdbcType="VARCHAR" />
+    <result column="IMG_POSITIVE" property="imgPositive" jdbcType="VARCHAR" />
+    <result column="IMG_QUA" property="imgQua" jdbcType="VARCHAR" />
+    <result column="JOB" property="job" jdbcType="VARCHAR" />
+    <result column="JOBSTART" property="jobstart" jdbcType="VARCHAR" />
+    <result column="MECH_WORK" property="mechWork" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="POLITICAL" property="political" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="QUALIFICAT_NAME" property="qualificatName" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="VARCHAR" />
+    <result column="SCHOOL" property="school" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="WORK_ADD_DETI" property="workAddDeti" jdbcType="VARCHAR" />
+    <result column="WORK_ADDRESS" property="workAddress" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="NOTICE" property="notice" jdbcType="VARCHAR" />
+    <result column="IS_AUTHENTICATE" property="isAuthenticate" jdbcType="VARCHAR" />
+    <result column="IS_COUNSELOR" property="isCounselor" jdbcType="VARCHAR" />
+    <result column="IS_LOGIN" property="isLogin" jdbcType="VARCHAR" />
+    <result column="IS_BUSY" property="isBusy" jdbcType="VARCHAR" />
+    <result column="LICENSE_NUMBER" property="licenseNumber" jdbcType="VARCHAR" />
+    <result column="PRIVATE_PAGE" property="privatePage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ABILITY, ACTUAL_NAME, ADDRESS, BIRTH, CITY, CUR_ADDRESS, CUR_ADDRESS_DETAIL, 
+    DISTRICT, EDUCATION, EMAIL, EXPERIENCE, ID_CARD, IMG_OTHER, IMG_PHOTO, IMG_POSITIVE, 
+    IMG_QUA, JOB, JOBSTART, MECH_WORK, PHONE_NUMBER, POLITICAL, PROVINCE, QUALIFICAT_NAME, 
+    ROLE, SCHOOL, SEX, TYPE, WORK_ADD_DETI, WORK_ADDRESS, PASSWORD, STATUS, NAME, UPDATE_TIME, 
+    CREATE_TIME, NOTICE, IS_AUTHENTICATE, IS_COUNSELOR, IS_LOGIN, IS_BUSY, LICENSE_NUMBER, 
+    PRIVATE_PAGE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediatorsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from counselor_and_mediators
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from counselor_and_mediators
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from counselor_and_mediators
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediatorsExample" >
+    delete from counselor_and_mediators
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediators" >
+    insert into counselor_and_mediators (ID, ABILITY, ACTUAL_NAME, 
+      ADDRESS, BIRTH, CITY, 
+      CUR_ADDRESS, CUR_ADDRESS_DETAIL, DISTRICT, 
+      EDUCATION, EMAIL, EXPERIENCE, 
+      ID_CARD, IMG_OTHER, IMG_PHOTO, 
+      IMG_POSITIVE, IMG_QUA, JOB, 
+      JOBSTART, MECH_WORK, PHONE_NUMBER, 
+      POLITICAL, PROVINCE, QUALIFICAT_NAME, 
+      ROLE, SCHOOL, SEX, 
+      TYPE, WORK_ADD_DETI, WORK_ADDRESS, 
+      PASSWORD, STATUS, NAME, 
+      UPDATE_TIME, CREATE_TIME, NOTICE, 
+      IS_AUTHENTICATE, IS_COUNSELOR, IS_LOGIN, 
+      IS_BUSY, LICENSE_NUMBER, PRIVATE_PAGE
+      )
+    values (#{id,jdbcType=BIGINT}, #{ability,jdbcType=VARCHAR}, #{actualName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{curAddress,jdbcType=VARCHAR}, #{curAddressDetail,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{imgOther,jdbcType=VARCHAR}, #{imgPhoto,jdbcType=VARCHAR}, 
+      #{imgPositive,jdbcType=VARCHAR}, #{imgQua,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{jobstart,jdbcType=VARCHAR}, #{mechWork,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{political,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{qualificatName,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{workAddDeti,jdbcType=VARCHAR}, #{workAddress,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{notice,jdbcType=VARCHAR}, 
+      #{isAuthenticate,jdbcType=VARCHAR}, #{isCounselor,jdbcType=VARCHAR}, #{isLogin,jdbcType=VARCHAR}, 
+      #{isBusy,jdbcType=VARCHAR}, #{licenseNumber,jdbcType=VARCHAR}, #{privatePage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediators" >
+    insert into counselor_and_mediators
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ability != null" >
+        ABILITY,
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="curAddress != null" >
+        CUR_ADDRESS,
+      </if>
+      <if test="curAddressDetail != null" >
+        CUR_ADDRESS_DETAIL,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="imgOther != null" >
+        IMG_OTHER,
+      </if>
+      <if test="imgPhoto != null" >
+        IMG_PHOTO,
+      </if>
+      <if test="imgPositive != null" >
+        IMG_POSITIVE,
+      </if>
+      <if test="imgQua != null" >
+        IMG_QUA,
+      </if>
+      <if test="job != null" >
+        JOB,
+      </if>
+      <if test="jobstart != null" >
+        JOBSTART,
+      </if>
+      <if test="mechWork != null" >
+        MECH_WORK,
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER,
+      </if>
+      <if test="political != null" >
+        POLITICAL,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="qualificatName != null" >
+        QUALIFICAT_NAME,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="school != null" >
+        SCHOOL,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="workAddDeti != null" >
+        WORK_ADD_DETI,
+      </if>
+      <if test="workAddress != null" >
+        WORK_ADDRESS,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="notice != null" >
+        NOTICE,
+      </if>
+      <if test="isAuthenticate != null" >
+        IS_AUTHENTICATE,
+      </if>
+      <if test="isCounselor != null" >
+        IS_COUNSELOR,
+      </if>
+      <if test="isLogin != null" >
+        IS_LOGIN,
+      </if>
+      <if test="isBusy != null" >
+        IS_BUSY,
+      </if>
+      <if test="licenseNumber != null" >
+        LICENSE_NUMBER,
+      </if>
+      <if test="privatePage != null" >
+        PRIVATE_PAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ability != null" >
+        #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="curAddress != null" >
+        #{curAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="curAddressDetail != null" >
+        #{curAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="imgOther != null" >
+        #{imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPhoto != null" >
+        #{imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPositive != null" >
+        #{imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="imgQua != null" >
+        #{imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstart != null" >
+        #{jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="mechWork != null" >
+        #{mechWork,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="qualificatName != null" >
+        #{qualificatName,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddDeti != null" >
+        #{workAddDeti,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notice != null" >
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthenticate != null" >
+        #{isAuthenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="isCounselor != null" >
+        #{isCounselor,jdbcType=VARCHAR},
+      </if>
+      <if test="isLogin != null" >
+        #{isLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="isBusy != null" >
+        #{isBusy,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null" >
+        #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="privatePage != null" >
+        #{privatePage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediatorsExample" resultType="java.lang.Integer" >
+    select count(*) from counselor_and_mediators
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update counselor_and_mediators
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.ability != null" >
+        ABILITY = #{record.ability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualName != null" >
+        ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curAddress != null" >
+        CUR_ADDRESS = #{record.curAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curAddressDetail != null" >
+        CUR_ADDRESS_DETAIL = #{record.curAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null" >
+        EDUCATION = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.experience != null" >
+        EXPERIENCE = #{record.experience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgOther != null" >
+        IMG_OTHER = #{record.imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgPhoto != null" >
+        IMG_PHOTO = #{record.imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgPositive != null" >
+        IMG_POSITIVE = #{record.imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgQua != null" >
+        IMG_QUA = #{record.imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        JOB = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobstart != null" >
+        JOBSTART = #{record.jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mechWork != null" >
+        MECH_WORK = #{record.mechWork,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null" >
+        PHONE_NUMBER = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.political != null" >
+        POLITICAL = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qualificatName != null" >
+        QUALIFICAT_NAME = #{record.qualificatName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        ROLE = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        SCHOOL = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAddDeti != null" >
+        WORK_ADD_DETI = #{record.workAddDeti,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAddress != null" >
+        WORK_ADDRESS = #{record.workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notice != null" >
+        NOTICE = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAuthenticate != null" >
+        IS_AUTHENTICATE = #{record.isAuthenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCounselor != null" >
+        IS_COUNSELOR = #{record.isCounselor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLogin != null" >
+        IS_LOGIN = #{record.isLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isBusy != null" >
+        IS_BUSY = #{record.isBusy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseNumber != null" >
+        LICENSE_NUMBER = #{record.licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privatePage != null" >
+        PRIVATE_PAGE = #{record.privatePage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update counselor_and_mediators
+    set ID = #{record.id,jdbcType=BIGINT},
+      ABILITY = #{record.ability,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      CUR_ADDRESS = #{record.curAddress,jdbcType=VARCHAR},
+      CUR_ADDRESS_DETAIL = #{record.curAddressDetail,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      EDUCATION = #{record.education,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EXPERIENCE = #{record.experience,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      IMG_OTHER = #{record.imgOther,jdbcType=VARCHAR},
+      IMG_PHOTO = #{record.imgPhoto,jdbcType=VARCHAR},
+      IMG_POSITIVE = #{record.imgPositive,jdbcType=VARCHAR},
+      IMG_QUA = #{record.imgQua,jdbcType=VARCHAR},
+      JOB = #{record.job,jdbcType=VARCHAR},
+      JOBSTART = #{record.jobstart,jdbcType=VARCHAR},
+      MECH_WORK = #{record.mechWork,jdbcType=VARCHAR},
+      PHONE_NUMBER = #{record.phoneNumber,jdbcType=VARCHAR},
+      POLITICAL = #{record.political,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      QUALIFICAT_NAME = #{record.qualificatName,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=VARCHAR},
+      SCHOOL = #{record.school,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      WORK_ADD_DETI = #{record.workAddDeti,jdbcType=VARCHAR},
+      WORK_ADDRESS = #{record.workAddress,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      NOTICE = #{record.notice,jdbcType=VARCHAR},
+      IS_AUTHENTICATE = #{record.isAuthenticate,jdbcType=VARCHAR},
+      IS_COUNSELOR = #{record.isCounselor,jdbcType=VARCHAR},
+      IS_LOGIN = #{record.isLogin,jdbcType=VARCHAR},
+      IS_BUSY = #{record.isBusy,jdbcType=VARCHAR},
+      LICENSE_NUMBER = #{record.licenseNumber,jdbcType=VARCHAR},
+      PRIVATE_PAGE = #{record.privatePage,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediators" >
+    update counselor_and_mediators
+    <set >
+      <if test="ability != null" >
+        ABILITY = #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="curAddress != null" >
+        CUR_ADDRESS = #{curAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="curAddressDetail != null" >
+        CUR_ADDRESS_DETAIL = #{curAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        EXPERIENCE = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="imgOther != null" >
+        IMG_OTHER = #{imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPhoto != null" >
+        IMG_PHOTO = #{imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPositive != null" >
+        IMG_POSITIVE = #{imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="imgQua != null" >
+        IMG_QUA = #{imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstart != null" >
+        JOBSTART = #{jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="mechWork != null" >
+        MECH_WORK = #{mechWork,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        POLITICAL = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="qualificatName != null" >
+        QUALIFICAT_NAME = #{qualificatName,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddDeti != null" >
+        WORK_ADD_DETI = #{workAddDeti,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        WORK_ADDRESS = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notice != null" >
+        NOTICE = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthenticate != null" >
+        IS_AUTHENTICATE = #{isAuthenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="isCounselor != null" >
+        IS_COUNSELOR = #{isCounselor,jdbcType=VARCHAR},
+      </if>
+      <if test="isLogin != null" >
+        IS_LOGIN = #{isLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="isBusy != null" >
+        IS_BUSY = #{isBusy,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null" >
+        LICENSE_NUMBER = #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="privatePage != null" >
+        PRIVATE_PAGE = #{privatePage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.CounselorAndMediators" >
+    update counselor_and_mediators
+    set ABILITY = #{ability,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      CUR_ADDRESS = #{curAddress,jdbcType=VARCHAR},
+      CUR_ADDRESS_DETAIL = #{curAddressDetail,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EXPERIENCE = #{experience,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      IMG_OTHER = #{imgOther,jdbcType=VARCHAR},
+      IMG_PHOTO = #{imgPhoto,jdbcType=VARCHAR},
+      IMG_POSITIVE = #{imgPositive,jdbcType=VARCHAR},
+      IMG_QUA = #{imgQua,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      JOBSTART = #{jobstart,jdbcType=VARCHAR},
+      MECH_WORK = #{mechWork,jdbcType=VARCHAR},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      POLITICAL = #{political,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      QUALIFICAT_NAME = #{qualificatName,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=VARCHAR},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      WORK_ADD_DETI = #{workAddDeti,jdbcType=VARCHAR},
+      WORK_ADDRESS = #{workAddress,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      NOTICE = #{notice,jdbcType=VARCHAR},
+      IS_AUTHENTICATE = #{isAuthenticate,jdbcType=VARCHAR},
+      IS_COUNSELOR = #{isCounselor,jdbcType=VARCHAR},
+      IS_LOGIN = #{isLogin,jdbcType=VARCHAR},
+      IS_BUSY = #{isBusy,jdbcType=VARCHAR},
+      LICENSE_NUMBER = #{licenseNumber,jdbcType=VARCHAR},
+      PRIVATE_PAGE = #{privatePage,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.MobileNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.MobileNotice" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+    <result column="USER_DETAIL_ID" property="userDetailId" jdbcType="INTEGER" />
+    <result column="IS_SUCCESS" property="isSuccess" jdbcType="VARCHAR" />
+    <result column="EXTRA_PARAM" property="extraParam" jdbcType="VARCHAR" />
+    <result column="RESULT_MESSAGE" property="resultMessage" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, TYPE, MESSAGE, USER_DETAIL_ID, IS_SUCCESS, EXTRA_PARAM, RESULT_MESSAGE, 
+    CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.MobileNoticeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mobile_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_notice
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mobile_notice
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.MobileNoticeExample" >
+    delete from mobile_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.MobileNotice" >
+    insert into mobile_notice (ID, NAME, TYPE, 
+      MESSAGE, USER_DETAIL_ID, IS_SUCCESS, 
+      EXTRA_PARAM, RESULT_MESSAGE, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{userDetailId,jdbcType=INTEGER}, #{isSuccess,jdbcType=VARCHAR}, 
+      #{extraParam,jdbcType=VARCHAR}, #{resultMessage,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.MobileNotice" >
+    insert into mobile_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="message != null" >
+        MESSAGE,
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID,
+      </if>
+      <if test="isSuccess != null" >
+        IS_SUCCESS,
+      </if>
+      <if test="extraParam != null" >
+        EXTRA_PARAM,
+      </if>
+      <if test="resultMessage != null" >
+        RESULT_MESSAGE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="userDetailId != null" >
+        #{userDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="extraParam != null" >
+        #{extraParam,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMessage != null" >
+        #{resultMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.MobileNoticeExample" resultType="java.lang.Integer" >
+    select count(*) from mobile_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mobile_notice
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null" >
+        MESSAGE = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDetailId != null" >
+        USER_DETAIL_ID = #{record.userDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSuccess != null" >
+        IS_SUCCESS = #{record.isSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extraParam != null" >
+        EXTRA_PARAM = #{record.extraParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultMessage != null" >
+        RESULT_MESSAGE = #{record.resultMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mobile_notice
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      MESSAGE = #{record.message,jdbcType=VARCHAR},
+      USER_DETAIL_ID = #{record.userDetailId,jdbcType=INTEGER},
+      IS_SUCCESS = #{record.isSuccess,jdbcType=VARCHAR},
+      EXTRA_PARAM = #{record.extraParam,jdbcType=VARCHAR},
+      RESULT_MESSAGE = #{record.resultMessage,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.MobileNotice" >
+    update mobile_notice
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID = #{userDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="isSuccess != null" >
+        IS_SUCCESS = #{isSuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="extraParam != null" >
+        EXTRA_PARAM = #{extraParam,jdbcType=VARCHAR},
+      </if>
+      <if test="resultMessage != null" >
+        RESULT_MESSAGE = #{resultMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.MobileNotice" >
+    update mobile_notice
+    set NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      USER_DETAIL_ID = #{userDetailId,jdbcType=INTEGER},
+      IS_SUCCESS = #{isSuccess,jdbcType=VARCHAR},
+      EXTRA_PARAM = #{extraParam,jdbcType=VARCHAR},
+      RESULT_MESSAGE = #{resultMessage,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

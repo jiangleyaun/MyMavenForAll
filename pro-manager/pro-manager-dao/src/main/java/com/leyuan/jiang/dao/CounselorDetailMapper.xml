@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.CounselorDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.CounselorDetail" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ABILITY" property="ability" jdbcType="VARCHAR" />
+    <result column="ACTUAL_NAME" property="actualName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="AGE" property="age" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="BIRTH" property="birth" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="IS_AUTHENTICATE" property="isAuthenticate" jdbcType="INTEGER" />
+    <result column="LEGAL_PERSON" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_NATURE" property="orgNature" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="REGISTRATION" property="registration" jdbcType="VARCHAR" />
+    <result column="SENIORITY" property="seniority" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="COUNSELOR_ID" property="counselorId" jdbcType="BIGINT" />
+    <result column="NATION" property="nation" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="areaId" jdbcType="BIGINT" />
+    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+    <result column="JOB" property="job" jdbcType="VARCHAR" />
+    <result column="JOBSTART" property="jobstart" jdbcType="VARCHAR" />
+    <result column="RESUME" property="resume" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="IMG_OTHER" property="imgOther" jdbcType="VARCHAR" />
+    <result column="IMG_PHOTO" property="imgPhoto" jdbcType="VARCHAR" />
+    <result column="IMG_POSITIVE" property="imgPositive" jdbcType="VARCHAR" />
+    <result column="IMG_QUA" property="imgQua" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ABILITY, ACTUAL_NAME, ADDRESS, AGE, AREA, BIRTH, COMPANY_NAME, ID_CARD, 
+    IS_AUTHENTICATE, LEGAL_PERSON, ORG_CODE, ORG_NAME, ORG_NATURE, PHONE, REGISTRATION, 
+    SENIORITY, SEX, COUNSELOR_ID, NATION, AREA_ID, EDUCATION, JOB, JOBSTART, RESUME, 
+    ROLE, CITY, DISTRICT, IMG_OTHER, IMG_PHOTO, IMG_POSITIVE, IMG_QUA, PROVINCE, TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.CounselorDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from counselor_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from counselor_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from counselor_detail
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.CounselorDetailExample" >
+    delete from counselor_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.CounselorDetail" >
+    insert into counselor_detail (ID, NAME, ABILITY, 
+      ACTUAL_NAME, ADDRESS, AGE, 
+      AREA, BIRTH, COMPANY_NAME, 
+      ID_CARD, IS_AUTHENTICATE, LEGAL_PERSON, 
+      ORG_CODE, ORG_NAME, ORG_NATURE, 
+      PHONE, REGISTRATION, SENIORITY, 
+      SEX, COUNSELOR_ID, NATION, 
+      AREA_ID, EDUCATION, JOB, 
+      JOBSTART, RESUME, ROLE, 
+      CITY, DISTRICT, IMG_OTHER, 
+      IMG_PHOTO, IMG_POSITIVE, IMG_QUA, 
+      PROVINCE, TYPE)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, 
+      #{actualName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{isAuthenticate,jdbcType=INTEGER}, #{legalPerson,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgNature,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{registration,jdbcType=VARCHAR}, #{seniority,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{counselorId,jdbcType=BIGINT}, #{nation,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=BIGINT}, #{education,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{jobstart,jdbcType=VARCHAR}, #{resume,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{imgOther,jdbcType=VARCHAR}, 
+      #{imgPhoto,jdbcType=VARCHAR}, #{imgPositive,jdbcType=VARCHAR}, #{imgQua,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.CounselorDetail" >
+    insert into counselor_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ability != null" >
+        ABILITY,
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="isAuthenticate != null" >
+        IS_AUTHENTICATE,
+      </if>
+      <if test="legalPerson != null" >
+        LEGAL_PERSON,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="registration != null" >
+        REGISTRATION,
+      </if>
+      <if test="seniority != null" >
+        SENIORITY,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="counselorId != null" >
+        COUNSELOR_ID,
+      </if>
+      <if test="nation != null" >
+        NATION,
+      </if>
+      <if test="areaId != null" >
+        AREA_ID,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="job != null" >
+        JOB,
+      </if>
+      <if test="jobstart != null" >
+        JOBSTART,
+      </if>
+      <if test="resume != null" >
+        RESUME,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="imgOther != null" >
+        IMG_OTHER,
+      </if>
+      <if test="imgPhoto != null" >
+        IMG_PHOTO,
+      </if>
+      <if test="imgPositive != null" >
+        IMG_POSITIVE,
+      </if>
+      <if test="imgQua != null" >
+        IMG_QUA,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ability != null" >
+        #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthenticate != null" >
+        #{isAuthenticate,jdbcType=INTEGER},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="seniority != null" >
+        #{seniority,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="counselorId != null" >
+        #{counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstart != null" >
+        #{jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="resume != null" >
+        #{resume,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="imgOther != null" >
+        #{imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPhoto != null" >
+        #{imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPositive != null" >
+        #{imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="imgQua != null" >
+        #{imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.CounselorDetailExample" resultType="java.lang.Integer" >
+    select count(*) from counselor_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update counselor_detail
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ability != null" >
+        ABILITY = #{record.ability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualName != null" >
+        ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        AGE = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        AREA = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAuthenticate != null" >
+        IS_AUTHENTICATE = #{record.isAuthenticate,jdbcType=INTEGER},
+      </if>
+      <if test="record.legalPerson != null" >
+        LEGAL_PERSON = #{record.legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCode != null" >
+        ORG_CODE = #{record.orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNature != null" >
+        ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registration != null" >
+        REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seniority != null" >
+        SENIORITY = #{record.seniority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counselorId != null" >
+        COUNSELOR_ID = #{record.counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.nation != null" >
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null" >
+        AREA_ID = #{record.areaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.education != null" >
+        EDUCATION = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        JOB = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobstart != null" >
+        JOBSTART = #{record.jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resume != null" >
+        RESUME = #{record.resume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        ROLE = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgOther != null" >
+        IMG_OTHER = #{record.imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgPhoto != null" >
+        IMG_PHOTO = #{record.imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgPositive != null" >
+        IMG_POSITIVE = #{record.imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgQua != null" >
+        IMG_QUA = #{record.imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update counselor_detail
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ABILITY = #{record.ability,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=VARCHAR},
+      AREA = #{record.area,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      IS_AUTHENTICATE = #{record.isAuthenticate,jdbcType=INTEGER},
+      LEGAL_PERSON = #{record.legalPerson,jdbcType=VARCHAR},
+      ORG_CODE = #{record.orgCode,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      SENIORITY = #{record.seniority,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      COUNSELOR_ID = #{record.counselorId,jdbcType=BIGINT},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      AREA_ID = #{record.areaId,jdbcType=BIGINT},
+      EDUCATION = #{record.education,jdbcType=VARCHAR},
+      JOB = #{record.job,jdbcType=VARCHAR},
+      JOBSTART = #{record.jobstart,jdbcType=VARCHAR},
+      RESUME = #{record.resume,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      IMG_OTHER = #{record.imgOther,jdbcType=VARCHAR},
+      IMG_PHOTO = #{record.imgPhoto,jdbcType=VARCHAR},
+      IMG_POSITIVE = #{record.imgPositive,jdbcType=VARCHAR},
+      IMG_QUA = #{record.imgQua,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.CounselorDetail" >
+    update counselor_detail
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ability != null" >
+        ABILITY = #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuthenticate != null" >
+        IS_AUTHENTICATE = #{isAuthenticate,jdbcType=INTEGER},
+      </if>
+      <if test="legalPerson != null" >
+        LEGAL_PERSON = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        REGISTRATION = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="seniority != null" >
+        SENIORITY = #{seniority,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="counselorId != null" >
+        COUNSELOR_ID = #{counselorId,jdbcType=BIGINT},
+      </if>
+      <if test="nation != null" >
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        AREA_ID = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstart != null" >
+        JOBSTART = #{jobstart,jdbcType=VARCHAR},
+      </if>
+      <if test="resume != null" >
+        RESUME = #{resume,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="imgOther != null" >
+        IMG_OTHER = #{imgOther,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPhoto != null" >
+        IMG_PHOTO = #{imgPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPositive != null" >
+        IMG_POSITIVE = #{imgPositive,jdbcType=VARCHAR},
+      </if>
+      <if test="imgQua != null" >
+        IMG_QUA = #{imgQua,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.CounselorDetail" >
+    update counselor_detail
+    set NAME = #{name,jdbcType=VARCHAR},
+      ABILITY = #{ability,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      IS_AUTHENTICATE = #{isAuthenticate,jdbcType=INTEGER},
+      LEGAL_PERSON = #{legalPerson,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      REGISTRATION = #{registration,jdbcType=VARCHAR},
+      SENIORITY = #{seniority,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      COUNSELOR_ID = #{counselorId,jdbcType=BIGINT},
+      NATION = #{nation,jdbcType=VARCHAR},
+      AREA_ID = #{areaId,jdbcType=BIGINT},
+      EDUCATION = #{education,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      JOBSTART = #{jobstart,jdbcType=VARCHAR},
+      RESUME = #{resume,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      IMG_OTHER = #{imgOther,jdbcType=VARCHAR},
+      IMG_PHOTO = #{imgPhoto,jdbcType=VARCHAR},
+      IMG_POSITIVE = #{imgPositive,jdbcType=VARCHAR},
+      IMG_QUA = #{imgQua,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Organization" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PARENT_ID" property="parentId" jdbcType="BIGINT" />
+    <result column="AREAS_CODE" property="areasCode" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_NAME" property="organizationName" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_AREA" property="organizationArea" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_ADDRESS" property="organizationAddress" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_CODE" property="organizationCode" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_IMG" property="organizationImg" jdbcType="VARCHAR" />
+    <result column="DETAIL_ADDRESS" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="LANDLINE_PHONE" property="landlinePhone" jdbcType="VARCHAR" />
+    <result column="LOGO_IMG" property="logoImg" jdbcType="VARCHAR" />
+    <result column="SUPER_NAME" property="superName" jdbcType="VARCHAR" />
+    <result column="CONTACT_NAME" property="contactName" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="CONTACT_MAIL" property="contactMail" jdbcType="VARCHAR" />
+    <result column="URL_IMG" property="urlImg" jdbcType="VARCHAR" />
+    <result column="GRADE" property="grade" jdbcType="VARCHAR" />
+    <result column="GRADE_LEVEL" property="gradeLevel" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="AREAS_SCOPE" property="areasScope" jdbcType="VARCHAR" />
+    <result column="AREAS_LEVEL" property="areasLevel" jdbcType="VARCHAR" />
+    <result column="MEDIATION_TYPE_ID" property="mediationTypeId" jdbcType="VARCHAR" />
+    <result column="SITE_URL" property="siteUrl" jdbcType="VARCHAR" />
+    <result column="SHUNT_LARGE" property="shuntLarge" jdbcType="VARCHAR" />
+    <result column="SHUNT_MIDDLE" property="shuntMiddle" jdbcType="VARCHAR" />
+    <result column="SHUNT_SMALL" property="shuntSmall" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.Organization" extends="BaseResultMap" >
+    <result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, AREAS_CODE, TYPE, ORGANIZATION_NAME, ORGANIZATION_AREA, ORGANIZATION_ADDRESS, 
+    ORGANIZATION_CODE, ORGANIZATION_IMG, DETAIL_ADDRESS, LANDLINE_PHONE, LOGO_IMG, SUPER_NAME, 
+    CONTACT_NAME, TITLE, CONTACT_PHONE, CONTACT_MAIL, URL_IMG, GRADE, GRADE_LEVEL, STATUS, 
+    AREAS_SCOPE, AREAS_LEVEL, MEDIATION_TYPE_ID, SITE_URL, SHUNT_LARGE, SHUNT_MIDDLE, 
+    SHUNT_SMALL, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    INTRODUCTION
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.OrganizationExample" >
+    delete from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Organization" >
+    insert into organization (ID, PARENT_ID, AREAS_CODE, 
+      TYPE, ORGANIZATION_NAME, ORGANIZATION_AREA, 
+      ORGANIZATION_ADDRESS, ORGANIZATION_CODE, 
+      ORGANIZATION_IMG, DETAIL_ADDRESS, LANDLINE_PHONE, 
+      LOGO_IMG, SUPER_NAME, CONTACT_NAME, 
+      TITLE, CONTACT_PHONE, CONTACT_MAIL, 
+      URL_IMG, GRADE, GRADE_LEVEL, 
+      STATUS, AREAS_SCOPE, AREAS_LEVEL, 
+      MEDIATION_TYPE_ID, SITE_URL, SHUNT_LARGE, 
+      SHUNT_MIDDLE, SHUNT_SMALL, CREATE_TIME, 
+      UPDATE_TIME, INTRODUCTION)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{areasCode,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{organizationName,jdbcType=VARCHAR}, #{organizationArea,jdbcType=VARCHAR}, 
+      #{organizationAddress,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
+      #{organizationImg,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, #{landlinePhone,jdbcType=VARCHAR}, 
+      #{logoImg,jdbcType=VARCHAR}, #{superName,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{contactMail,jdbcType=VARCHAR}, 
+      #{urlImg,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{gradeLevel,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{areasScope,jdbcType=VARCHAR}, #{areasLevel,jdbcType=VARCHAR}, 
+      #{mediationTypeId,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, #{shuntLarge,jdbcType=VARCHAR}, 
+      #{shuntMiddle,jdbcType=VARCHAR}, #{shuntSmall,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Organization" >
+    insert into organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="organizationName != null" >
+        ORGANIZATION_NAME,
+      </if>
+      <if test="organizationArea != null" >
+        ORGANIZATION_AREA,
+      </if>
+      <if test="organizationAddress != null" >
+        ORGANIZATION_ADDRESS,
+      </if>
+      <if test="organizationCode != null" >
+        ORGANIZATION_CODE,
+      </if>
+      <if test="organizationImg != null" >
+        ORGANIZATION_IMG,
+      </if>
+      <if test="detailAddress != null" >
+        DETAIL_ADDRESS,
+      </if>
+      <if test="landlinePhone != null" >
+        LANDLINE_PHONE,
+      </if>
+      <if test="logoImg != null" >
+        LOGO_IMG,
+      </if>
+      <if test="superName != null" >
+        SUPER_NAME,
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="contactMail != null" >
+        CONTACT_MAIL,
+      </if>
+      <if test="urlImg != null" >
+        URL_IMG,
+      </if>
+      <if test="grade != null" >
+        GRADE,
+      </if>
+      <if test="gradeLevel != null" >
+        GRADE_LEVEL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="areasScope != null" >
+        AREAS_SCOPE,
+      </if>
+      <if test="areasLevel != null" >
+        AREAS_LEVEL,
+      </if>
+      <if test="mediationTypeId != null" >
+        MEDIATION_TYPE_ID,
+      </if>
+      <if test="siteUrl != null" >
+        SITE_URL,
+      </if>
+      <if test="shuntLarge != null" >
+        SHUNT_LARGE,
+      </if>
+      <if test="shuntMiddle != null" >
+        SHUNT_MIDDLE,
+      </if>
+      <if test="shuntSmall != null" >
+        SHUNT_SMALL,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="areasCode != null" >
+        #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null" >
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationArea != null" >
+        #{organizationArea,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAddress != null" >
+        #{organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null" >
+        #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationImg != null" >
+        #{organizationImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="landlinePhone != null" >
+        #{landlinePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="superName != null" >
+        #{superName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMail != null" >
+        #{contactMail,jdbcType=VARCHAR},
+      </if>
+      <if test="urlImg != null" >
+        #{urlImg,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeLevel != null" >
+        #{gradeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="areasScope != null" >
+        #{areasScope,jdbcType=VARCHAR},
+      </if>
+      <if test="areasLevel != null" >
+        #{areasLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="mediationTypeId != null" >
+        #{mediationTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null" >
+        #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntLarge != null" >
+        #{shuntLarge,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntMiddle != null" >
+        #{shuntMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntSmall != null" >
+        #{shuntSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.OrganizationExample" resultType="java.lang.Integer" >
+    select count(*) from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.areasCode != null" >
+        AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationName != null" >
+        ORGANIZATION_NAME = #{record.organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationArea != null" >
+        ORGANIZATION_AREA = #{record.organizationArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationAddress != null" >
+        ORGANIZATION_ADDRESS = #{record.organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null" >
+        ORGANIZATION_CODE = #{record.organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationImg != null" >
+        ORGANIZATION_IMG = #{record.organizationImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailAddress != null" >
+        DETAIL_ADDRESS = #{record.detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landlinePhone != null" >
+        LANDLINE_PHONE = #{record.landlinePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoImg != null" >
+        LOGO_IMG = #{record.logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superName != null" >
+        SUPER_NAME = #{record.superName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactName != null" >
+        CONTACT_NAME = #{record.contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPhone != null" >
+        CONTACT_PHONE = #{record.contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactMail != null" >
+        CONTACT_MAIL = #{record.contactMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urlImg != null" >
+        URL_IMG = #{record.urlImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null" >
+        GRADE = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gradeLevel != null" >
+        GRADE_LEVEL = #{record.gradeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.areasScope != null" >
+        AREAS_SCOPE = #{record.areasScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areasLevel != null" >
+        AREAS_LEVEL = #{record.areasLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediationTypeId != null" >
+        MEDIATION_TYPE_ID = #{record.mediationTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteUrl != null" >
+        SITE_URL = #{record.siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuntLarge != null" >
+        SHUNT_LARGE = #{record.shuntLarge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuntMiddle != null" >
+        SHUNT_MIDDLE = #{record.shuntMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuntSmall != null" >
+        SHUNT_SMALL = #{record.shuntSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.introduction != null" >
+        INTRODUCTION = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update organization
+    set ID = #{record.id,jdbcType=BIGINT},
+      PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      ORGANIZATION_NAME = #{record.organizationName,jdbcType=VARCHAR},
+      ORGANIZATION_AREA = #{record.organizationArea,jdbcType=VARCHAR},
+      ORGANIZATION_ADDRESS = #{record.organizationAddress,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{record.organizationCode,jdbcType=VARCHAR},
+      ORGANIZATION_IMG = #{record.organizationImg,jdbcType=VARCHAR},
+      DETAIL_ADDRESS = #{record.detailAddress,jdbcType=VARCHAR},
+      LANDLINE_PHONE = #{record.landlinePhone,jdbcType=VARCHAR},
+      LOGO_IMG = #{record.logoImg,jdbcType=VARCHAR},
+      SUPER_NAME = #{record.superName,jdbcType=VARCHAR},
+      CONTACT_NAME = #{record.contactName,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{record.contactPhone,jdbcType=VARCHAR},
+      CONTACT_MAIL = #{record.contactMail,jdbcType=VARCHAR},
+      URL_IMG = #{record.urlImg,jdbcType=VARCHAR},
+      GRADE = #{record.grade,jdbcType=VARCHAR},
+      GRADE_LEVEL = #{record.gradeLevel,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      AREAS_SCOPE = #{record.areasScope,jdbcType=VARCHAR},
+      AREAS_LEVEL = #{record.areasLevel,jdbcType=VARCHAR},
+      MEDIATION_TYPE_ID = #{record.mediationTypeId,jdbcType=VARCHAR},
+      SITE_URL = #{record.siteUrl,jdbcType=VARCHAR},
+      SHUNT_LARGE = #{record.shuntLarge,jdbcType=VARCHAR},
+      SHUNT_MIDDLE = #{record.shuntMiddle,jdbcType=VARCHAR},
+      SHUNT_SMALL = #{record.shuntSmall,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      INTRODUCTION = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization
+    set ID = #{record.id,jdbcType=BIGINT},
+      PARENT_ID = #{record.parentId,jdbcType=BIGINT},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      ORGANIZATION_NAME = #{record.organizationName,jdbcType=VARCHAR},
+      ORGANIZATION_AREA = #{record.organizationArea,jdbcType=VARCHAR},
+      ORGANIZATION_ADDRESS = #{record.organizationAddress,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{record.organizationCode,jdbcType=VARCHAR},
+      ORGANIZATION_IMG = #{record.organizationImg,jdbcType=VARCHAR},
+      DETAIL_ADDRESS = #{record.detailAddress,jdbcType=VARCHAR},
+      LANDLINE_PHONE = #{record.landlinePhone,jdbcType=VARCHAR},
+      LOGO_IMG = #{record.logoImg,jdbcType=VARCHAR},
+      SUPER_NAME = #{record.superName,jdbcType=VARCHAR},
+      CONTACT_NAME = #{record.contactName,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{record.contactPhone,jdbcType=VARCHAR},
+      CONTACT_MAIL = #{record.contactMail,jdbcType=VARCHAR},
+      URL_IMG = #{record.urlImg,jdbcType=VARCHAR},
+      GRADE = #{record.grade,jdbcType=VARCHAR},
+      GRADE_LEVEL = #{record.gradeLevel,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      AREAS_SCOPE = #{record.areasScope,jdbcType=VARCHAR},
+      AREAS_LEVEL = #{record.areasLevel,jdbcType=VARCHAR},
+      MEDIATION_TYPE_ID = #{record.mediationTypeId,jdbcType=VARCHAR},
+      SITE_URL = #{record.siteUrl,jdbcType=VARCHAR},
+      SHUNT_LARGE = #{record.shuntLarge,jdbcType=VARCHAR},
+      SHUNT_MIDDLE = #{record.shuntMiddle,jdbcType=VARCHAR},
+      SHUNT_SMALL = #{record.shuntSmall,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Organization" >
+    update organization
+    <set >
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null" >
+        ORGANIZATION_NAME = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationArea != null" >
+        ORGANIZATION_AREA = #{organizationArea,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAddress != null" >
+        ORGANIZATION_ADDRESS = #{organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null" >
+        ORGANIZATION_CODE = #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationImg != null" >
+        ORGANIZATION_IMG = #{organizationImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        DETAIL_ADDRESS = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="landlinePhone != null" >
+        LANDLINE_PHONE = #{landlinePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        LOGO_IMG = #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="superName != null" >
+        SUPER_NAME = #{superName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMail != null" >
+        CONTACT_MAIL = #{contactMail,jdbcType=VARCHAR},
+      </if>
+      <if test="urlImg != null" >
+        URL_IMG = #{urlImg,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        GRADE = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeLevel != null" >
+        GRADE_LEVEL = #{gradeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="areasScope != null" >
+        AREAS_SCOPE = #{areasScope,jdbcType=VARCHAR},
+      </if>
+      <if test="areasLevel != null" >
+        AREAS_LEVEL = #{areasLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="mediationTypeId != null" >
+        MEDIATION_TYPE_ID = #{mediationTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null" >
+        SITE_URL = #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntLarge != null" >
+        SHUNT_LARGE = #{shuntLarge,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntMiddle != null" >
+        SHUNT_MIDDLE = #{shuntMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="shuntSmall != null" >
+        SHUNT_SMALL = #{shuntSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.Organization" >
+    update organization
+    set PARENT_ID = #{parentId,jdbcType=BIGINT},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      ORGANIZATION_NAME = #{organizationName,jdbcType=VARCHAR},
+      ORGANIZATION_AREA = #{organizationArea,jdbcType=VARCHAR},
+      ORGANIZATION_ADDRESS = #{organizationAddress,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{organizationCode,jdbcType=VARCHAR},
+      ORGANIZATION_IMG = #{organizationImg,jdbcType=VARCHAR},
+      DETAIL_ADDRESS = #{detailAddress,jdbcType=VARCHAR},
+      LANDLINE_PHONE = #{landlinePhone,jdbcType=VARCHAR},
+      LOGO_IMG = #{logoImg,jdbcType=VARCHAR},
+      SUPER_NAME = #{superName,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      CONTACT_MAIL = #{contactMail,jdbcType=VARCHAR},
+      URL_IMG = #{urlImg,jdbcType=VARCHAR},
+      GRADE = #{grade,jdbcType=VARCHAR},
+      GRADE_LEVEL = #{gradeLevel,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      AREAS_SCOPE = #{areasScope,jdbcType=VARCHAR},
+      AREAS_LEVEL = #{areasLevel,jdbcType=VARCHAR},
+      MEDIATION_TYPE_ID = #{mediationTypeId,jdbcType=VARCHAR},
+      SITE_URL = #{siteUrl,jdbcType=VARCHAR},
+      SHUNT_LARGE = #{shuntLarge,jdbcType=VARCHAR},
+      SHUNT_MIDDLE = #{shuntMiddle,jdbcType=VARCHAR},
+      SHUNT_SMALL = #{shuntSmall,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Organization" >
+    update organization
+    set PARENT_ID = #{parentId,jdbcType=BIGINT},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      ORGANIZATION_NAME = #{organizationName,jdbcType=VARCHAR},
+      ORGANIZATION_AREA = #{organizationArea,jdbcType=VARCHAR},
+      ORGANIZATION_ADDRESS = #{organizationAddress,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{organizationCode,jdbcType=VARCHAR},
+      ORGANIZATION_IMG = #{organizationImg,jdbcType=VARCHAR},
+      DETAIL_ADDRESS = #{detailAddress,jdbcType=VARCHAR},
+      LANDLINE_PHONE = #{landlinePhone,jdbcType=VARCHAR},
+      LOGO_IMG = #{logoImg,jdbcType=VARCHAR},
+      SUPER_NAME = #{superName,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      CONTACT_MAIL = #{contactMail,jdbcType=VARCHAR},
+      URL_IMG = #{urlImg,jdbcType=VARCHAR},
+      GRADE = #{grade,jdbcType=VARCHAR},
+      GRADE_LEVEL = #{gradeLevel,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      AREAS_SCOPE = #{areasScope,jdbcType=VARCHAR},
+      AREAS_LEVEL = #{areasLevel,jdbcType=VARCHAR},
+      MEDIATION_TYPE_ID = #{mediationTypeId,jdbcType=VARCHAR},
+      SITE_URL = #{siteUrl,jdbcType=VARCHAR},
+      SHUNT_LARGE = #{shuntLarge,jdbcType=VARCHAR},
+      SHUNT_MIDDLE = #{shuntMiddle,jdbcType=VARCHAR},
+      SHUNT_SMALL = #{shuntSmall,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

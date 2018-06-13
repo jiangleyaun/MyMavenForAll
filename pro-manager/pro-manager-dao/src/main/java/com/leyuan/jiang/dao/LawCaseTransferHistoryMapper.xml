@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.LawCaseTransferHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.LawCaseTransferHistory" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="LAW_CASE_ID" property="lawCaseId" jdbcType="BIGINT" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="FROM_ORD_ID" property="fromOrdId" jdbcType="BIGINT" />
+    <result column="FROM_ORD_NAME" property="fromOrdName" jdbcType="VARCHAR" />
+    <result column="TO_ORD_ID" property="toOrdId" jdbcType="BIGINT" />
+    <result column="TO_ORD_NAME" property="toOrdName" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LAW_CASE_ID, REASON, FROM_ORD_ID, FROM_ORD_NAME, TO_ORD_ID, TO_ORD_NAME, CREATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from law_case_transfer_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from law_case_transfer_history
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_case_transfer_history
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistoryExample" >
+    delete from law_case_transfer_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistory" >
+    insert into law_case_transfer_history (ID, LAW_CASE_ID, REASON, 
+      FROM_ORD_ID, FROM_ORD_NAME, TO_ORD_ID, 
+      TO_ORD_NAME, CREATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{lawCaseId,jdbcType=BIGINT}, #{reason,jdbcType=VARCHAR}, 
+      #{fromOrdId,jdbcType=BIGINT}, #{fromOrdName,jdbcType=VARCHAR}, #{toOrdId,jdbcType=BIGINT}, 
+      #{toOrdName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistory" >
+    insert into law_case_transfer_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="fromOrdId != null" >
+        FROM_ORD_ID,
+      </if>
+      <if test="fromOrdName != null" >
+        FROM_ORD_NAME,
+      </if>
+      <if test="toOrdId != null" >
+        TO_ORD_ID,
+      </if>
+      <if test="toOrdName != null" >
+        TO_ORD_NAME,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lawCaseId != null" >
+        #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="fromOrdId != null" >
+        #{fromOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="fromOrdName != null" >
+        #{fromOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="toOrdId != null" >
+        #{toOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="toOrdName != null" >
+        #{toOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistoryExample" resultType="java.lang.Integer" >
+    select count(*) from law_case_transfer_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update law_case_transfer_history
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawCaseId != null" >
+        LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.reason != null" >
+        REASON = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromOrdId != null" >
+        FROM_ORD_ID = #{record.fromOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromOrdName != null" >
+        FROM_ORD_NAME = #{record.fromOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toOrdId != null" >
+        TO_ORD_ID = #{record.toOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.toOrdName != null" >
+        TO_ORD_NAME = #{record.toOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update law_case_transfer_history
+    set ID = #{record.id,jdbcType=BIGINT},
+      LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      REASON = #{record.reason,jdbcType=VARCHAR},
+      FROM_ORD_ID = #{record.fromOrdId,jdbcType=BIGINT},
+      FROM_ORD_NAME = #{record.fromOrdName,jdbcType=VARCHAR},
+      TO_ORD_ID = #{record.toOrdId,jdbcType=BIGINT},
+      TO_ORD_NAME = #{record.toOrdName,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistory" >
+    update law_case_transfer_history
+    <set >
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="fromOrdId != null" >
+        FROM_ORD_ID = #{fromOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="fromOrdName != null" >
+        FROM_ORD_NAME = #{fromOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="toOrdId != null" >
+        TO_ORD_ID = #{toOrdId,jdbcType=BIGINT},
+      </if>
+      <if test="toOrdName != null" >
+        TO_ORD_NAME = #{toOrdName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.LawCaseTransferHistory" >
+    update law_case_transfer_history
+    set LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      REASON = #{reason,jdbcType=VARCHAR},
+      FROM_ORD_ID = #{fromOrdId,jdbcType=BIGINT},
+      FROM_ORD_NAME = #{fromOrdName,jdbcType=VARCHAR},
+      TO_ORD_ID = #{toOrdId,jdbcType=BIGINT},
+      TO_ORD_NAME = #{toOrdName,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

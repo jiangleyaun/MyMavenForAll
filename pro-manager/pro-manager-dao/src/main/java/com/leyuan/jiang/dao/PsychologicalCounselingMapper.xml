@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.PsychologicalCounselingMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.PsychologicalCounseling" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="NUMBER" property="number" jdbcType="INTEGER" />
+    <result column="RESERVATION_TYPE" property="reservationType" jdbcType="VARCHAR" />
+    <result column="SERVICE_NO" property="serviceNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CAM_ID" property="camId" jdbcType="BIGINT" />
+    <result column="RESERVATION_ORG_ID" property="reservationOrgId" jdbcType="BIGINT" />
+    <result column="VIOLENT_CASE_ID" property="violentCaseId" jdbcType="BIGINT" />
+    <result column="APPOINTMENT_DATE" property="appointmentDate" jdbcType="TIMESTAMP" />
+    <result column="TIME_RANGE" property="timeRange" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_TIME, NUMBER, RESERVATION_TYPE, SERVICE_NO, STATUS, UPDATE_TIME, 
+    CAM_ID, RESERVATION_ORG_ID, VIOLENT_CASE_ID, APPOINTMENT_DATE, TIME_RANGE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounselingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from psychological_counseling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from psychological_counseling
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from psychological_counseling
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounselingExample" >
+    delete from psychological_counseling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounseling" >
+    insert into psychological_counseling (ID, NAME, CREATE_TIME, 
+      NUMBER, RESERVATION_TYPE, SERVICE_NO, 
+      STATUS, UPDATE_TIME, CAM_ID, 
+      RESERVATION_ORG_ID, VIOLENT_CASE_ID, APPOINTMENT_DATE, 
+      TIME_RANGE)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{number,jdbcType=INTEGER}, #{reservationType,jdbcType=VARCHAR}, #{serviceNo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{camId,jdbcType=BIGINT}, 
+      #{reservationOrgId,jdbcType=BIGINT}, #{violentCaseId,jdbcType=BIGINT}, #{appointmentDate,jdbcType=TIMESTAMP}, 
+      #{timeRange,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounseling" >
+    insert into psychological_counseling
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="number != null" >
+        NUMBER,
+      </if>
+      <if test="reservationType != null" >
+        RESERVATION_TYPE,
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="camId != null" >
+        CAM_ID,
+      </if>
+      <if test="reservationOrgId != null" >
+        RESERVATION_ORG_ID,
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID,
+      </if>
+      <if test="appointmentDate != null" >
+        APPOINTMENT_DATE,
+      </if>
+      <if test="timeRange != null" >
+        TIME_RANGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="reservationType != null" >
+        #{reservationType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNo != null" >
+        #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="camId != null" >
+        #{camId,jdbcType=BIGINT},
+      </if>
+      <if test="reservationOrgId != null" >
+        #{reservationOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointmentDate != null" >
+        #{appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeRange != null" >
+        #{timeRange,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounselingExample" resultType="java.lang.Integer" >
+    select count(*) from psychological_counseling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update psychological_counseling
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.number != null" >
+        NUMBER = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.reservationType != null" >
+        RESERVATION_TYPE = #{record.reservationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceNo != null" >
+        SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.camId != null" >
+        CAM_ID = #{record.camId,jdbcType=BIGINT},
+      </if>
+      <if test="record.reservationOrgId != null" >
+        RESERVATION_ORG_ID = #{record.reservationOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.violentCaseId != null" >
+        VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appointmentDate != null" >
+        APPOINTMENT_DATE = #{record.appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timeRange != null" >
+        TIME_RANGE = #{record.timeRange,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update psychological_counseling
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      NUMBER = #{record.number,jdbcType=INTEGER},
+      RESERVATION_TYPE = #{record.reservationType,jdbcType=VARCHAR},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CAM_ID = #{record.camId,jdbcType=BIGINT},
+      RESERVATION_ORG_ID = #{record.reservationOrgId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      APPOINTMENT_DATE = #{record.appointmentDate,jdbcType=TIMESTAMP},
+      TIME_RANGE = #{record.timeRange,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounseling" >
+    update psychological_counseling
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        NUMBER = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="reservationType != null" >
+        RESERVATION_TYPE = #{reservationType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="camId != null" >
+        CAM_ID = #{camId,jdbcType=BIGINT},
+      </if>
+      <if test="reservationOrgId != null" >
+        RESERVATION_ORG_ID = #{reservationOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointmentDate != null" >
+        APPOINTMENT_DATE = #{appointmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeRange != null" >
+        TIME_RANGE = #{timeRange,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.PsychologicalCounseling" >
+    update psychological_counseling
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      NUMBER = #{number,jdbcType=INTEGER},
+      RESERVATION_TYPE = #{reservationType,jdbcType=VARCHAR},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CAM_ID = #{camId,jdbcType=BIGINT},
+      RESERVATION_ORG_ID = #{reservationOrgId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      APPOINTMENT_DATE = #{appointmentDate,jdbcType=TIMESTAMP},
+      TIME_RANGE = #{timeRange,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

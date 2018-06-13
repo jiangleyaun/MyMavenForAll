@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.SanctuaryMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Sanctuary" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="SANCTUARY_NO" property="sanctuaryNo" jdbcType="VARCHAR" />
+    <result column="SANCTUARY_IMAGE" property="sanctuaryImage" jdbcType="VARCHAR" />
+    <result column="SANCTUARY_ICO" property="sanctuaryIco" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="BUS_INFO" property="busInfo" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NUMBER" property="contractNumber" jdbcType="VARCHAR" />
+    <result column="LATITUDE" property="latitude" jdbcType="VARCHAR" />
+    <result column="LEADER" property="leader" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_ID" property="organizationId" jdbcType="BIGINT" />
+    <result column="SANCTUARY_ADMIN_USER_ID" property="sanctuaryAdminUserId" jdbcType="BIGINT" />
+    <result column="PASS_WORD" property="passWord" jdbcType="VARCHAR" />
+    <result column="MODE_OF_TRANSPORTATION" property="modeOfTransportation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SANCTUARY_NO, SANCTUARY_IMAGE, SANCTUARY_ICO, NAME, ADDRESS, BUS_INFO, CONTRACT_NUMBER, 
+    LATITUDE, LEADER, LONGITUDE, PHONE_NUMBER, ORGANIZATION_ID, SANCTUARY_ADMIN_USER_ID, 
+    PASS_WORD, MODE_OF_TRANSPORTATION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.SanctuaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sanctuary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sanctuary
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sanctuary
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.SanctuaryExample" >
+    delete from sanctuary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Sanctuary" >
+    insert into sanctuary (ID, SANCTUARY_NO, SANCTUARY_IMAGE, 
+      SANCTUARY_ICO, NAME, ADDRESS, 
+      BUS_INFO, CONTRACT_NUMBER, LATITUDE, 
+      LEADER, LONGITUDE, PHONE_NUMBER, 
+      ORGANIZATION_ID, SANCTUARY_ADMIN_USER_ID, PASS_WORD, 
+      MODE_OF_TRANSPORTATION)
+    values (#{id,jdbcType=BIGINT}, #{sanctuaryNo,jdbcType=VARCHAR}, #{sanctuaryImage,jdbcType=VARCHAR}, 
+      #{sanctuaryIco,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{busInfo,jdbcType=VARCHAR}, #{contractNumber,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{leader,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{organizationId,jdbcType=BIGINT}, #{sanctuaryAdminUserId,jdbcType=BIGINT}, #{passWord,jdbcType=VARCHAR}, 
+      #{modeOfTransportation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Sanctuary" >
+    insert into sanctuary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sanctuaryNo != null" >
+        SANCTUARY_NO,
+      </if>
+      <if test="sanctuaryImage != null" >
+        SANCTUARY_IMAGE,
+      </if>
+      <if test="sanctuaryIco != null" >
+        SANCTUARY_ICO,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="busInfo != null" >
+        BUS_INFO,
+      </if>
+      <if test="contractNumber != null" >
+        CONTRACT_NUMBER,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="leader != null" >
+        LEADER,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER,
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID,
+      </if>
+      <if test="sanctuaryAdminUserId != null" >
+        SANCTUARY_ADMIN_USER_ID,
+      </if>
+      <if test="passWord != null" >
+        PASS_WORD,
+      </if>
+      <if test="modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sanctuaryNo != null" >
+        #{sanctuaryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sanctuaryImage != null" >
+        #{sanctuaryImage,jdbcType=VARCHAR},
+      </if>
+      <if test="sanctuaryIco != null" >
+        #{sanctuaryIco,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="busInfo != null" >
+        #{busInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNumber != null" >
+        #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="sanctuaryAdminUserId != null" >
+        #{sanctuaryAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="modeOfTransportation != null" >
+        #{modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.SanctuaryExample" resultType="java.lang.Integer" >
+    select count(*) from sanctuary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sanctuary
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.sanctuaryNo != null" >
+        SANCTUARY_NO = #{record.sanctuaryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sanctuaryImage != null" >
+        SANCTUARY_IMAGE = #{record.sanctuaryImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sanctuaryIco != null" >
+        SANCTUARY_ICO = #{record.sanctuaryIco,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busInfo != null" >
+        BUS_INFO = #{record.busInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractNumber != null" >
+        CONTRACT_NUMBER = #{record.contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        LEADER = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null" >
+        PHONE_NUMBER = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationId != null" >
+        ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sanctuaryAdminUserId != null" >
+        SANCTUARY_ADMIN_USER_ID = #{record.sanctuaryAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.passWord != null" >
+        PASS_WORD = #{record.passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION = #{record.modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sanctuary
+    set ID = #{record.id,jdbcType=BIGINT},
+      SANCTUARY_NO = #{record.sanctuaryNo,jdbcType=VARCHAR},
+      SANCTUARY_IMAGE = #{record.sanctuaryImage,jdbcType=VARCHAR},
+      SANCTUARY_ICO = #{record.sanctuaryIco,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      BUS_INFO = #{record.busInfo,jdbcType=VARCHAR},
+      CONTRACT_NUMBER = #{record.contractNumber,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      LEADER = #{record.leader,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      PHONE_NUMBER = #{record.phoneNumber,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      SANCTUARY_ADMIN_USER_ID = #{record.sanctuaryAdminUserId,jdbcType=BIGINT},
+      PASS_WORD = #{record.passWord,jdbcType=VARCHAR},
+      MODE_OF_TRANSPORTATION = #{record.modeOfTransportation,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Sanctuary" >
+    update sanctuary
+    <set >
+      <if test="sanctuaryNo != null" >
+        SANCTUARY_NO = #{sanctuaryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sanctuaryImage != null" >
+        SANCTUARY_IMAGE = #{sanctuaryImage,jdbcType=VARCHAR},
+      </if>
+      <if test="sanctuaryIco != null" >
+        SANCTUARY_ICO = #{sanctuaryIco,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="busInfo != null" >
+        BUS_INFO = #{busInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNumber != null" >
+        CONTRACT_NUMBER = #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        LEADER = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="sanctuaryAdminUserId != null" >
+        SANCTUARY_ADMIN_USER_ID = #{sanctuaryAdminUserId,jdbcType=BIGINT},
+      </if>
+      <if test="passWord != null" >
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION = #{modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Sanctuary" >
+    update sanctuary
+    set SANCTUARY_NO = #{sanctuaryNo,jdbcType=VARCHAR},
+      SANCTUARY_IMAGE = #{sanctuaryImage,jdbcType=VARCHAR},
+      SANCTUARY_ICO = #{sanctuaryIco,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      BUS_INFO = #{busInfo,jdbcType=VARCHAR},
+      CONTRACT_NUMBER = #{contractNumber,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      LEADER = #{leader,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      SANCTUARY_ADMIN_USER_ID = #{sanctuaryAdminUserId,jdbcType=BIGINT},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      MODE_OF_TRANSPORTATION = #{modeOfTransportation,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

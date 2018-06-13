@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.PersonnelMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.Personnel" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ACTUAL_NAME" property="actualName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="BIRTH" property="birth" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="CORPORATION" property="corporation" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ENTERPRISE_PHONE" property="enterprisePhone" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="NATION" property="nation" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_NATURE" property="orgNature" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="PROCREDIT_CODE" property="procreditCode" jdbcType="VARCHAR" />
+    <result column="PROLICENSE_CODE" property="prolicenseCode" jdbcType="VARCHAR" />
+    <result column="PROORGANIZATION" property="proorganization" jdbcType="VARCHAR" />
+    <result column="PROTAX" property="protax" jdbcType="VARCHAR" />
+    <result column="REGISTRATION" property="registration" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="INTEGER" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="USER_DETAIL_ID" property="userDetailId" jdbcType="BIGINT" />
+    <result column="LAW_CASE_ID" property="lawCaseId" jdbcType="BIGINT" />
+    <result column="EXTEND" property="extend" jdbcType="VARCHAR" />
+    <result column="ORDERS" property="orders" jdbcType="INTEGER" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="AREAS_CODE" property="areasCode" jdbcType="VARCHAR" />
+    <result column="LAW_NO_DISPUTE_FACT_ID" property="lawNoDisputeFactId" jdbcType="BIGINT" />
+    <result column="LAW_JUDGLE_BOOK_ID" property="lawJudgleBookId" jdbcType="BIGINT" />
+    <result column="LAW_MSCHEME_ID" property="lawMschemeId" jdbcType="BIGINT" />
+    <result column="LAW_PROMISE_ID" property="lawPromiseId" jdbcType="BIGINT" />
+    <result column="LAW_DISSENT_ID" property="lawDissentId" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="LAW_ADJUST_BOOK_ID" property="lawAdjustBookId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ACTUAL_NAME, ADDRESS, BIRTH, COMPANY_NAME, CORPORATION, CREATE_TIME, ENTERPRISE_PHONE, 
+    ID_CARD, NATION, ORG_NAME, ORG_NATURE, PHONE, PROCREDIT_CODE, PROLICENSE_CODE, PROORGANIZATION, 
+    PROTAX, REGISTRATION, ROLE, SEX, TYPE, UPDATE_TIME, USER_DETAIL_ID, LAW_CASE_ID, 
+    EXTEND, ORDERS, EMAIL, POST_CODE, AREAS_CODE, LAW_NO_DISPUTE_FACT_ID, LAW_JUDGLE_BOOK_ID, 
+    LAW_MSCHEME_ID, LAW_PROMISE_ID, LAW_DISSENT_ID, TITLE, LAW_ADJUST_BOOK_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.PersonnelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from personnel
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from personnel
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.PersonnelExample" >
+    delete from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.Personnel" >
+    insert into personnel (ID, NAME, ACTUAL_NAME, 
+      ADDRESS, BIRTH, COMPANY_NAME, 
+      CORPORATION, CREATE_TIME, ENTERPRISE_PHONE, 
+      ID_CARD, NATION, ORG_NAME, 
+      ORG_NATURE, PHONE, PROCREDIT_CODE, 
+      PROLICENSE_CODE, PROORGANIZATION, PROTAX, 
+      REGISTRATION, ROLE, SEX, 
+      TYPE, UPDATE_TIME, USER_DETAIL_ID, 
+      LAW_CASE_ID, EXTEND, ORDERS, 
+      EMAIL, POST_CODE, AREAS_CODE, 
+      LAW_NO_DISPUTE_FACT_ID, LAW_JUDGLE_BOOK_ID, LAW_MSCHEME_ID, 
+      LAW_PROMISE_ID, LAW_DISSENT_ID, TITLE, 
+      LAW_ADJUST_BOOK_ID)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{actualName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{corporation,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{enterprisePhone,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{orgNature,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{procreditCode,jdbcType=VARCHAR}, 
+      #{prolicenseCode,jdbcType=VARCHAR}, #{proorganization,jdbcType=VARCHAR}, #{protax,jdbcType=VARCHAR}, 
+      #{registration,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{userDetailId,jdbcType=BIGINT}, 
+      #{lawCaseId,jdbcType=BIGINT}, #{extend,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{areasCode,jdbcType=VARCHAR}, 
+      #{lawNoDisputeFactId,jdbcType=BIGINT}, #{lawJudgleBookId,jdbcType=BIGINT}, #{lawMschemeId,jdbcType=BIGINT}, 
+      #{lawPromiseId,jdbcType=BIGINT}, #{lawDissentId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{lawAdjustBookId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.Personnel" >
+    insert into personnel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="corporation != null" >
+        CORPORATION,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="enterprisePhone != null" >
+        ENTERPRISE_PHONE,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="nation != null" >
+        NATION,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="procreditCode != null" >
+        PROCREDIT_CODE,
+      </if>
+      <if test="prolicenseCode != null" >
+        PROLICENSE_CODE,
+      </if>
+      <if test="proorganization != null" >
+        PROORGANIZATION,
+      </if>
+      <if test="protax != null" >
+        PROTAX,
+      </if>
+      <if test="registration != null" >
+        REGISTRATION,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID,
+      </if>
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID,
+      </if>
+      <if test="extend != null" >
+        EXTEND,
+      </if>
+      <if test="orders != null" >
+        ORDERS,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE,
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID,
+      </if>
+      <if test="lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID,
+      </if>
+      <if test="lawMschemeId != null" >
+        LAW_MSCHEME_ID,
+      </if>
+      <if test="lawPromiseId != null" >
+        LAW_PROMISE_ID,
+      </if>
+      <if test="lawDissentId != null" >
+        LAW_DISSENT_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null" >
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterprisePhone != null" >
+        #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="procreditCode != null" >
+        #{procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prolicenseCode != null" >
+        #{prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proorganization != null" >
+        #{proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="protax != null" >
+        #{protax,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDetailId != null" >
+        #{userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="lawCaseId != null" >
+        #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="extend != null" >
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areasCode != null" >
+        #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        #{lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="lawJudgleBookId != null" >
+        #{lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="lawMschemeId != null" >
+        #{lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="lawPromiseId != null" >
+        #{lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="lawDissentId != null" >
+        #{lawDissentId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="lawAdjustBookId != null" >
+        #{lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.PersonnelExample" resultType="java.lang.Integer" >
+    select count(*) from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update personnel
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualName != null" >
+        ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporation != null" >
+        CORPORATION = #{record.corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterprisePhone != null" >
+        ENTERPRISE_PHONE = #{record.enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNature != null" >
+        ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procreditCode != null" >
+        PROCREDIT_CODE = #{record.procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prolicenseCode != null" >
+        PROLICENSE_CODE = #{record.prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proorganization != null" >
+        PROORGANIZATION = #{record.proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protax != null" >
+        PROTAX = #{record.protax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registration != null" >
+        REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        ROLE = #{record.role,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userDetailId != null" >
+        USER_DETAIL_ID = #{record.userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawCaseId != null" >
+        LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.extend != null" >
+        EXTEND = #{record.extend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orders != null" >
+        ORDERS = #{record.orders,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null" >
+        POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areasCode != null" >
+        AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID = #{record.lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID = #{record.lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawMschemeId != null" >
+        LAW_MSCHEME_ID = #{record.lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawPromiseId != null" >
+        LAW_PROMISE_ID = #{record.lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawDissentId != null" >
+        LAW_DISSENT_ID = #{record.lawDissentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID = #{record.lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update personnel
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{record.actualName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      BIRTH = #{record.birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      CORPORATION = #{record.corporation,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      ENTERPRISE_PHONE = #{record.enterprisePhone,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{record.orgNature,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{record.procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{record.prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{record.proorganization,jdbcType=VARCHAR},
+      PROTAX = #{record.protax,jdbcType=VARCHAR},
+      REGISTRATION = #{record.registration,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=INTEGER},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{record.userDetailId,jdbcType=BIGINT},
+      LAW_CASE_ID = #{record.lawCaseId,jdbcType=BIGINT},
+      EXTEND = #{record.extend,jdbcType=VARCHAR},
+      ORDERS = #{record.orders,jdbcType=INTEGER},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      AREAS_CODE = #{record.areasCode,jdbcType=VARCHAR},
+      LAW_NO_DISPUTE_FACT_ID = #{record.lawNoDisputeFactId,jdbcType=BIGINT},
+      LAW_JUDGLE_BOOK_ID = #{record.lawJudgleBookId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{record.lawMschemeId,jdbcType=BIGINT},
+      LAW_PROMISE_ID = #{record.lawPromiseId,jdbcType=BIGINT},
+      LAW_DISSENT_ID = #{record.lawDissentId,jdbcType=BIGINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      LAW_ADJUST_BOOK_ID = #{record.lawAdjustBookId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.Personnel" >
+    update personnel
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="actualName != null" >
+        ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null" >
+        CORPORATION = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterprisePhone != null" >
+        ENTERPRISE_PHONE = #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="procreditCode != null" >
+        PROCREDIT_CODE = #{procreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prolicenseCode != null" >
+        PROLICENSE_CODE = #{prolicenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proorganization != null" >
+        PROORGANIZATION = #{proorganization,jdbcType=VARCHAR},
+      </if>
+      <if test="protax != null" >
+        PROTAX = #{protax,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        REGISTRATION = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDetailId != null" >
+        USER_DETAIL_ID = #{userDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="lawCaseId != null" >
+        LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="extend != null" >
+        EXTEND = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        ORDERS = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areasCode != null" >
+        AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lawNoDisputeFactId != null" >
+        LAW_NO_DISPUTE_FACT_ID = #{lawNoDisputeFactId,jdbcType=BIGINT},
+      </if>
+      <if test="lawJudgleBookId != null" >
+        LAW_JUDGLE_BOOK_ID = #{lawJudgleBookId,jdbcType=BIGINT},
+      </if>
+      <if test="lawMschemeId != null" >
+        LAW_MSCHEME_ID = #{lawMschemeId,jdbcType=BIGINT},
+      </if>
+      <if test="lawPromiseId != null" >
+        LAW_PROMISE_ID = #{lawPromiseId,jdbcType=BIGINT},
+      </if>
+      <if test="lawDissentId != null" >
+        LAW_DISSENT_ID = #{lawDissentId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="lawAdjustBookId != null" >
+        LAW_ADJUST_BOOK_ID = #{lawAdjustBookId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.Personnel" >
+    update personnel
+    set NAME = #{name,jdbcType=VARCHAR},
+      ACTUAL_NAME = #{actualName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      CORPORATION = #{corporation,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ENTERPRISE_PHONE = #{enterprisePhone,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      NATION = #{nation,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_NATURE = #{orgNature,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      PROCREDIT_CODE = #{procreditCode,jdbcType=VARCHAR},
+      PROLICENSE_CODE = #{prolicenseCode,jdbcType=VARCHAR},
+      PROORGANIZATION = #{proorganization,jdbcType=VARCHAR},
+      PROTAX = #{protax,jdbcType=VARCHAR},
+      REGISTRATION = #{registration,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=INTEGER},
+      SEX = #{sex,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      USER_DETAIL_ID = #{userDetailId,jdbcType=BIGINT},
+      LAW_CASE_ID = #{lawCaseId,jdbcType=BIGINT},
+      EXTEND = #{extend,jdbcType=VARCHAR},
+      ORDERS = #{orders,jdbcType=INTEGER},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      AREAS_CODE = #{areasCode,jdbcType=VARCHAR},
+      LAW_NO_DISPUTE_FACT_ID = #{lawNoDisputeFactId,jdbcType=BIGINT},
+      LAW_JUDGLE_BOOK_ID = #{lawJudgleBookId,jdbcType=BIGINT},
+      LAW_MSCHEME_ID = #{lawMschemeId,jdbcType=BIGINT},
+      LAW_PROMISE_ID = #{lawPromiseId,jdbcType=BIGINT},
+      LAW_DISSENT_ID = #{lawDissentId,jdbcType=BIGINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      LAW_ADJUST_BOOK_ID = #{lawAdjustBookId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

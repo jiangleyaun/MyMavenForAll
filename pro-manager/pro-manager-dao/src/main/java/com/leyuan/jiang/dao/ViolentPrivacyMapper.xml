@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ViolentPrivacyMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CRIME_HISTORY" property="crimeHistory" jdbcType="VARCHAR" />
+    <result column="DISEASE" property="disease" jdbcType="VARCHAR" />
+    <result column="DISEASE_HISTORY" property="diseaseHistory" jdbcType="VARCHAR" />
+    <result column="DOMESTIC_VIOLENCE_HISTORY" property="domesticViolenceHistory" jdbcType="VARCHAR" />
+    <result column="MENTAL_ILLNESS" property="mentalIllness" jdbcType="BIT" />
+    <result column="PRIVACY" property="privacy" jdbcType="BIT" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="VIOLENT_PERSONNEL_ID" property="violentPersonnelId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.ViolentPrivacy" extends="BaseResultMap" >
+    <result column="ILLNESS_DETAIL" property="illnessDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_TIME, CRIME_HISTORY, DISEASE, DISEASE_HISTORY, DOMESTIC_VIOLENCE_HISTORY, 
+    MENTAL_ILLNESS, PRIVACY, UPDATE_TIME, VIOLENT_PERSONNEL_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    ILLNESS_DETAIL
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_privacy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from violent_privacy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from violent_privacy
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from violent_privacy
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacyExample" >
+    delete from violent_privacy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    insert into violent_privacy (ID, NAME, CREATE_TIME, 
+      CRIME_HISTORY, DISEASE, DISEASE_HISTORY, 
+      DOMESTIC_VIOLENCE_HISTORY, MENTAL_ILLNESS, PRIVACY, 
+      UPDATE_TIME, VIOLENT_PERSONNEL_ID, ILLNESS_DETAIL
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{crimeHistory,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{diseaseHistory,jdbcType=VARCHAR}, 
+      #{domesticViolenceHistory,jdbcType=VARCHAR}, #{mentalIllness,jdbcType=BIT}, #{privacy,jdbcType=BIT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{violentPersonnelId,jdbcType=BIGINT}, #{illnessDetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    insert into violent_privacy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="crimeHistory != null" >
+        CRIME_HISTORY,
+      </if>
+      <if test="disease != null" >
+        DISEASE,
+      </if>
+      <if test="diseaseHistory != null" >
+        DISEASE_HISTORY,
+      </if>
+      <if test="domesticViolenceHistory != null" >
+        DOMESTIC_VIOLENCE_HISTORY,
+      </if>
+      <if test="mentalIllness != null" >
+        MENTAL_ILLNESS,
+      </if>
+      <if test="privacy != null" >
+        PRIVACY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID,
+      </if>
+      <if test="illnessDetail != null" >
+        ILLNESS_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crimeHistory != null" >
+        #{crimeHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="disease != null" >
+        #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseHistory != null" >
+        #{diseaseHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="domesticViolenceHistory != null" >
+        #{domesticViolenceHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="mentalIllness != null" >
+        #{mentalIllness,jdbcType=BIT},
+      </if>
+      <if test="privacy != null" >
+        #{privacy,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="violentPersonnelId != null" >
+        #{violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="illnessDetail != null" >
+        #{illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacyExample" resultType="java.lang.Integer" >
+    select count(*) from violent_privacy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update violent_privacy
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.crimeHistory != null" >
+        CRIME_HISTORY = #{record.crimeHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disease != null" >
+        DISEASE = #{record.disease,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseHistory != null" >
+        DISEASE_HISTORY = #{record.diseaseHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domesticViolenceHistory != null" >
+        DOMESTIC_VIOLENCE_HISTORY = #{record.domesticViolenceHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mentalIllness != null" >
+        MENTAL_ILLNESS = #{record.mentalIllness,jdbcType=BIT},
+      </if>
+      <if test="record.privacy != null" >
+        PRIVACY = #{record.privacy,jdbcType=BIT},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.illnessDetail != null" >
+        ILLNESS_DETAIL = #{record.illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update violent_privacy
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CRIME_HISTORY = #{record.crimeHistory,jdbcType=VARCHAR},
+      DISEASE = #{record.disease,jdbcType=VARCHAR},
+      DISEASE_HISTORY = #{record.diseaseHistory,jdbcType=VARCHAR},
+      DOMESTIC_VIOLENCE_HISTORY = #{record.domesticViolenceHistory,jdbcType=VARCHAR},
+      MENTAL_ILLNESS = #{record.mentalIllness,jdbcType=BIT},
+      PRIVACY = #{record.privacy,jdbcType=BIT},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT},
+      ILLNESS_DETAIL = #{record.illnessDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update violent_privacy
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CRIME_HISTORY = #{record.crimeHistory,jdbcType=VARCHAR},
+      DISEASE = #{record.disease,jdbcType=VARCHAR},
+      DISEASE_HISTORY = #{record.diseaseHistory,jdbcType=VARCHAR},
+      DOMESTIC_VIOLENCE_HISTORY = #{record.domesticViolenceHistory,jdbcType=VARCHAR},
+      MENTAL_ILLNESS = #{record.mentalIllness,jdbcType=BIT},
+      PRIVACY = #{record.privacy,jdbcType=BIT},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_PERSONNEL_ID = #{record.violentPersonnelId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    update violent_privacy
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crimeHistory != null" >
+        CRIME_HISTORY = #{crimeHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="disease != null" >
+        DISEASE = #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseHistory != null" >
+        DISEASE_HISTORY = #{diseaseHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="domesticViolenceHistory != null" >
+        DOMESTIC_VIOLENCE_HISTORY = #{domesticViolenceHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="mentalIllness != null" >
+        MENTAL_ILLNESS = #{mentalIllness,jdbcType=BIT},
+      </if>
+      <if test="privacy != null" >
+        PRIVACY = #{privacy,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="violentPersonnelId != null" >
+        VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT},
+      </if>
+      <if test="illnessDetail != null" >
+        ILLNESS_DETAIL = #{illnessDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    update violent_privacy
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CRIME_HISTORY = #{crimeHistory,jdbcType=VARCHAR},
+      DISEASE = #{disease,jdbcType=VARCHAR},
+      DISEASE_HISTORY = #{diseaseHistory,jdbcType=VARCHAR},
+      DOMESTIC_VIOLENCE_HISTORY = #{domesticViolenceHistory,jdbcType=VARCHAR},
+      MENTAL_ILLNESS = #{mentalIllness,jdbcType=BIT},
+      PRIVACY = #{privacy,jdbcType=BIT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT},
+      ILLNESS_DETAIL = #{illnessDetail,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ViolentPrivacy" >
+    update violent_privacy
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CRIME_HISTORY = #{crimeHistory,jdbcType=VARCHAR},
+      DISEASE = #{disease,jdbcType=VARCHAR},
+      DISEASE_HISTORY = #{diseaseHistory,jdbcType=VARCHAR},
+      DOMESTIC_VIOLENCE_HISTORY = #{domesticViolenceHistory,jdbcType=VARCHAR},
+      MENTAL_ILLNESS = #{mentalIllness,jdbcType=BIT},
+      PRIVACY = #{privacy,jdbcType=BIT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VIOLENT_PERSONNEL_ID = #{violentPersonnelId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

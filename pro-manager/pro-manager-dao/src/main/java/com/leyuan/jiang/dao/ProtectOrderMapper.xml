@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.ProtectOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="IS_SUBMIT" property="isSubmit" jdbcType="BIT" />
+    <result column="SERVICE_NO" property="serviceNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="ORGANIZATION_ID" property="organizationId" jdbcType="BIGINT" />
+    <result column="VIOLENT_CASE_ID" property="violentCaseId" jdbcType="BIGINT" />
+    <result column="ORG_BY_ADDRESS_TYPE" property="orgByAddressType" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.leyuan.jiang.pojo.po.ProtectOrder" extends="BaseResultMap" >
+    <result column="FACT_AND_REASONS" property="factAndReasons" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, CREATE_TIME, IS_SUBMIT, SERVICE_NO, STATUS, UPDATE_TIME, ORGANIZATION_ID, 
+    VIOLENT_CASE_ID, ORG_BY_ADDRESS_TYPE
+  </sql>
+  <sql id="Blob_Column_List" >
+    FACT_AND_REASONS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ProtectOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from protect_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.ProtectOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from protect_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from protect_order
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from protect_order
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.ProtectOrderExample" >
+    delete from protect_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    insert into protect_order (ID, NAME, CREATE_TIME, 
+      IS_SUBMIT, SERVICE_NO, STATUS, 
+      UPDATE_TIME, ORGANIZATION_ID, VIOLENT_CASE_ID, 
+      ORG_BY_ADDRESS_TYPE, FACT_AND_REASONS)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isSubmit,jdbcType=BIT}, #{serviceNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{organizationId,jdbcType=BIGINT}, #{violentCaseId,jdbcType=BIGINT}, 
+      #{orgByAddressType,jdbcType=VARCHAR}, #{factAndReasons,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    insert into protect_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="isSubmit != null" >
+        IS_SUBMIT,
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID,
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID,
+      </if>
+      <if test="orgByAddressType != null" >
+        ORG_BY_ADDRESS_TYPE,
+      </if>
+      <if test="factAndReasons != null" >
+        FACT_AND_REASONS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSubmit != null" >
+        #{isSubmit,jdbcType=BIT},
+      </if>
+      <if test="serviceNo != null" >
+        #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="orgByAddressType != null" >
+        #{orgByAddressType,jdbcType=VARCHAR},
+      </if>
+      <if test="factAndReasons != null" >
+        #{factAndReasons,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.ProtectOrderExample" resultType="java.lang.Integer" >
+    select count(*) from protect_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update protect_order
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isSubmit != null" >
+        IS_SUBMIT = #{record.isSubmit,jdbcType=BIT},
+      </if>
+      <if test="record.serviceNo != null" >
+        SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organizationId != null" >
+        ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.violentCaseId != null" >
+        VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgByAddressType != null" >
+        ORG_BY_ADDRESS_TYPE = #{record.orgByAddressType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factAndReasons != null" >
+        FACT_AND_REASONS = #{record.factAndReasons,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update protect_order
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      IS_SUBMIT = #{record.isSubmit,jdbcType=BIT},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      ORG_BY_ADDRESS_TYPE = #{record.orgByAddressType,jdbcType=VARCHAR},
+      FACT_AND_REASONS = #{record.factAndReasons,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update protect_order
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      IS_SUBMIT = #{record.isSubmit,jdbcType=BIT},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      ORG_BY_ADDRESS_TYPE = #{record.orgByAddressType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    update protect_order
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSubmit != null" >
+        IS_SUBMIT = #{isSubmit,jdbcType=BIT},
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="orgByAddressType != null" >
+        ORG_BY_ADDRESS_TYPE = #{orgByAddressType,jdbcType=VARCHAR},
+      </if>
+      <if test="factAndReasons != null" >
+        FACT_AND_REASONS = #{factAndReasons,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    update protect_order
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_SUBMIT = #{isSubmit,jdbcType=BIT},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      ORG_BY_ADDRESS_TYPE = #{orgByAddressType,jdbcType=VARCHAR},
+      FACT_AND_REASONS = #{factAndReasons,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.ProtectOrder" >
+    update protect_order
+    set NAME = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_SUBMIT = #{isSubmit,jdbcType=BIT},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      ORGANIZATION_ID = #{organizationId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      ORG_BY_ADDRESS_TYPE = #{orgByAddressType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyuan.jiang.dao.SanctuaryApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.leyuan.jiang.pojo.po.SanctuaryApplication" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONTACT_HOTLINE" property="contactHotline" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODE_OF_TRANSPORTATION" property="modeOfTransportation" jdbcType="VARCHAR" />
+    <result column="SERVICE_NO" property="serviceNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SANCTUARY_ID" property="sanctuaryId" jdbcType="BIGINT" />
+    <result column="VIOLENT_CASE_ID" property="violentCaseId" jdbcType="BIGINT" />
+    <result column="ARRIVE_TIME" property="arriveTime" jdbcType="TIMESTAMP" />
+    <result column="LEAVE_TIME" property="leaveTime" jdbcType="TIMESTAMP" />
+    <result column="REMINDED_OR_NOT" property="remindedOrNot" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, ADDRESS, CONTACT_HOTLINE, CREATE_TIME, MODE_OF_TRANSPORTATION, SERVICE_NO, 
+    STATUS, UPDATE_TIME, SANCTUARY_ID, VIOLENT_CASE_ID, ARRIVE_TIME, LEAVE_TIME, REMINDED_OR_NOT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sanctuary_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sanctuary_application
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sanctuary_application
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplicationExample" >
+    delete from sanctuary_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplication" >
+    insert into sanctuary_application (ID, NAME, ADDRESS, 
+      CONTACT_HOTLINE, CREATE_TIME, MODE_OF_TRANSPORTATION, 
+      SERVICE_NO, STATUS, UPDATE_TIME, 
+      SANCTUARY_ID, VIOLENT_CASE_ID, ARRIVE_TIME, 
+      LEAVE_TIME, REMINDED_OR_NOT)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{contactHotline,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modeOfTransportation,jdbcType=VARCHAR}, 
+      #{serviceNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{sanctuaryId,jdbcType=BIGINT}, #{violentCaseId,jdbcType=BIGINT}, #{arriveTime,jdbcType=TIMESTAMP}, 
+      #{leaveTime,jdbcType=TIMESTAMP}, #{remindedOrNot,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplication" >
+    insert into sanctuary_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="contactHotline != null" >
+        CONTACT_HOTLINE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION,
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="sanctuaryId != null" >
+        SANCTUARY_ID,
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID,
+      </if>
+      <if test="arriveTime != null" >
+        ARRIVE_TIME,
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME,
+      </if>
+      <if test="remindedOrNot != null" >
+        REMINDED_OR_NOT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactHotline != null" >
+        #{contactHotline,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modeOfTransportation != null" >
+        #{modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNo != null" >
+        #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sanctuaryId != null" >
+        #{sanctuaryId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="arriveTime != null" >
+        #{arriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null" >
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindedOrNot != null" >
+        #{remindedOrNot,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplicationExample" resultType="java.lang.Integer" >
+    select count(*) from sanctuary_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sanctuary_application
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactHotline != null" >
+        CONTACT_HOTLINE = #{record.contactHotline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION = #{record.modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceNo != null" >
+        SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sanctuaryId != null" >
+        SANCTUARY_ID = #{record.sanctuaryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.violentCaseId != null" >
+        VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.arriveTime != null" >
+        ARRIVE_TIME = #{record.arriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveTime != null" >
+        LEAVE_TIME = #{record.leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remindedOrNot != null" >
+        REMINDED_OR_NOT = #{record.remindedOrNot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sanctuary_application
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      CONTACT_HOTLINE = #{record.contactHotline,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      MODE_OF_TRANSPORTATION = #{record.modeOfTransportation,jdbcType=VARCHAR},
+      SERVICE_NO = #{record.serviceNo,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      SANCTUARY_ID = #{record.sanctuaryId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{record.violentCaseId,jdbcType=BIGINT},
+      ARRIVE_TIME = #{record.arriveTime,jdbcType=TIMESTAMP},
+      LEAVE_TIME = #{record.leaveTime,jdbcType=TIMESTAMP},
+      REMINDED_OR_NOT = #{record.remindedOrNot,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplication" >
+    update sanctuary_application
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactHotline != null" >
+        CONTACT_HOTLINE = #{contactHotline,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modeOfTransportation != null" >
+        MODE_OF_TRANSPORTATION = #{modeOfTransportation,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNo != null" >
+        SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sanctuaryId != null" >
+        SANCTUARY_ID = #{sanctuaryId,jdbcType=BIGINT},
+      </if>
+      <if test="violentCaseId != null" >
+        VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="arriveTime != null" >
+        ARRIVE_TIME = #{arriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null" >
+        LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindedOrNot != null" >
+        REMINDED_OR_NOT = #{remindedOrNot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leyuan.jiang.pojo.po.SanctuaryApplication" >
+    update sanctuary_application
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONTACT_HOTLINE = #{contactHotline,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODE_OF_TRANSPORTATION = #{modeOfTransportation,jdbcType=VARCHAR},
+      SERVICE_NO = #{serviceNo,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SANCTUARY_ID = #{sanctuaryId,jdbcType=BIGINT},
+      VIOLENT_CASE_ID = #{violentCaseId,jdbcType=BIGINT},
+      ARRIVE_TIME = #{arriveTime,jdbcType=TIMESTAMP},
+      LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      REMINDED_OR_NOT = #{remindedOrNot,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
